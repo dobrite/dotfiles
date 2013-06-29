@@ -4,3 +4,4 @@ ln -s ~/dotfiles/.bash_prompt.sh ~/.bash_prompt.sh
 ln -s ~/dotfiles/.xmonad ~/
 ln -s ~/dotfiles/.xmobarrc ~/
 ln -s ~/dotfiles/.gitconfig ~/
+ln -s ~/dotfiles/.pam_environment ~/
