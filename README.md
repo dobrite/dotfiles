@@ -10,6 +10,8 @@ sudo pip -U pip virtualenv virtualenvwrapper
 
 sudp apt-get -y install xmonad xmobar suckless-tools
 
+sudo apt-get -y install keepass2 autocutsel 
+
 git clone https://github.com/dobrite/dotfiles.git
 cd dotfiles
 chmod +x load.sh
