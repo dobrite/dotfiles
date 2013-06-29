@@ -5,3 +5,4 @@ ln -s ~/dotfiles/.xmonad ~/
 ln -s ~/dotfiles/.xmobarrc ~/
 ln -s ~/dotfiles/.gitconfig ~/
 ln -s ~/dotfiles/.pam_environment ~/
+ln -s ~/dotfiles/.pythonrc ~/

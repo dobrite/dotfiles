@@ -117,7 +117,7 @@ gconftool-2 --set "/apps/gnome-terminal/profiles/Default/palette" --type string 
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#838394949696"
 
-PYTHONSTARTUP=~/.pythonrc.py
+PYTHONSTARTUP=~/.pythonrc
 export PYTHONSTARTUP
 
 eval `dircolors $HOME/.dircolors`
