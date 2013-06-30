@@ -28,3 +28,9 @@
 [submodule ".vim/bundle/vim-git"]
 	path = .vim/bundle/vim-git
 	url = https://github.com/tpope/vim-git.git
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/pydoc"]
+	path = .vim/bundle/pydoc
+	url = https://github.com/fs111/pydoc.vim.git
