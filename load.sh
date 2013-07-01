@@ -9,3 +9,5 @@ ln -s ~/dotfiles/.pythonrc ~/
 ln -s ~/dotfiles/.bash_profile ~/
 ln -s ~/dotfiles/.Xresources ~/
 ln -s ~/dotfiles/.xinitrc ~/
+ln -s ~/dotfiles/.xsession ~/ #light dm uses .xsession instead of .xinitrc
+sudo ln -s ~/dotfiles/custom.desktop /usr/share/xsessions/

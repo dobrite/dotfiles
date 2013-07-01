@@ -16,3 +16,7 @@ git clone https://github.com/dobrite/dotfiles.git
 cd dotfiles
 chmod +x load.sh
 ./load.sh
+
+echo "manual" | sudo tee -a /etc/init/lightdm.override
+remove "splash" from /etc/default/grub
+sudo update-grub
