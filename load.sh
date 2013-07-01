@@ -8,3 +8,4 @@ ln -s ~/dotfiles/.pam_environment ~/
 ln -s ~/dotfiles/.pythonrc ~/
 ln -s ~/dotfiles/.bash_profile ~/
 ln -s ~/dotfiles/.Xresources ~/
+ln -s ~/dotfiles/.xinitrc ~/
