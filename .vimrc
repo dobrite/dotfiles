@@ -48,7 +48,7 @@ filetype off
 execute pathogen#infect()
 call pathogen#helptags()
 
-syntax on 
+syntax on
 filetype on
 filetype plugin indent on
 

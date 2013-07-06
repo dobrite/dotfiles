@@ -13,8 +13,8 @@ myBar = "xmobar"
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myConfig = defaultConfig {
-	terminal = "xterm",
-        manageHook = manageDocks <+> manageHook defaultConfig,
-        layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
-        modMask = mod4Mask    -- Rebind Mod to the Windows key
+    terminal = "xterm",
+    manageHook = manageDocks <+> manageHook defaultConfig,
+    layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
+    modMask = mod4Mask    -- Rebind Mod to the Windows key
 }

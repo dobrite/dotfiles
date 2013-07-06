@@ -20,3 +20,8 @@ chmod +x load.sh
 echo "manual" | sudo tee -a /etc/init/lightdm.override
 remove "splash" from /etc/default/grub
 sudo update-grub
+
+git submodule init
+git submodule update
+
+sudo ln -s ~/dotfiles/switch-sound-output.sh /usr/local/bin

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-autocutsel -fork &
+autocutsel -fork
 exec xmonad
