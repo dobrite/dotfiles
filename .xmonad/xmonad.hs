@@ -6,8 +6,9 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 import XMonad.Layout.ThreeColumns
 
-myLayout = ThreeColMid 1 (3/100) (37/100) ||| Tall 1 (3/100) (1/2)
-
+windowExpandRate = (3/100)
+mainWindowPercentage = (37/100)
+myLayout = ThreeColMid 1 windowExpandRate mainWindowPercentage ||| Tall 1 windowExpandRate (1/2)
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myBar = "xmobar"
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
@@ -16,5 +17,7 @@ myConfig = defaultConfig {
     terminal = "xterm",
     manageHook = manageDocks <+> manageHook defaultConfig,
     layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
-    modMask = mod4Mask    -- Rebind Mod to the Windows key
+    modMask = mod4Mask,    -- Rebind Mod to the Windows key
+    focusedBorderColor = "#2aa198",
+    normalBorderColor = "#839496"
 }
