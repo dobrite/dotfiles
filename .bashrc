@@ -44,12 +44,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+      color_prompt=yes
     else
-	color_prompt=
+      color_prompt=
     fi
 fi
 
@@ -86,6 +86,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias sso=switch-sound-output.sh
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -111,11 +113,11 @@ export PROJECT_HOME=$HOME/projects
 source /usr/local/bin/virtualenvwrapper.sh
 source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_background" --type bool false
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_colors" --type bool false
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#838394949696"
+# gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_background" --type bool false
+# gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_colors" --type bool false
+# gconftool-2 --set "/apps/gnome-terminal/profiles/Default/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+# gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
+# gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#838394949696"
 
 PYTHONSTARTUP=~/.pythonrc
 export PYTHONSTARTUP
