@@ -3,7 +3,8 @@ Config { font = "xft:inconsolata:size=12:antialias=true:dpi=101:rgba=rgb:hinting
        , fgColor = "#839496"
        , position = TopW L 95
        , lowerOnStart = True
-       , commands = [ Run Weather "KCRQ" ["-t","<station>: <tempF>F (<hour>)","-L","65","-H","85","--normal","#859900","--high","#dc322f","--low","#2aa198"] 36000
+       , commands = [ Run StdinReader
+                    , Run Weather "KCRQ" ["-t","<station>: <tempF>F (<hour>)","-L","65","-H","85","--normal","#859900","--high","#dc322f","--low","#2aa198"] 36000
                     , Run Network "eth0" ["-L","0","-H","32","--normal","#859900","--high","#dc322f"] 10
                     , Run Network "eth1" ["-L","0","-H","32","--normal","#859900","--high","#dc322f"] 10
                     , Run Cpu ["-L","3","-H","50","--normal","#859900","--high","#dc322f"] 10

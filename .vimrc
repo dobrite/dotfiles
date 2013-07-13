@@ -17,8 +17,8 @@ nmap <leader>sb :call SplitScroll()<CR>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-"map <leader>j :RopeGotoDefinition<CR>
-"map <leader>r :RopeRename<CR>
+" map <leader>j :RopeGotoDefinition<CR>
+" map <leader>r :RopeRename<CR>
 
 " run py.test's
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
@@ -82,6 +82,7 @@ set scrolloff=3             " Keep 3 context lines above and below the cursor
 set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
 set nowrap                  " don't wrap text
+set textwidth=0             " plz?
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
