@@ -17,9 +17,6 @@ nmap <leader>sb :call SplitScroll()<CR>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-" map <leader>j :RopeGotoDefinition<CR>
-" map <leader>r :RopeRename<CR>
-
 " run py.test's
 nmap <silent><Leader>tf <Esc>:Pytest file<CR>
 nmap <silent><Leader>tc <Esc>:Pytest class<CR>
@@ -130,7 +127,7 @@ set incsearch               " Incrementally search while typing a /regex
 """ Insert completion
 "don't select first item, follow typing in autocomplete
 "set completeopt=menuone,longest,preview
-"set pumheight=6             " Keep a small completion window
+set pumheight=6             " Keep a small completion window
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Paste from clipboard
@@ -162,10 +159,24 @@ autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 so
 
 " Python
 "au BufRead *.py compiler nose
-au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+" Jedi stuff - just making some defaults explicit
+let g:jedi#auto_initialization = 1
+let g:jedi#popup_select_first = 1
+let g:jedi#show_function_definition = 1
+let g:jedi#goto_command = "<leader>g"
+let g:jedi#get_definition_command = "<leader>d"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#related_names_command = "<leader>n"
+let g:jedi#autocompletion_command = "<C-Space>"
+
+" non-default
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#popup_on_dot = 0
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
