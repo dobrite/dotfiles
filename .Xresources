@@ -1,9 +1,11 @@
+Xterm*saveLines: 50000
+
 ! use inconsolata everywhere
 *faceName:           inconsolata:style=Regular:size=12
 
 ! Xft settings ---------------------------------------------------------------
 
-Xft.dpi:        101 
+Xft.dpi:        101
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true

@@ -146,6 +146,12 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
 autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
 
+" NERDTREE Settings
+" open NERDTREE
+map <C-n> :NERDTreeToggle<CR>
+" close vim if nerdtree is the last window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 set t_Co=16
 colorscheme solarized
 let g:solarized_termcolors=16
