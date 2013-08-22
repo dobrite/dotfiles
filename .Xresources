@@ -11,6 +11,7 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
+xtightvncviewer*grabKeyboard: True
 
 ! Solarized color scheme for the X Window System
 !

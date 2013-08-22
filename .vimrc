@@ -26,8 +26,10 @@ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " open/close the quickfix window
-nmap <leader>c :copen<CR>
-nmap <leader>cc :cclose<CR>
+nmap <leader>q :copen<CR>
+nmap <leader>qq :cclose<CR>
+
+nmap <leader>c :bp\|bd#<CR>
 
 " ctrl-jklm changes to that split
 map <c-j> <c-w>j
@@ -59,6 +61,7 @@ set wildmode=full  " <Tab> cycles between all matching choices.
 set wildignore+=*.o,*.obj,.git,.hg,*.pyc,
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 " don't bell or blink
 set noerrorbells
@@ -169,6 +172,12 @@ autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 so
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+" ctrp p custom ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|bower_components)$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \ }
 
 " Jedi stuff - just making some defaults explicit
 let g:jedi#auto_initialization = 1
