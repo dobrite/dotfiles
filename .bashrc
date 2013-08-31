@@ -119,9 +119,6 @@ source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 # gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
 # gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#838394949696"
 
-PYTHONSTARTUP=~/.pythonrc
-export PYTHONSTARTUP
-
 eval `dircolors $HOME/.dircolors`
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
