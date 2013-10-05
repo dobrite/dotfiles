@@ -26,8 +26,8 @@ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " open/close the quickfix window
-nmap <leader>q :copen<CR>
-nmap <leader>qq :cclose<CR>
+nmap <leader>x :copen<CR>
+nmap <leader>xx :cclose<CR>
 
 nmap <leader>c :bp\|bd#<CR>
 
@@ -193,19 +193,20 @@ let g:jedi#autocompletion_command = "<C-Space>"
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 0
 
+" Commented out - doesn't work with pyvenv-3.3
 " Add the virtualenv's site-packages to vim path
-if has('python')
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-endif
+"if has('python')
+"py << EOF
+"import os.path
+"import sys
+"import vim
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    sys.path.insert(0, project_base_dir)
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    execfile(activate_this, dict(__file__=activate_this))
+"EOF
+"endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
