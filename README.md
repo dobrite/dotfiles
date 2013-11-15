@@ -30,7 +30,7 @@ git submodule update
 
 Dropbox
 =======
-Install Dropbox in Unity
+http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
 copy dropbox script to /etc/init.d/dropbox
 sudo chmod +x /etc/init.d/dropbox
 sudo update-rc.d dropbox defaults
