@@ -27,3 +27,10 @@ Update vim submodules
 =====================
 git submodule init
 git submodule update
+
+Dropbox
+=======
+Install Dropbox in Unity
+copy dropbox script to /etc/init.d/dropbox
+sudo chmod +x /etc/init.d/dropbox
+sudo update-rc.d dropbox defaults

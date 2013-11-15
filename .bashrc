@@ -122,3 +122,6 @@ source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 eval `dircolors $HOME/.dircolors`
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/pycharm/bin # Add pycharm to PATH
+PATH=$PATH:/opt/python3.3/bin # Add python3.3 to PATH
+PATH=$PATH:$HOME/projects/scala/sbt/bin
