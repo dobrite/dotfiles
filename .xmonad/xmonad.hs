@@ -6,6 +6,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 import XMonad.Layout.ThreeColumns
 import XMonad.Actions.SpawnOn
+import XMonad.Hooks.ManageHelpers
 
 myWorkspaces = ["main", "web", "misc" ] ++ map show [4..9]
 windowExpandRate = (3/100)
@@ -21,8 +22,8 @@ myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myConfig = defaultConfig {
     workspaces = myWorkspaces,
-    terminal = "xterm",
-    manageHook = manageSpawn <+> manageDocks <+> manageHook defaultConfig,
+    terminal = "gnome-terminal",
+    manageHook = manageSpawn <+> ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
     layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
     startupHook = startup,
     --modMask = mod4Mask,    -- Rebind Mod to the Windows key
