@@ -7,26 +7,28 @@ import System.IO
 import XMonad.Layout.ThreeColumns
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageHelpers
+import XMonad.Config.Xfce
+
+myManageHook = composeAll [
+    className =? "MPlayer" --> doFloat,
+    className =? "Gimp" --> doFloat,
+    className =? "Xfce4-appfinder" --> doFloat,
+    className =? "Xfrun4" --> doFloat,
+    resource =? "desktop_window" --> doIgnore,
+    resource =? "kdesktop" --> doIgnore
+    ]
 
 myWorkspaces = ["main", "web", "misc" ] ++ map show [4..9]
 windowExpandRate = (3/100)
 mainWindowPercentage = (37/100)
 myLayout = ThreeColMid 1 windowExpandRate mainWindowPercentage ||| Tall 2 windowExpandRate (1/3)
-startup = do
-  spawnOn "web" "chromium-browser"
-  spawnOn "misc" "keepass2"
-  spawnOn "misc" "spotify"
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
-myBar = "xmobar"
-myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
-myConfig = defaultConfig {
+main = xmonad myConfig
+myConfig = xfceConfig {
     workspaces = myWorkspaces,
-    terminal = "gnome-terminal",
-    manageHook = manageSpawn <+> ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
-    layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
-    startupHook = startup,
-    --modMask = mod4Mask,    -- Rebind Mod to the Windows key
+    terminal = "xfce4-terminal",
+    manageHook = manageSpawn <+> ( isFullscreen --> doFullFloat ) <+> manageDocks <+> myManageHook,
+    layoutHook = avoidStruts  $  layoutHook xfceConfig { layoutHook = myLayout },
+    modMask = mod4Mask,    -- Rebind Mod to the Windows key
     focusedBorderColor = "#2aa198",
     normalBorderColor = "#839496"
 }
