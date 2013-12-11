@@ -179,20 +179,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
 
-" Jedi stuff - just making some defaults explicit
-let g:jedi#auto_initialization = 1
-let g:jedi#popup_select_first = 1
-let g:jedi#show_function_definition = 1
-let g:jedi#goto_command = "<leader>g"
-let g:jedi#get_definition_command = "<leader>d"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#related_names_command = "<leader>n"
-let g:jedi#autocompletion_command = "<C-Space>"
-
-" non-default
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#popup_on_dot = 0
-
 " Commented out - doesn't work with pyvenv-3.3
 " Add the virtualenv's site-packages to vim path
 "if has('python')
