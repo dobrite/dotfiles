@@ -9,5 +9,7 @@ ln -s ~/dotfiles/.pythonrc ~/
 ln -s ~/dotfiles/.bash_profile ~/
 ln -s ~/dotfiles/.Xresources ~/
 ln -s ~/dotfiles/.xinitrc ~/
+ln -s ~/dotfiles/.vim ~/
+ln -s ~/dotfiles/.vimrc ~/
 sudo ln -s ~/dotfiles/custom.desktop /usr/share/xsessions/
 sudo ln -s ~/dotfiles/switch-sound-output.sh /usr/local/bin
