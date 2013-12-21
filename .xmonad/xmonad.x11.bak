@@ -16,6 +16,7 @@ startup = do
   spawnOn "web" "chromium-browser"
   spawnOn "misc" "keepass2"
   spawnOn "misc" "spotify"
+  spawnOn "misc" "synergy"
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myBar = "xmobar"
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
@@ -26,7 +27,7 @@ myConfig = defaultConfig {
     manageHook = manageSpawn <+> ( isFullscreen --> doFullFloat ) <+> manageDocks <+> manageHook defaultConfig,
     layoutHook = avoidStruts  $  layoutHook defaultConfig { layoutHook = myLayout },
     startupHook = startup,
-    --modMask = mod4Mask,    -- Rebind Mod to the Windows key
+    modMask = mod4Mask,    -- Rebind Mod to the Windows key
     focusedBorderColor = "#2aa198",
     normalBorderColor = "#839496"
 }
