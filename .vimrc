@@ -159,6 +159,9 @@ set t_Co=16
 colorscheme solarized
 let g:solarized_termcolors=16
 
+" JSHint will only do its thing when we save
+let JSHintUpdateWriteOnly=1
+
 " ===========================================================
 " FileType specific changes
 " ============================================================
