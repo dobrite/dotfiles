@@ -110,7 +110,6 @@ fi
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-source /usr/local/bin/virtualenvwrapper.sh
 source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 
 # gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_background" --type bool false
