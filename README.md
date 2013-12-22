@@ -20,3 +20,8 @@ http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-b
 cp -r dropbox /etc/init.d/dropbox
 sudo chmod +x /etc/init.d/dropbox
 sudo update-rc.d dropbox defaults
+
+XMonad and XFCE
+===============
+Do the "ensure xmonad get started"
+www.haskell.org/haskellwiki/Xmonad/Using_xmonad_in_XFCE#Configuring_XMonad_to_work_with_Xfce
