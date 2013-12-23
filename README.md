@@ -25,3 +25,11 @@ XMonad and XFCE
 ===============
 Do the "ensure xmonad get started"
 www.haskell.org/haskellwiki/Xmonad/Using_xmonad_in_XFCE#Configuring_XMonad_to_work_with_Xfce
+
+XFCE4 Keyboard Shortcuts
+========================
+Get rid of `windows` button opening whisker menu and ctrl+p display properties.
+Remap ctrl+p to open collapsed appfinder.
+Remove Super_L line and add xfce4-appfinder --collapsed to Super p entry.
+sudo vim
+/etc/xdg/xdg-default/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
