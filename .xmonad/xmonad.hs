@@ -13,6 +13,7 @@ myManageHook = composeAll [
     className =? "MPlayer" --> doFloat,
     className =? "Gimp" --> doFloat,
     className =? "Xfce4-appfinder" --> doFloat,
+    className =? "Xfce4-whiskermenu" --> doFloat,
     className =? "Xfrun4" --> doFloat,
     resource =? "desktop_window" --> doIgnore,
     resource =? "kdesktop" --> doIgnore
