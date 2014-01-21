@@ -110,6 +110,8 @@ fi
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
+
+export HISTIGNORE="&:ls:ls -la:cd ..:[bf]g:exit:[ \t]*"
 source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 source ~/.env #api keys and such
 
