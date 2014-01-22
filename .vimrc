@@ -58,7 +58,7 @@ set wildmenu       " Menu completion in command mode on <Tab>
 set wildmode=full  " <Tab> cycles between all matching choices.
 
 " Ignore these files when completing
-set wildignore+=*.o,*.obj,.git,.hg,*.pyc,
+set wildignore+=*.o,*.obj,.git,.hg,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
