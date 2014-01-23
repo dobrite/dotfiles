@@ -150,6 +150,8 @@ autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
 autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
 
 " NERDTREE Settings
+" show dotfiles
+let NERDTreeShowHidden=1
 " open NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 " close vim if nerdtree is the last window left
