@@ -113,6 +113,7 @@ export PROJECT_HOME=$HOME/projects
 
 export HISTIGNORE="&:ls:ls -la:cd ..:[bf]g:exit:[ \t]*"
 source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
+source /usr/local/share/chruby/chruby.sh
 source ~/.env #api keys and such
 
 # gnome-terminal solarized color theme - not used
@@ -128,3 +129,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/pycharm/bin # Add pycharm to PATH
 PATH=$PATH:/opt/python3.3/bin # Add python3.3 to PATH
 PATH=$PATH:$HOME/projects/scala/sbt/bin
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
