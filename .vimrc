@@ -168,7 +168,8 @@ let JSHintUpdateWriteOnly=1
 " FileType specific changes
 " ============================================================
 " Mako/Jinja2/Handlebars/HTML
-autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.hbs setlocal ft=html
+autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.j2,*.hbs setlocal ft=html
+autocmd BufNewFile,BufRead *.jinja2,*.j2 setlocal ft=jinja
 autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 " Python
@@ -180,9 +181,11 @@ au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\
 
 " ctrp p custom ignores
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|bower_components)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|bower_components|env[0-9]*)$',
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
+
+let g:ctrlp_working_path_mode = 'ra'
 
 " Commented out - doesn't work with pyvenv-3.3
 " Add the virtualenv's site-packages to vim path
