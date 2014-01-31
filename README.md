@@ -36,6 +36,7 @@ XFCE4 Keyboard Shortcuts
 * Get rid of `windows` button opening whisker menu and win+p display properties.
 * Remap win+p to open collapsed appfinder.
 * Remove Super_L line and add xfce4-appfinder --collapsed to Super p entry.
-```sudo vim
+```
+sudo vim
 /etc/xdg/xdg-default/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
 ```
