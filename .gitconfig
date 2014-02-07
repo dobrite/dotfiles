@@ -6,3 +6,5 @@
 	ui = auto
 [push]
 	default = simple
+[core]
+	editor = vim
