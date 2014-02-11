@@ -152,7 +152,7 @@ autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
 " NERDTREE Settings
 " show dotfiles
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['__pycache__', '\.pyc$', '*.swp']
+let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
 " open NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 " close vim if nerdtree is the last window left
