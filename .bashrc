@@ -132,3 +132,5 @@ PATH=$PATH:$HOME/projects/scala/sbt/bin
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+### Added by rvm
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
