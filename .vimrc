@@ -14,6 +14,10 @@ endfu
 
 nmap <leader>sb :call SplitScroll()<CR>
 
+" Dash
+:nmap <silent><Leader>d <Plug>DashSearch
+:nmap <silent><Leader>D <Plug>DashSearchGlobal
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -148,6 +152,7 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 " Use tab to scroll through autocomplete menus
 autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
 autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
+" autocmd Filetype ruby,eruby setlocal ts=2 sw=2 expandtab
 
 " NERDTREE Settings
 " show dotfiles
@@ -187,6 +192,8 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 let g:ctrlp_working_path_mode = 'ra'
+
+set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
 " Commented out - doesn't work with pyvenv-3.3
 " Add the virtualenv's site-packages to vim path
