@@ -29,6 +29,12 @@ nmap <silent><Leader>tn <Esc>:Pytest next<CR>
 nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
+" RSpec.vim mappings
+map <Leader>F :call RunCurrentSpecFile()<CR>
+map <Leader>N :call RunNearestSpec()<CR>
+map <Leader>L :call RunLastSpec()<CR>
+map <Leader>A :call RunAllSpecs()<CR>
+
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
 nmap <leader>xx :cclose<CR>
@@ -147,7 +153,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader><space> :nohlsearch<cr>
 
 " Remove trailing whitespace on <leader>S
-nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Use tab to scroll through autocomplete menus
 autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
