@@ -34,3 +34,6 @@
 [submodule ".vim/bundle/vim-slim.git"]
 	path = .vim/bundle/vim-slim.git
 	url = https://github.com/slim-template/vim-slim.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
