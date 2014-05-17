@@ -115,11 +115,20 @@ export PROJECT_HOME=$HOME/projects
 
 export HISTIGNORE="&:ls:ls -la:cd ..:[bf]g:exit:[ \t]*"
 source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
 source ~/.env #api keys and such
+
+export PATH=$PATH:/usr/local/go/bin
 
 eval `dircolors $HOME/.dircolors`
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+### rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+eval "$(~/code/pco/bin/pco init -)"
+
+#deis stuff
+export DEIS_NUM_INSTANCES=3
+export DOCKER_HOST=tcp://172.17.8.100:4243
+export FLEETCTL_TUNNEL=172.17.8.100
