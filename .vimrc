@@ -70,6 +70,8 @@ endif
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -187,6 +189,9 @@ let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
 map <C-n> :NERDTreeToggle<CR>
 " close vim if nerdtree is the last window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" gofmt on save
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 set t_Co=16
 colorscheme solarized
