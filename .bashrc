@@ -118,6 +118,8 @@ source ~/.bash_prompt.sh #adds 2 lines, colors and git branches to prompt
 source ~/.env #api keys and such
 
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/projects/go
+export PATH=$PATH:$GOPATH/bin
 
 eval `dircolors $HOME/.dircolors`
 
