@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/ack"]
 	path = .vim/bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
-[submodule ".vim/bundle/flake8"]
-	path = .vim/bundle/flake8
-	url = https://github.com/nvie/vim-flake8
 [submodule ".vim/bundle/fugitive"]
 	path = .vim/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -19,24 +16,18 @@
 [submodule ".vim/bundle/javascript"]
 	path = .vim/bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
-[submodule ".vim/bundle/pytest"]
-	path = .vim/bundle/pytest
-	url = https://github.com/alfredodeza/pytest.vim.git
-[submodule ".vim/bundle/jedi-vim"]
-	path = .vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim
 [submodule ".vim/bundle/vim-git"]
 	path = .vim/bundle/vim-git
 	url = https://github.com/tpope/vim-git.git
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule ".vim/bundle/pydoc"]
-	path = .vim/bundle/pydoc
-	url = https://github.com/fs111/pydoc.vim.git
-[submodule ".vim/bundle/surround"]
-	path = .vim/bundle/surround
-	url = git@github.com:tpope/vim-surround.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git

@@ -4,12 +4,12 @@ let mapleader=","
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 fu! SplitScroll()
-    :wincmd v
-    :wincmd w
-    execute "normal! \<C-d>"
-    :set scrollbind
-    :wincmd w
-    :set scrollbind
+  :wincmd v
+  :wincmd w
+  execute "normal! \<C-d>"
+  :set scrollbind
+  :wincmd w
+  :set scrollbind
 endfu
 
 nmap <leader>sb :call SplitScroll()<CR>
@@ -51,9 +51,27 @@ map <c-h> <c-w>h
 " happen as if in command mode )
 imap <C-w> <C-O><C-w>
 
-nmap <leader>a <Esc>:Ack!
+nmap <leader>A <Esc>:Ack!
+nmap <leader>a <Esc>:Ag<SPACE>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -143,6 +161,9 @@ set incsearch               " Incrementally search while typing a /regex
 set pumheight=6             " Keep a small completion window
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Git Blame
+map <C-g>b :Gblame<CR>
+
 " Paste from clipboard
 map <leader>p "+p
 
@@ -169,12 +190,20 @@ map <C-n> :NERDTreeToggle<CR>
 " close vim if nerdtree is the last window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" gofmt on save
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 set t_Co=16
 colorscheme solarized
 let g:solarized_termcolors=16
 
 " JSHint will only do its thing when we save
 let JSHintUpdateWriteOnly=1
+
+let g:syntastic_quiet_messages = {}
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 " ===========================================================
 " FileType specific changes
@@ -189,6 +218,7 @@ let JSHintUpdateWriteOnly=1
 "au FileType python set omnifunc=pythoncomplete#Complete
 "au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 "au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " ctrp p custom ignores
@@ -200,21 +230,6 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ra'
 
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
-
-" Commented out - doesn't work with pyvenv-3.3
-" Add the virtualenv's site-packages to vim path
-"if has('python')
-"py << EOF
-"import os.path
-"import sys
-"import vim
-"if 'VIRTUAL_ENV' in os.environ:
-"    project_base_dir = os.environ['VIRTUAL_ENV']
-"    sys.path.insert(0, project_base_dir)
-"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"    execfile(activate_this, dict(__file__=activate_this))
-"EOF
-"endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
