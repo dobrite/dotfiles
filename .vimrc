@@ -14,10 +14,6 @@ endfu
 
 nmap <leader>sb :call SplitScroll()<CR>
 
-" Dash
-:nmap <silent><Leader>d <Plug>DashSearch
-:nmap <silent><Leader>D <Plug>DashSearchGlobal
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -138,12 +134,6 @@ set smarttab   " Handle tabs more intelligently
 set hlsearch   " Highlight searches by default.
 set incsearch  " Incrementally search while typing a /regex
 
-""" Insert completion
-"don't select first item, follow typing in autocomplete
-"set completeopt=menuone,longest,preview
-set pumheight=6             " Keep a small completion window
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " Paste from clipboard
 map <leader>p "+p
 
@@ -156,22 +146,18 @@ nnoremap <leader><space> :nohlsearch<cr>
 " Remove trailing whitespace on <leader>s
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
-" Use tab to scroll through autocomplete menus
-autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
-autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
-" autocmd Filetype ruby,eruby setlocal ts=2 sw=2 expandtab
-
 " NERDTREE Settings
-" show dotfiles
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=1 " show dotfiles
 let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
+
+" super tab
+let g:SuperTabDefaultCompletionType = "context"
+
 " open NERDTREE
 map <C-n> :NERDTreeToggle<CR>
+
 " close vim if nerdtree is the last window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" gofmt on save
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 set t_Co=16
 colorscheme solarized
@@ -180,22 +166,15 @@ let g:solarized_termcolors=16
 " JSHint will only do its thing when we save
 let JSHintUpdateWriteOnly=1
 
-" ===========================================================
-" FileType specific changes
-" ============================================================
-" Mako/Jinja2/Handlebars/HTML
-"autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.j2,*.hbs setlocal ft=html
-"autocmd BufNewFile,BufRead *.jinja2,*.j2 setlocal ft=jinja
-"autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+" gofmt on save
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" generate ctags for go files when saving
+au BufWritePost *.go silent! !ctags -R --exclude=*.js --exclude=*.coffee &
 
-" Python
-"au BufRead *.py compiler nose
-"au FileType python set omnifunc=pythoncomplete#Complete
-"au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-"au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 au BufRead,BufNewFile *.go set filetype=go
 autocmd FileType go set nolist
 autocmd FileType go set ts=4
+
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " ctrp p custom ignores
