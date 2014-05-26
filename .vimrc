@@ -128,16 +128,15 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
-"set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
 set listchars=tab:>-,trail:#,precedes:<,extends:>
 set list
 
 """ Searching and Patterns
-set ignorecase              " Default to using case insensitive searches,
-set smartcase               " unless uppercase letters are used in the regex.
-set smarttab                " Handle tabs more intelligently
-set hlsearch                " Highlight searches by default.
-set incsearch               " Incrementally search while typing a /regex
+set ignorecase " Default to using case insensitive searches,
+set smartcase  " unless uppercase letters are used in the regex.
+set smarttab   " Handle tabs more intelligently
+set hlsearch   " Highlight searches by default.
+set incsearch  " Incrementally search while typing a /regex
 
 """ Insert completion
 "don't select first item, follow typing in autocomplete
@@ -154,7 +153,7 @@ nnoremap <leader>q :q<CR>
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Remove trailing whitespace on <leader>S
+" Remove trailing whitespace on <leader>s
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Use tab to scroll through autocomplete menus
@@ -194,6 +193,9 @@ let JSHintUpdateWriteOnly=1
 "au FileType python set omnifunc=pythoncomplete#Complete
 "au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 "au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+au BufRead,BufNewFile *.go set filetype=go
+autocmd FileType go set nolist
+autocmd FileType go set ts=4
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " ctrp p custom ignores
