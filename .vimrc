@@ -34,6 +34,7 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
+let g:rspec_command = "!zeus test {spec}"
 
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
@@ -54,6 +55,9 @@ imap <C-w> <C-O><C-w>
 nmap <leader>A <Esc>:Ack!
 nmap <leader>a <Esc>:Ag<SPACE>
 
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -65,9 +69,6 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-" bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 filetype off
 filetype plugin indent off
@@ -155,12 +156,6 @@ set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
-""" Insert completion
-"don't select first item, follow typing in autocomplete
-"set completeopt=menuone,longest,preview
-set pumheight=6             " Keep a small completion window
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " Git Blame
 map <C-g>b :Gblame<CR>
 
@@ -175,11 +170,6 @@ nnoremap <leader><space> :nohlsearch<cr>
 
 " Remove trailing whitespace on <leader>S
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
-
-" Use tab to scroll through autocomplete menus
-autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
-autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
-" autocmd Filetype ruby,eruby setlocal ts=2 sw=2 expandtab
 
 " NERDTREE Settings
 " show dotfiles
@@ -203,21 +193,8 @@ let JSHintUpdateWriteOnly=1
 let g:syntastic_quiet_messages = {}
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+let g:syntastic_ignore_files = ['\.cjsx$']
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-" ===========================================================
-" FileType specific changes
-" ============================================================
-" Mako/Jinja2/Handlebars/HTML
-"autocmd BufNewFile,BufRead *.mako,*.mak,*.jinja2,*.j2,*.hbs setlocal ft=html
-"autocmd BufNewFile,BufRead *.jinja2,*.j2 setlocal ft=jinja
-"autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-
-" Python
-"au BufRead *.py compiler nose
-"au FileType python set omnifunc=pythoncomplete#Complete
-"au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-"au FileType coffee setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
@@ -228,6 +205,12 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <leader>f :CtrlP<CR>
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <leader>m :CtrlPMRU<CR>
+
+" cjsx
+autocmd BufNewFile,BufRead *.cjsx set filetype=coffee
 
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
