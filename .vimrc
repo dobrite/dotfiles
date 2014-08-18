@@ -52,7 +52,6 @@ map <c-h> <c-w>h
 " happen as if in command mode )
 imap <C-w> <C-O><C-w>
 
-nmap <leader>A <Esc>:Ack!
 nmap <leader>a <Esc>:Ag<SPACE>
 
 " bind \ (backward slash) to grep shortcut
