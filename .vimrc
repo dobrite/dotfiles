@@ -14,10 +14,6 @@ endfu
 
 nmap <leader>sb :call SplitScroll()<CR>
 
-" Dash
-:nmap <silent><Leader>d <Plug>DashSearch
-:nmap <silent><Leader>D <Plug>DashSearchGlobal
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -122,6 +118,7 @@ set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
 set foldmethod=indent       " allow us to fold on indents
 set foldlevel=99            " don't fold by default
+set foldlevelstart=99       " don't fold by default
 
 " don't outdent hashes
 inoremap # #
@@ -144,16 +141,15 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
-"set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
 set listchars=tab:>-,trail:#,precedes:<,extends:>
 set list
 
 """ Searching and Patterns
-set ignorecase              " Default to using case insensitive searches,
-set smartcase               " unless uppercase letters are used in the regex.
-set smarttab                " Handle tabs more intelligently
-set hlsearch                " Highlight searches by default.
-set incsearch               " Incrementally search while typing a /regex
+set ignorecase " Default to using case insensitive searches,
+set smartcase  " unless uppercase letters are used in the regex.
+set smarttab   " Handle tabs more intelligently
+set hlsearch   " Highlight searches by default.
+set incsearch  " Incrementally search while typing a /regex
 
 " Git Blame
 map <C-g>b :Gblame<CR>
@@ -167,20 +163,21 @@ nnoremap <leader>q :q<CR>
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Remove trailing whitespace on <leader>S
+" Remove trailing whitespace on <leader>s
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
 " NERDTREE Settings
-" show dotfiles
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=1 " show dotfiles
 let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
+
+" super tab
+let g:SuperTabDefaultCompletionType = "context"
+
 " open NERDTREE
 map <C-n> :NERDTreeToggle<CR>
+
 " close vim if nerdtree is the last window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" gofmt on save
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 set t_Co=16
 colorscheme solarized
@@ -189,12 +186,13 @@ let g:solarized_termcolors=16
 " JSHint will only do its thing when we save
 let JSHintUpdateWriteOnly=1
 
-let g:syntastic_quiet_messages = {}
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-let g:syntastic_ignore_files = ['\.cjsx$']
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
+" gofmt on save
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" generate ctags for go files when saving
+au BufWritePost *.go silent! !ctags -R --exclude=*.js --exclude=*.coffee &
+au BufRead,BufNewFile *.go set filetype=go
+autocmd FileType go set nolist
+autocmd FileType go set ts=4
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " ctrp p custom ignores
