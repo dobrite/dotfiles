@@ -201,6 +201,10 @@ nnoremap <silent> <leader>m :CtrlPMRU<CR>
 " cjsx
 autocmd BufNewFile,BufRead *.cjsx set filetype=coffee
 
+" vim-javascript
+let javascript_enable_domhtmlcss = 1
+let g:javascript_conceal = 1
+
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
 " Load up virtualenv's vimrc if it exists
