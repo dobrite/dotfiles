@@ -22,13 +22,11 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!zeus test {spec}"
+let g:rspec_command = "!pco box zeus test {spec}"
 
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
 nmap <leader>xx :cclose<CR>
-
-nmap <leader>c :bp\|bd#<CR>
 
 " ctrl-jklm changes to that split
 map <c-j> <c-w>j
@@ -97,9 +95,9 @@ set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
 set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
-set nowrap                  " don't wrap text
-set textwidth=0             " plz?
 set linebreak               " don't wrap textin the middle of a word
+"set textwidth=0             " plz?
+set nowrap                  " don't wrap text
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
 set tabstop=4               " <tab> inserts 4 spaces
@@ -151,6 +149,12 @@ map <leader>p "+p
 
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
+
+" Tabs
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>c :tabclose<CR>
+" Open new tab when opening new buffer
+set switchbuf=usetab,newtab
 
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<cr>
