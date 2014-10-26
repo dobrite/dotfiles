@@ -22,7 +22,9 @@ myManageHook = composeAll [
 myWorkspaces = ["main", "web", "misc" ] ++ map show [4..9]
 windowExpandRate = (3/100)
 mainWindowPercentage = (37/100)
-myLayout = ThreeColMid 1 windowExpandRate mainWindowPercentage ||| Tall 2 windowExpandRate (1/3)
+myLayout = ThreeColMid 1 windowExpandRate mainWindowPercentage |||
+           Tall 2 windowExpandRate (1/3) |||
+           Tall 1 windowExpandRate (2/3)
 main = xmonad myConfig
 myConfig = xfceConfig {
     workspaces = myWorkspaces,
@@ -30,6 +32,6 @@ myConfig = xfceConfig {
     manageHook = manageSpawn <+> ( isFullscreen --> doFullFloat ) <+> manageDocks <+> myManageHook,
     layoutHook = avoidStruts  $  layoutHook xfceConfig { layoutHook = myLayout },
     modMask = mod4Mask,    -- Rebind Mod to the Windows key
-    focusedBorderColor = "#2aa198",
-    normalBorderColor = "#839496"
+    focusedBorderColor = "#073642",
+    normalBorderColor = "#073642"
 }
