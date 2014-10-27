@@ -182,6 +182,9 @@ let g:solarized_termcolors=16
 " JSHint will only do its thing when we save
 let JSHintUpdateWriteOnly=1
 
+" syntastic
+let g:syntastic_javascript_checkers = ['jsxhint']
+
 " gofmt on save
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
 " generate ctags for go files when saving
