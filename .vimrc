@@ -185,6 +185,9 @@ let JSHintUpdateWriteOnly=1
 " syntastic
 let g:syntastic_javascript_checkers = ['jsxhint']
 
+" vim-jsx
+let g:jsx_pragma_required = 0
+
 " gofmt on save
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
 " generate ctags for go files when saving
