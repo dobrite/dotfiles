@@ -22,7 +22,7 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!zeus test {spec}"
+let g:rspec_command = "!pco box zeus test {spec}"
 
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
@@ -121,8 +121,6 @@ set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
 set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
-set mouse=a
-
 """" Messages, Info, Status
 set ls=2                    " allways show status line
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
@@ -151,6 +149,8 @@ map <leader>p "+p
 
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
+" Quit window on <leader>q
+nnoremap <leader>w :bd<CR>
 
 " Tabs
 nnoremap <leader>t :tabnew<CR>
