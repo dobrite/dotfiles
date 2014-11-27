@@ -22,7 +22,7 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!pco box zeus test {spec}"
+let g:rspec_command = "!pco box rspec {spec}"
 
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
@@ -58,6 +58,8 @@ endif
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
+
+runtime macros/matchit.vim
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -149,8 +151,9 @@ map <leader>p "+p
 
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
-" Quit window on <leader>q
-nnoremap <leader>w :bd<CR>
+
+" close buffer and don't close split
+nmap <leader>w :b#<bar>bd#<CR>
 
 " Tabs
 nnoremap <leader>t :tabnew<CR>
