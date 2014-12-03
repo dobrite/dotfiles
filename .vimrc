@@ -158,8 +158,6 @@ nmap <leader>w :b#<bar>bd#<CR>
 " Tabs
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>c :tabclose<CR>
-" Open new tab when opening new buffer
-set switchbuf=usetab,newtab
 
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<cr>
@@ -221,11 +219,6 @@ let javascript_enable_domhtmlcss = 1
 let g:javascript_conceal = 1
 
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
-
-" Load up virtualenv's vimrc if it exists
-if filereadable($VIRTUAL_ENV . '/.vimrc')
-    source $VIRTUAL_ENV/.vimrc
-endif
 
 if exists("&colorcolumn")
     set colorcolumn=79
