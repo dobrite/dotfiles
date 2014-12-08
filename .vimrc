@@ -165,8 +165,18 @@ nnoremap <leader><space> :nohlsearch<cr>
 " Remove trailing whitespace on <leader>s
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 
+" NERDTREE Settings
+let NERDTreeShowHidden=1 " show dotfiles
+let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
+
 " super tab
 let g:SuperTabDefaultCompletionType = "context"
+
+" open NERDTREE
+map <C-n> :NERDTreeToggle<CR>
+
+" close vim if nerdtree is the last window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 set t_Co=16
 colorscheme solarized

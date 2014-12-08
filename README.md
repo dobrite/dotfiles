@@ -1,6 +1,6 @@
 # dotfiles
 
-dotfiles for various things.
+My dotfiles for various things.
 
 ```
 sudo apt-get -y install libghc-xmonad-contrib-dev xmonad
