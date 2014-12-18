@@ -214,6 +214,9 @@ nnoremap <silent> <leader>m :CtrlPMRU<CR>
 " cjsx
 autocmd BufNewFile,BufRead *.cjsx set filetype=coffee
 
+" clojurescript
+au BufNewFile,BufRead *.cljs set filetype=clojure
+
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
 let g:javascript_conceal = 1
