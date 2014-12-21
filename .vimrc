@@ -22,7 +22,7 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!pco box rspec {spec}"
+let g:rspec_command = "!pco box zeus test {spec}"
 
 " open/close the quickfix window
 nmap <leader>x :copen<CR>
@@ -54,6 +54,8 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 filetype off
 filetype plugin indent off

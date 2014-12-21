@@ -6,3 +6,5 @@ ln -s ~/dotfiles/.gitconfig ~/
 ln -s ~/dotfiles/.bash_profile ~/
 ln -s ~/dotfiles/.vim ~/
 ln -s ~/dotfiles/.vimrc ~/
+ln -s ~/dotfiles/.emacs.d ~/
+ln -s ~/dotfiles/.lein ~/
