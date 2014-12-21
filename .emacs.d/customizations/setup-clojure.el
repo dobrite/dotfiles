@@ -12,7 +12,7 @@
 ;; A little more syntax highlighting
 (require 'clojure-mode-extra-font-locking)
 
-;; syntax hilighting for midje
+;; syntax highlighting for midje
 (add-hook 'clojure-mode-hook
           (lambda ()
             (setq inferior-lisp-program "lein repl")
@@ -40,7 +40,7 @@
 (setq cider-auto-select-error-buffer t)
 
 ;; Where to store the cider history.
-(setq cider-repl-history-file "~/.emacs.d/cider-history")
+(setq cider-repl-history-file "~/tmp/emacs-cider-history")
 
 ;; Wrap when navigating history.
 (setq cider-repl-wrap-history t)
@@ -64,7 +64,6 @@
     (cider-repl-set-ns ns)
     (cider-interactive-eval (format "(println '(def server (%s/start))) (println 'server)" ns))
     (cider-interactive-eval (format "(def server (%s/start)) (println server)" ns))))
-
 
 (defun cider-refresh ()
   (interactive)

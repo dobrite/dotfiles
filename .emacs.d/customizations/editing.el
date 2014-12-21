@@ -101,8 +101,6 @@
 
 (evil-leader/set-key
   "u" 'undo-tree-visualize)
-(evil-leader/set-key
-  "n" 'new-empty-buffer)
 (global-set-key (kbd "C-r") 'undo-tree-redo)
 
 ;; default keybindings for evil-nerd-commenter

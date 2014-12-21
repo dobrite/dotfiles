@@ -160,6 +160,7 @@
 
 (require 'evil)
 (evil-mode 1)
+(add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
 
 (require 'evil-matchit)
 (global-evil-matchit-mode 1)
