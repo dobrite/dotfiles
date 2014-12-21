@@ -235,3 +235,5 @@
 
 (custom-set-variables
  '(coffee-tab-width 2))
+
+(setq helm-split-window-in-side-p t)

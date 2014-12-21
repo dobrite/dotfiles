@@ -102,7 +102,6 @@
    "f" 'helm-recentf
    "r" 'helm-projectile-recentf
    "b" 'projectile-switch-to-buffer
-   "p" 'helm-projectile
    "w" 'kill-this-buffer)
 
 (evil-leader/set-key
@@ -114,17 +113,28 @@
   "s" 'evil-window-split
   "q" 'delete-window
   "o" 'zoom-win
-  "h" 'evil-window-left
-  "j" 'evil-window-down
-  "k" 'evil-window-up
-  "l" 'evil-window-right
   "H" 'evil-window-move-far-left
   "J" 'evil-window-move-very-bottom
   "K" 'evil-window-move-very-top
   "L" 'evil-window-move-far-right)
-(global-set-key (kbd "C-^") 'iflipb-next-buffer)
 
 ; directory tree view
 (evil-leader/set-key
-  "p" 'projectile-dired
-  "P" 'dired-jump)
+  "n" 'projectile-dired
+  "N" 'dired-jump)
+
+(define-key evil-normal-state-map "\C-p" 'helm-projectile)
+(define-key evil-normal-state-map "\C-h" 'evil-window-left)
+(define-key evil-normal-state-map "\C-j" 'evil-window-down)
+(define-key evil-normal-state-map "\C-k" 'evil-window-up)
+(define-key evil-normal-state-map "\C-l" 'evil-window-right)
+(global-set-key (kbd "C-^") 'iflipb-next-buffer)
+
+;;; esc quits!
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
