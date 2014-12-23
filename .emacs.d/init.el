@@ -192,7 +192,10 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
+;; add underscore to word for ruby
 (add-hook 'ruby-mode-hook       (lambda () (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)))
+
+;; add hyphen to work for elisp
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table)))
 
 ;;;;
