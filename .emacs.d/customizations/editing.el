@@ -32,12 +32,12 @@
 ; place backup and auto-save files in my ~/tmp directory
 (defvar user-temporary-file-directory "~/tmp")
 (setq backup-by-copying t
-      backup-directory-alist
-        '(("." . "~/tmp"))
-      delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t)
+  backup-directory-alist
+  '(("." . "~/tmp"))
+  delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
 (setq auto-save-default nil)
 
 ; remember cursor position when re-opening a file
