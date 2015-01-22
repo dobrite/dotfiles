@@ -3,15 +3,6 @@ let mapleader=","
 
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-fu! SplitScroll()
-  :wincmd v
-  :wincmd w
-  execute "normal! \<C-d>"
-  :set scrollbind
-  :wincmd w
-  :set scrollbind
-endfu
-
 imap jk <Esc>
 imap kj <Esc>
 nmap <leader>sb :call SplitScroll()<CR>
@@ -74,15 +65,6 @@ filetype plugin indent on
 set number
 set numberwidth=1
 
-"set wildmenu       " Menu completion in command mode on <Tab>
-"set wildmode=full  " <Tab> cycles between all matching choices.
-"
-"" Ignore these files when completing
-"set wildignore+=*.o,*.obj,.git,.hg,*.pyc
-"set wildignore+=eggs/**
-"set wildignore+=*.egg-info/**
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
 " don't bell or blink
 set noerrorbells
 set vb t_vb=
@@ -102,14 +84,12 @@ set scrolloff=3             " Keep 3 context lines above and below the cursor
 set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
 set linebreak               " don't wrap textin the middle of a word
-"set textwidth=0             " plz?
 set nowrap                  " don't wrap text
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
 set tabstop=4               " <tab> inserts 4 spaces
 set shiftwidth=4            " but an indent level is 2 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
-"set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
 set foldmethod=indent       " allow us to fold on indents
