@@ -7,7 +7,7 @@ imap jk <Esc>
 imap kj <Esc>
 nmap <leader>sb :call SplitScroll()<CR>
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
 " RSpec.vim mappings
