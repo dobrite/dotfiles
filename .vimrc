@@ -212,3 +212,8 @@ set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 if exists("&colorcolumn")
     set colorcolumn=79
 endif
+
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
