@@ -129,8 +129,11 @@ set smarttab   " Handle tabs more intelligently
 set hlsearch   " Highlight searches by default.
 set incsearch  " Incrementally search while typing a /regex
 
-" Git Blame
+" Figitive (Git)
 map <C-g>b :Gblame<CR>
+map <C-g>s :Gstatus<CR>
+map <C-g>a :Gadd<CR>
+map <C-g>c :Gcommit<CR>
 
 " Paste from clipboard
 map <leader>p "+p
