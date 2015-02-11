@@ -134,6 +134,7 @@ map <C-g>b :Gblame<CR>
 map <C-g>s :Gstatus<CR>
 map <C-g>a :Gadd<CR>
 map <C-g>c :Gcommit<CR>
+map <C-g>l :Glog<CR>
 
 " Paste from clipboard
 map <leader>p "+p
