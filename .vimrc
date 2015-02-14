@@ -35,6 +35,10 @@ imap <C-w> <C-O><C-w>
 
 nmap <leader>a <Esc>:Ag<SPACE>
 
+" rubocop
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
+
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
@@ -215,7 +219,7 @@ let g:javascript_conceal = 1
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
 if exists("&colorcolumn")
-    set colorcolumn=79
+    set colorcolumn=119
 endif
 
 au FileType qf call AdjustWindowHeight(3, 10)
