@@ -5,7 +5,6 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 
 imap jk <Esc>
 imap kj <Esc>
-nmap <leader>sb :call SplitScroll()<CR>
 
 " Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
