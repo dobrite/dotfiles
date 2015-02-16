@@ -52,6 +52,7 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
@@ -187,6 +188,7 @@ let g:jsx_pragma_required = 0
 
 " gofmt on save
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 " generate ctags for go files when saving
 au BufWritePost *.go silent! !ctags -R --exclude=*.js --exclude=*.coffee &
 au BufRead,BufNewFile *.go set filetype=go
