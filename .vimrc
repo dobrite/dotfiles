@@ -140,6 +140,8 @@ map <C-g>a :Gadd<CR>
 map <C-g>c :Gcommit<CR>
 map <C-g>l :Glog<CR>
 map <C-g>h :Gbrowse<CR>
+map <C-g>r :Gread<CR>
+map <C-g>w :Gwrite<CR>
 
 " Paste from clipboard
 map <leader>p "+p
