@@ -142,6 +142,9 @@ map <C-g>l :Glog<CR>
 map <C-g>h :Gbrowse<CR>
 map <C-g>r :Gread<CR>
 map <C-g>w :Gwrite<CR>
+map <C-g>s :Gpush<CR>
+map <C-g>u :Gpull<CR>
+map <C-g>f :Gfetch<CR>
 
 " Paste from clipboard
 map <leader>p "+p
