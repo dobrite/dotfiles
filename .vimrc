@@ -232,3 +232,7 @@ au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
