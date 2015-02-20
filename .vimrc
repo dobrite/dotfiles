@@ -6,6 +6,11 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 imap jk <Esc>
 imap kj <Esc>
 
+" (Hopefully) removes the delay when hitting esc in insert mode
+set noesckeys
+set ttimeout
+set ttimeoutlen=1
+
 " Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
