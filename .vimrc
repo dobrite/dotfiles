@@ -21,6 +21,7 @@ map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
 let g:rspec_command = "!pco box spring rspec {spec}"
 
+" open related file in split (rails)
 map <Leader>r :AS<CR>
 
 " open/close the quickfix window
@@ -32,11 +33,9 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" and lets make these all work in insert mode too ( <C-O> makes next cmd
-" happen as if in command mode )
 imap <C-w> <C-O><C-w>
 
+" Silver searcher
 nmap <leader>a <Esc>:Ag<SPACE>
 
 " rubocop
