@@ -228,9 +228,7 @@ let g:javascript_conceal = 1
 
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
-if exists("&colorcolumn")
-  set colorcolumn=119
-endif
+set colorcolumn=119
 
 au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)

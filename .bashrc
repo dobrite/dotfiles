@@ -129,8 +129,3 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 eval "$(~/code/pco/bin/pco init -)"
-
-#deis stuff
-export DEIS_NUM_INSTANCES=3
-export DOCKER_HOST=tcp://172.17.8.100:4243
-export FLEETCTL_TUNNEL=172.17.8.100
