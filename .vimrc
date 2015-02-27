@@ -189,9 +189,6 @@ let g:solarized_termcolors=16
 " JSHint will only do its thing when we save
 let JSHintUpdateWriteOnly=1
 
-" syntastic
-let g:syntastic_javascript_checkers = ['jsxhint']
-
 " vim-jsx
 let g:jsx_pragma_required = 0
 
