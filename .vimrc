@@ -19,7 +19,7 @@ map <Leader>F :call RunCurrentSpecFile()<CR>
 map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!pco box spring rspec {spec}"
+let g:rspec_command = "!pco box zeus test {spec}"
 
 " open related file in split (rails)
 map <Leader>r :AS<CR>
