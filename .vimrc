@@ -42,6 +42,9 @@ nmap <leader>a <Esc>:Ag<SPACE>
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
 
+" coffeelint
+let g:syntastic_coffee_coffeelint_args = '-f .coffeelint.json'
+
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
