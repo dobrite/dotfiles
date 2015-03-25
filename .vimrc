@@ -38,13 +38,6 @@ imap <C-w> <C-O><C-w>
 " Silver searcher
 nmap <leader>a <Esc>:Ag<SPACE>
 
-" rubocop
-let g:vimrubocop_keymap = 0
-nmap <Leader>r :RuboCop<CR>
-
-" coffeelint
-let g:syntastic_coffee_coffeelint_args = '-f .coffeelint.json'
-
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
@@ -246,3 +239,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
+
+" rubocop
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
+
+" coffeelint
+let g:syntastic_coffee_coffeelint_args = '-f .coffeelint.json'
