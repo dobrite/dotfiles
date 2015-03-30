@@ -20,7 +20,6 @@ git submodule update
 ```
 
 ## Install node
-## Install jshint
 ## Install ctags
 
 ```
