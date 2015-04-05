@@ -19,13 +19,6 @@ git submodule init
 git submodule update
 ```
 
-## Install node
-## Install ctags
-
-```
-sudo apt-get install ctags
-```
-
 ## Dropbox
 
 [do this](http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment)
