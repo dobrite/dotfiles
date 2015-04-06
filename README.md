@@ -22,7 +22,7 @@ git submodule update
 ## Dropbox
 
 [do this](http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment)
-then this...
+then this
 
 ```
 cp -r dropbox /etc/init.d/dropbox
