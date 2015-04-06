@@ -56,6 +56,9 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+" don't save to register when deleting single characters
+nnoremap <silent> x "_x
+
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
