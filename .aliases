@@ -1,0 +1,50 @@
+# Unix
+alias tlf="tail -f"
+alias ln='ln -v'
+alias mkdir='mkdir -p'
+alias ...='../..'
+alias l='ls'
+alias ll='ls -al'
+alias lh='ls -Alh'
+#alias -g G='| grep'
+#alias -g M='| less'
+#alias -g L='| wc -l'
+#alias -g ONE="| awk '{ print \$1}'"
+alias e="$EDITOR"
+alias v="$VISUAL"
+alias be='bundle exec'
+alias be="bundle exec"
+alias bers="bundle exec rails server"
+alias berc="bundle exec rails console"
+alias gggunit="guard :rspec, cmd: \"bundle exec rspec\""
+
+# git
+alias master="git checkout master && git pull"
+alias staging="git checkout staging && git pull"
+alias gci="git pull --rebase && rake && git push"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gs="git status"
+alias gd="clear; git diff"
+alias gdc="clear; git diff --cached"
+alias gtfo="git reset --hard HEAD"
+
+# Bundler
+alias b="bundle"
+
+# Tests and Specs
+alias t="ruby -I test"
+alias cuc="bundle exec cucumber"
+
+# Rubygems
+alias gi="gem install"
+alias giv="gem install -v"
+
+# Rails
+alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
+alias m="migrate"
+alias rk="rake"
+alias s="rspec"
+alias z="zeus"
+
+# Include custom aliases
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local
