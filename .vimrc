@@ -209,9 +209,6 @@ nnoremap <silent> <leader>f :CtrlP<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
 
-" cjsx
-autocmd BufNewFile,BufRead *.cjsx set filetype=coffee
-
 " clojurescript
 au BufNewFile,BufRead *.cljs set filetype=clojure
 
