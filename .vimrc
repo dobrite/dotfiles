@@ -209,9 +209,6 @@ nnoremap <silent> <leader>f :CtrlP<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
 
-" clojurescript
-au BufNewFile,BufRead *.cljs set filetype=clojure
-
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
 let g:javascript_conceal = 1
