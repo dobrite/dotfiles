@@ -45,6 +45,7 @@ alias m="migrate"
 alias rk="rake"
 alias s="rspec"
 alias z="zeus"
+alias tpp="tail -f log/development.log | grep 'Processing\|Parameters'"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
