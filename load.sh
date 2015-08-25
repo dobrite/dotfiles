@@ -9,3 +9,4 @@ ln -s ~/dotfiles/.vimrc ~/
 ln -s ~/dotfiles/.emacs.d ~/
 ln -s ~/dotfiles/.lein ~/
 ln -s ~/dotfiles/.aliases ~/
+ln -s ~/dotfiles/.ctags ~/
