@@ -11,6 +11,9 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
+" pretty print json
+nnoremap <leader>J :%!python -m json.tool<CR>
+
 " Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
@@ -20,6 +23,7 @@ map <Leader>N :call RunNearestSpec()<CR>
 map <Leader>L :call RunLastSpec()<CR>
 map <Leader>A :call RunAllSpecs()<CR>
 let g:rspec_command = "!pco box zeus test {spec}"
+"let g:rspec_command = "!bundle exec rspec {spec}"
 
 " open related file in split (rails)
 map <Leader>r :AS<CR>
@@ -28,12 +32,20 @@ map <Leader>r :AS<CR>
 nmap <leader>x :copen<CR>
 nmap <leader>xx :cclose<CR>
 
+" do not save to register when deleting single characters
+" note: put this also in after/plugin/yankring.vim
+nnoremap <silent> x "_x
+nnoremap <silent> X "_X
+
 " ctrl-jklm changes to that split
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 imap <C-w> <C-O><C-w>
+
+" Coffee!
+map <Leader>CC :CoffeeCompile<CR>
 
 " Silver searcher
 nmap <leader>a <Esc>:Ag<SPACE>
@@ -217,7 +229,7 @@ set dir=~/.vimswap//,/var/tmp//,/tmp//,.
 
 set colorcolumn=119
 
-au FileType qf call AdjustWindowHeight(3, 10)
+au FileType qf call AdjustWindowHeight(3, 25)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
@@ -233,6 +245,10 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_mode_map = { "mode": "passive" }
+
+" run syntastic
+map <Leader>l :SyntasticCheck<CR>
 
 " rubocop
 let g:vimrubocop_keymap = 0
@@ -240,3 +256,15 @@ nmap <Leader>r :RuboCop<CR>
 
 " coffeelint
 let g:syntastic_coffee_coffeelint_args = '-f .coffeelint.json'
+
+" Smart, multipurpose tab key - insert tab or autocomplete
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
