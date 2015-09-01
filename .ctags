@@ -1,1 +1,7 @@
---recurse=yes --exclude=.git --exclude=log --exclude=tmp --exclude=log --languages=-javascript,sql --append
+--recurse=yes
+--exclude=.git
+--exclude=log
+--exclude=tmp
+--exclude=log
+--languages=-javascript,sql
+--append
