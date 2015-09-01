@@ -17,6 +17,7 @@ alias be="bundle exec"
 alias bers="bundle exec rails server"
 alias berc="bundle exec rails console"
 alias gggunit="guard :rspec, cmd: \"bundle exec rspec\""
+alias p='ps aux | grep $1'
 
 # git
 alias master="git checkout master && git pull"
@@ -27,6 +28,11 @@ alias gs="git status"
 alias gd="clear; git diff"
 alias gdc="clear; git diff --cached"
 alias gtfo="git reset --hard HEAD"
+alias grh="git reset HEAD"
+alias grs="git reset --soft HEAD~1"
+alias gl="git log"
+alias gco="git checkout"
+alias gcob="git checkout -b"
 
 # Bundler
 alias b="bundle"
@@ -42,6 +48,31 @@ alias rk="rake"
 alias s="rspec"
 alias z="zeus"
 alias tpp="tail -f log/development.log | grep 'Processing\|Parameters'"
+
+# Pco Box
+alias pbr="pco box bundle exec rails s -b 0.0.0.0"
+alias pbc="pco box bundle exec rails c"
+
+# Foremans
+
+foremans () {
+    cd ~/Code/accounts
+    foreman start &>log/foreman.log &
+    cd ~/Code/people
+    foreman start &>log/foreman.log &
+    cd ~/Code/services
+    foreman start &>log/foreman.log &
+}
+
+fstop () {
+  kill `pgrep -f foreman`
+  rm ~/Code/accounts/log/foreman.log
+  rm ~/Code/people/log/foreman.log
+  rm ~/Code/services/log/foreman.log
+}
+
+alias foremans=“foremans”
+alias fstop=“fstop”
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
