@@ -6,10 +6,14 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 imap jk <Esc>
 imap kj <Esc>
 
+" save on focus loss
+:au FocusLost * silent! wa
+
+" disabled for neovim
 " removes the delay when hitting esc in insert mode
-set noesckeys
-set ttimeout
-set ttimeoutlen=1
+"set noesckeys
+"set ttimeout
+"set ttimeoutlen=1
 
 " pretty print json
 nnoremap <leader>J :%!python -m json.tool<CR>
@@ -17,13 +21,15 @@ nnoremap <leader>J :%!python -m json.tool<CR>
 " Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" RSpec.vim mappings
-map <Leader>F :call RunCurrentSpecFile()<CR>
-map <Leader>N :call RunNearestSpec()<CR>
-map <Leader>L :call RunLastSpec()<CR>
-map <Leader>A :call RunAllSpecs()<CR>
-let g:rspec_command = "!pco box zeus test {spec}"
-"let g:rspec_command = "!bundle exec rspec {spec}"
+" vim-test mappings
+nmap <silent> <leader>N :TestNearest<CR>
+nmap <silent> <leader>F :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>L :TestLast<CR>
+nmap <silent> <leader>A :TestSuite<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = "neovim"
+let g:test#preserve_screen = 1
 
 " open related file in split (rails)
 map <Leader>r :AS<CR>
@@ -98,7 +104,6 @@ set background=dark
 
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
-set ruler                   " show the cursor position all the time
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
@@ -106,7 +111,6 @@ set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
 set linebreak               " don't wrap textin the middle of a word
 set nowrap                  " don't wrap text
-set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
 set tabstop=4               " <tab> inserts 4 spaces
 set shiftwidth=4            " but an indent level is 2 spaces wide.
@@ -131,7 +135,6 @@ set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 """" Messages, Info, Status
 set ls=2                    " allways show status line
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
-set showcmd                 " Show incomplete normal mode commands as I type.
 set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2            " Always show statusline, even if only 1 window.
@@ -144,7 +147,6 @@ set list
 """ Searching and Patterns
 set ignorecase " Default to using case insensitive searches,
 set smartcase  " unless uppercase letters are used in the regex.
-set smarttab   " Handle tabs more intelligently
 set hlsearch   " Highlight searches by default.
 set incsearch  " Incrementally search while typing a /regex
 
@@ -184,9 +186,6 @@ nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
 let NERDTreeShowHidden=1 " show dotfiles
 let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.swp', '.swo']
 
-" super tab
-let g:SuperTabDefaultCompletionType = "context"
-
 " open NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 
@@ -197,11 +196,13 @@ set t_Co=16
 colorscheme solarized
 let g:solarized_termcolors=16
 
-" vim-jsx
-let g:jsx_pragma_required = 0
-
 " gofmt on save
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
+autocmd FileType javascript set formatprg=./node_modules/prettier/bin/prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma=es5
+let g:neoformat_try_formatprg = 1
 
 " generate ctags for go files when saving
 au BufWritePost *.go silent! !ctags -R --exclude=*.js --exclude=*.coffee &
@@ -220,6 +221,7 @@ let g:ctrlp_working_path_mode = 'ra'
 nnoremap <silent> <leader>f :CtrlP<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
+nnoremap <silent> <leader>. :CtrlPTag<CR>
 
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
@@ -234,17 +236,21 @@ function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
 
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+:let g:syntastic_loc_list_height = 5
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_mode_map = { "mode": "passive" }
 
 " run syntastic
@@ -252,19 +258,21 @@ map <Leader>l :SyntasticCheck<CR>
 
 " rubocop
 let g:vimrubocop_keymap = 0
+let g:vimrubocop_config = '.rubocop.yml'
 nmap <Leader>r :RuboCop<CR>
 
 " coffeelint
 let g:syntastic_coffee_coffeelint_args = '-f .coffeelint.json'
 
-" Smart, multipurpose tab key - insert tab or autocomplete
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
+
+" vim-jsx
+let g:jsx_pragma_required = 0
+let g:jsx_ext_required = 0
+
+" rustfmt on save
+let g:rustfmt_autosave = 1
+let g:rustfmt_fail_silently = 0
