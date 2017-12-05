@@ -12,7 +12,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
-  Plug 'rakr/vim-one'
   Plug 'rust-lang/rust.vim'
   Plug 'sbdchd/neoformat'
   Plug 'scrooloose/nerdtree'
