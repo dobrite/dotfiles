@@ -1,25 +1,40 @@
 call plug#begin('~/.config/nvim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'airblade/vim-gitgutter'
   Plug 'altercation/vim-colors-solarized'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'janko-m/vim-test'
   Plug 'jremmen/vim-ripgrep'
   Plug 'kchmck/vim-coffee-script'
+  Plug 'keith/swift.vim'
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
+  Plug 'rakr/vim-one'
   Plug 'rust-lang/rust.vim'
   Plug 'sbdchd/neoformat'
   Plug 'scrooloose/nerdtree'
+  Plug 'slim-template/vim-slim'
+  Plug 'stephpy/vim-yaml'
   Plug 'tell-k/vim-browsereload-mac'
+  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails', { 'commit': 'f8f5c6c544de7d9ebff7283142593e1733ffae89' } " for syntax hl
+  Plug 'tpope/vim-rhubarb'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 colorscheme solarized
 set background=dark
+
+let g:airline_theme='solarized'
+
+" italics
+highlight Comment cterm=italic
+" end italics
 
 let mapleader=","
 
@@ -41,6 +56,11 @@ map <c-h> <c-w>h
 imap <C-w> <C-O><C-w>
 " end navigation
 
+" line numbers
+set number
+set numberwidth=1
+" end line numbers
+
 " whitespace
 set list " show whitespace
 set listchars=tab:>-,trail:#,precedes:<,extends:> " formatting for shown whitespace
@@ -53,7 +73,6 @@ set linebreak " don't wrap text in the middle of a word
 
 set confirm " Y/N/C prompt
 set hidden  " hide buffers instead of closing (keeps changes rather than forceing prompt)
-
 
 " reading/writing
 set noautowrite    " Never write a file unless I request it.
@@ -106,18 +125,31 @@ nnoremap <silent> <leader>m :CtrlPMRU<CR>
 nnoremap <silent> <leader>. :CtrlPTag<CR>
 " end ctrlp
 
+" fugitive (git)
+map <C-g>b :Gblame<CR>
+map <C-g>s :Gstatus<CR>
+map <C-g>a :Gadd<CR>
+map <C-g>c :Gcommit<CR>
+map <C-g>l :Glog<CR>
+map <C-g>h :Gbrowse<CR>
+map <C-g>r :Gread<CR>
+map <C-g>w :Gwrite<CR>
+map <C-g>s :Gpush<CR>
+map <C-g>u :Gpull<CR>
+map <C-g>f :Gfetch<CR>
+" end fugitive
+
 " neoformat - prettier
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=./node_modules/prettier/bin/prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma=es5
+autocmd FileType javascript set formatprg=./node_modules/prettier/bin/prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5
 let g:neoformat_try_formatprg = 1
-let g:neoformat_only_msg_on_error = 1
+"let g:neoformat_only_msg_on_error = 1
 " end neoformat - prettier
 
 " ripgrep
 nmap <leader>a <Esc>:Rg<SPACE>
-let g:rg_command = "rg --vimgrep --sort-files"
-
+let g:rg_command = "rg --vimgrep --sort-files --smart-case"
 if executable('rg')
   set grepprg=rg\ --color=never
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
