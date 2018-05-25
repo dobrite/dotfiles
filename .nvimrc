@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
@@ -12,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
   Plug 'pangloss/vim-javascript'
+  Plug 'pest-parser/pest.vim'
   Plug 'rust-lang/rust.vim'
   Plug 'sbdchd/neoformat'
   Plug 'scrooloose/nerdtree'
@@ -24,6 +26,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-ruby/vim-ruby'
+  Plug 'munshkr/vim-tidal'
 call plug#end()
 
 colorscheme solarized
@@ -138,10 +141,14 @@ map <C-g>u :Gpull<CR>
 map <C-g>f :Gfetch<CR>
 " end fugitive
 
+" neomake (linting - e.g. rubocop)
+nmap <Leader>l :Neomake<CR>
+" end neomake
+
 " neoformat - prettier
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=./node_modules/prettier/bin/prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5
+autocmd FileType javascript set formatprg=./node_modules/prettier/bin-prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5
 let g:neoformat_try_formatprg = 1
 "let g:neoformat_only_msg_on_error = 1
 " end neoformat - prettier
@@ -171,3 +178,16 @@ let g:deoplete#enable_at_startup = 1
 nnoremap <silent> <leader>r :ChromeReload<CR>
 let g:returnApp = "iTerm"
 " end vim browsereload-mac
+
+" rustfmt
+let g:rustfmt_autosave = 1
+let g:rustfmt_fail_silently = 0
+" end rustfmt
+
+" RLS
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+let g:LanguageClient_autoStart = 1
+autocmd BufReadPost *.rs setlocal filetype=rust
+" end RLS

@@ -30,6 +30,8 @@ nmap <silent> <leader>A :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = "neovim"
 let g:test#preserve_screen = 1
+let test#ruby#rspec#executable = 'bundle exec rspec'
+let test#ruby#use_binstubs = 0
 
 " open related file in split (rails)
 map <Leader>r :AS<CR>
@@ -266,7 +268,3 @@ let g:javascript_plugin_flow = 1
 " vim-jsx
 let g:jsx_pragma_required = 0
 let g:jsx_ext_required = 0
-
-" rustfmt on save
-let g:rustfmt_autosave = 1
-let g:rustfmt_fail_silently = 0
