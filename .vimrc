@@ -195,11 +195,6 @@ let g:solarized_termcolors=16
 " gofmt on save
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
-autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=./node_modules/prettier/bin/prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma=es5
-let g:neoformat_try_formatprg = 1
-
 " generate ctags for go files when saving
 au BufWritePost *.go silent! !ctags -R --exclude=*.js --exclude=*.coffee &
 au BufRead,BufNewFile *.go set filetype=go
@@ -268,3 +263,6 @@ let g:javascript_plugin_flow = 1
 " vim-jsx
 let g:jsx_pragma_required = 0
 let g:jsx_ext_required = 0
+
+" rust
+let g:rustfmt_autosave = 1

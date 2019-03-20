@@ -10,8 +10,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jremmen/vim-ripgrep'
   Plug 'kchmck/vim-coffee-script'
   Plug 'keith/swift.vim'
-  Plug 'mxw/vim-jsx'
   Plug 'neomake/neomake'
+  Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   Plug 'pest-parser/pest.vim'
   Plug 'rust-lang/rust.vim'
@@ -26,7 +26,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'munshkr/vim-tidal'
 call plug#end()
 
 colorscheme solarized
@@ -142,20 +141,23 @@ map <C-g>f :Gfetch<CR>
 " end fugitive
 
 " neomake (linting - e.g. rubocop)
-nmap <Leader>l :Neomake<CR>
+let g:neomake_javascript_enabled_makers = ['eslint']
+call neomake#configure#automake('w')
+"let g:ale_ruby_rubocop_executable = 'bundle exec'
+"let g:ale_ruby_rubocop_options = '--config=.rubocop.yml'
 " end neomake
 
 " neoformat - prettier
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=./node_modules/prettier/bin-prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5
+autocmd FileType javascript set formatprg=./node_modules/prettier/bin-prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5\ --parser\ babylon
 let g:neoformat_try_formatprg = 1
 "let g:neoformat_only_msg_on_error = 1
 " end neoformat - prettier
 
 " ripgrep
 nmap <leader>a <Esc>:Rg<SPACE>
-let g:rg_command = "rg --vimgrep --sort-files --smart-case"
+let g:rg_command = "rg --vimgrep --sort-files"
 if executable('rg')
   set grepprg=rg\ --color=never
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
@@ -191,3 +193,6 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 autocmd BufReadPost *.rs setlocal filetype=rust
 " end RLS
+
+packloadall
+silent! helptags ALL
