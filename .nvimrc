@@ -116,6 +116,7 @@ nmap <silent> <leader>L :TestLast<CR>
 nmap <silent> <leader>A :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = "neovim"
+let test#ruby#use_spring_binstub = 1
 let g:test#preserve_screen = 1
 " end vim-test
 
