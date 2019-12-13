@@ -10,8 +10,8 @@ if [ -f ~/.env ]; then
   . ~/.env
 fi
 
-if [ -f ~/git-completion.bash ]; then
-  . ~/git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
 fi
 
 export VISUAL=vim
@@ -47,20 +47,7 @@ export PS1="\n$PROMPT_TIME$PROMPT_PREFIX$PROMPT_GIT_BRANCH\n$PROMPT_PATH \n$PROM
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export GOPATH=$HOME/projects/go
-export PATH="$PATH:$GOPATH/bin"
-
 # rust stuffs
-export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
-export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
 
-export NVM_DIR="/Users/dave/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export RUST_NEW_ERROR_FORMAT=true
-eval "$(direnv hook bash)"
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -s "/Users/dave/.scm_breeze/scm_breeze.sh" ] && source "/Users/dave/.scm_breeze/scm_breeze.sh"
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
