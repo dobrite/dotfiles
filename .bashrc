@@ -50,4 +50,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # rust stuffs
 export PATH="$HOME/.cargo/bin:$PATH"
 
+export PATH="$HOME/Library/Python/3.8/bin:$PATH"
+
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+source "$HOME/.cargo/env"
