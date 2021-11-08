@@ -1,3 +1,7 @@
+function grbs() {
+  git reflog | egrep -io "moving from ([^[:space:]]+)" | awk '{ print $3 }' | awk ' !x[$0]++' | egrep -v '^[a-f0-9]{40}$' | egrep -v -x '^(master|staging)$' | head -12
+}
+
 # Unix
 alias tlf="tail -f"
 alias ln='ln -v'
@@ -28,6 +32,7 @@ alias ghs='open https://github.com/ministrycentered/services'
 # git
 alias master="git checkout master && git pull"
 alias main="git checkout main && git pull"
+alias next="git checkout next && git pull"
 alias staging="git checkout staging && git pull"
 alias launch_staging="git add . && git stash && git checkout staging && git fetch origin staging && git reset --hard origin/staging && git merge - && git push && pco deploy && git checkout -"
 alias gci="git pull --rebase && rake && git push"
@@ -48,8 +53,12 @@ alias clean="pb be tmp:clear && pb be assets:clobber && pb apprestart"
 alias git-delete-merged-branches="git branch --merged | egrep -v \"(^\*|master|dev)\" | xargs git branch -d"
 #alias gcbd="git checkout `git rev-list -n 1 --before='$1' master`"
 
+# DynamoDB
+alias dynamo="DYNAMO_ENDPOINT=http://localhost:8000 AWS_ACCESS_KEY_ID='developmentId' dynamodb-admin"
+
 # Bundler
 alias b="bundle"
+alias be="bundle exec"
 
 # Tests and Specs
 alias t="ruby -I test"
@@ -66,6 +75,9 @@ alias tpp="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|
 # unbox
 alias orr="sudo openresty -s reload"
 alias ort="tail -f /usr/local/var/log/nginx/*"
+
+alias wtf="spring stop && bundle && touch tmp/restart.txt"
+alias things="bundle && touch tmp/restart.txt && yarn && yarn start"
 
 alias mysqlbu="ssh -o ProxyCommand='ssh -W %h:%p ops@mysqlstandby.planningcenter.plumbing' ops@10.23.108.190"
 
