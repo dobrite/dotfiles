@@ -151,9 +151,7 @@ call neomake#configure#automake('w')
 " neoformat - prettier
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
-autocmd FileType javascript set formatprg=./node_modules/prettier/bin-prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5\ --parser\ babel
-let g:neoformat_try_formatprg = 1
-"let g:neoformat_only_msg_on_error = 1
+let g:neoformat_try_node_exe = 1
 " end neoformat - prettier
 
 " ripgrep
