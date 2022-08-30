@@ -1,18 +1,17 @@
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+  Plug 'MaxMEllon/vim-jsx-pretty'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
-  Plug 'altercation/vim-colors-solarized'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'ericbn/vim-solarized'
   Plug 'janko-m/vim-test'
   Plug 'jremmen/vim-ripgrep'
   Plug 'kchmck/vim-coffee-script'
   Plug 'keith/swift.vim'
-  Plug 'neomake/neomake'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'pangloss/vim-javascript'
-  Plug 'MaxMEllon/vim-jsx-pretty'
   Plug 'pest-parser/pest.vim'
   Plug 'rust-lang/rust.vim'
   Plug 'sbdchd/neoformat'
@@ -116,7 +115,6 @@ nmap <silent> <leader>L :TestLast<CR>
 nmap <silent> <leader>A :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 let test#strategy = "neovim"
-let test#ruby#use_spring_binstub = 1
 let g:test#preserve_screen = 1
 " end vim-test
 
@@ -141,16 +139,11 @@ map <C-g>u :Gpull<CR>
 map <C-g>f :Gfetch<CR>
 " end fugitive
 
-" neomake (linting - e.g. rubocop)
-let g:neomake_javascript_enabled_makers = ['eslint']
-call neomake#configure#automake('w')
-"let g:ale_ruby_rubocop_executable = 'bundle exec'
-"let g:ale_ruby_rubocop_options = '--config=.rubocop.yml'
-" end neomake
-
 " neoformat - prettier
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
+autocmd BufWritePre *.ts Neoformat
+autocmd BufWritePre *.tsx Neoformat
 let g:neoformat_try_node_exe = 1
 " end neoformat - prettier
 
@@ -185,13 +178,23 @@ let g:rustfmt_autosave = 1
 let g:rustfmt_fail_silently = 0
 " end rustfmt
 
-" RLS
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ }
-let g:LanguageClient_autoStart = 1
-autocmd BufReadPost *.rs setlocal filetype=rust
-" end RLS
-
 packloadall
 silent! helptags ALL
+
+lua <<EOLUA
+  local nvim_lsp = require('lspconfig')
+
+  nvim_lsp.syntax_tree.setup({
+    cmd = { 'bundle', 'exec', 'stree', 'lsp' }
+  })
+
+  local servers = { "solargraph" } -- , "tsserver" }
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 150,
+        }
+      }
+  end
+EOLUA

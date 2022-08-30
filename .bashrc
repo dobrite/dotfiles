@@ -38,7 +38,7 @@ ruby_version() {
 
 PROMPT_PREFIX='[\[$(tput setaf 7)\]\[$(tput bold)\]$(ruby_version)\[$(tput sgr0)\]]'
 PROMPT_PATH='[\[$(tput setaf 4)\]$(current_path)\[$(tput sgr0)\]]'
-PROMPT_SUFFIX='\[$(tput bold)\]$\[$(tput sgr0)\] '
+PROMPT_SUFFIX='\[$(tput setaf 4)\]~ \[$(tput sgr0)\]\[$(tput setaf 3)\]><>\[$(tput sgr0)\] '
 PROMPT_GIT_BRANCH='[\[$(tput setaf 7)\]$(git_branch)\[$(tput sgr0)\]]'
 PROMPT_TIME='[\[$(tput setaf 2)\]\D{%F}\[$(tput sgr0)\]\[$(tput setaf 3)\] \D{%T}\[$(tput sgr0)\]]'
 
@@ -54,3 +54,5 @@ export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 source "$HOME/.cargo/env"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

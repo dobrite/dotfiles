@@ -33,6 +33,7 @@ alias ghs='open https://github.com/ministrycentered/services'
 alias master="git checkout master && git pull"
 alias main="git checkout main && git pull"
 alias next="git checkout next && git pull"
+alias release="git checkout release && git pull"
 alias staging="git checkout staging && git pull"
 alias launch_staging="git add . && git stash && git checkout staging && git fetch origin staging && git reset --hard origin/staging && git merge - && git push && pco deploy && git checkout -"
 alias gci="git pull --rebase && rake && git push"
