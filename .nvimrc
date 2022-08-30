@@ -7,10 +7,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ericbn/vim-solarized'
   Plug 'janko-m/vim-test'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'jremmen/vim-ripgrep'
   Plug 'kchmck/vim-coffee-script'
   Plug 'keith/swift.vim'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/plenary.nvim'
   Plug 'pangloss/vim-javascript'
   Plug 'pest-parser/pest.vim'
   Plug 'rust-lang/rust.vim'
@@ -186,5 +188,16 @@ lua <<EOLUA
 
   nvim_lsp.syntax_tree.setup({
     cmd = { 'bundle', 'exec', 'stree', 'lsp' }
+  })
+
+  local null_ls = require('null-ls')
+
+  null_ls.setup({
+    sources = {
+      null_ls.builtins.diagnostics.rubocop.with({
+        command = 'bundle',
+        args = vim.list_extend({ 'exec', 'rubocop' }, null_ls.builtins.diagnostics.rubocop._opts.args),
+      }),
+    },
   })
 EOLUA
