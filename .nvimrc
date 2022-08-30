@@ -187,14 +187,4 @@ lua <<EOLUA
   nvim_lsp.syntax_tree.setup({
     cmd = { 'bundle', 'exec', 'stree', 'lsp' }
   })
-
-  local servers = { "solargraph" } -- , "tsserver" }
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      flags = {
-          debounce_text_changes = 150,
-        }
-      }
-  end
 EOLUA
