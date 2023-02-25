@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'slim-template/vim-slim'
   Plug 'stephpy/vim-yaml'
+  Plug 'tell-k/vim-autopep8'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails', { 'commit': 'f8f5c6c544de7d9ebff7283142593e1733ffae89' } " for syntax hl
@@ -149,6 +150,10 @@ autocmd BufWritePre *.tsx Neoformat
 let g:neoformat_try_node_exe = 1
 " end neoformat - prettier
 
+" python stuffs
+let g:autopep8_on_save = 1
+let g:autopep8_disable_show_diff=1
+
 " ripgrep
 nmap <leader>a <Esc>:Rg<SPACE>
 let g:rg_command = "rg --vimgrep --sort-files"
@@ -186,6 +191,7 @@ silent! helptags ALL
 lua <<EOLUA
   local nvim_lsp = require('lspconfig')
 
+  -- Ruby stuffs
   nvim_lsp.syntax_tree.setup({
     cmd = { 'bundle', 'exec', 'stree', 'lsp' }
   })
@@ -199,5 +205,16 @@ lua <<EOLUA
         args = vim.list_extend({ 'exec', 'rubocop' }, null_ls.builtins.diagnostics.rubocop._opts.args),
       }),
     },
+  })
+
+  -- Rust stuffs
+  nvim_lsp.rust_analyzer.setup({
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave={
+          allTargets=false
+        }
+      }
+    }
   })
 EOLUA
