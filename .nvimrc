@@ -32,6 +32,7 @@ call plug#end()
 
 colorscheme solarized
 set background=dark
+set mouse=
 
 let g:airline_theme='solarized'
 
