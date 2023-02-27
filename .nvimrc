@@ -23,7 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tell-k/vim-autopep8'
   Plug 'tell-k/vim-browsereload-mac'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rails', { 'commit': 'f8f5c6c544de7d9ebff7283142593e1733ffae89' } " for syntax hl
+  Plug 'tpope/vim-rails'
   Plug 'tpope/vim-rhubarb'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
