@@ -1,1 +1,1 @@
-/Users/waffles/dotfiles/.nvimrc
+/Users/dave/dotfiles/.nvimrc
