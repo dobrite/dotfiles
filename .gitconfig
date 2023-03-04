@@ -21,7 +21,7 @@
   autocrlf = input
   editor = nvim
 [include]
-  path = .gitconfig.local # see .gitconfig.local
+  path = ~/.gitconfig.local # see .gitconfig.local
 [rerere]
   enabled = true
 [url "git@github.com:"]
