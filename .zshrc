@@ -16,6 +16,15 @@ if [ -f ~/.work.sh ]; then
   . ~/.work.sh
 fi
 
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
 export VISUAL=nvim
 export EDITOR=$VISUAL
 
