@@ -32,6 +32,8 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  "simrat39/rust-tools.nvim",
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
@@ -376,15 +378,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  rust_analyzer = {
-    ['rust-analyzer'] = {
-      checkOnSave = {
-        allTargets = false
-      }
-    }
-  },
   -- tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -418,6 +412,33 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
+      ["rust_analyzer"] = function()
+    require("rust-tools").setup(
+      {
+        tools = {
+          runnables = {
+            use_telescope = true,
+          },
+          inlay_hints = {
+            auto = true,
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+          },
+        },
+        server = {
+          on_attach = on_attach,
+          settings = {
+                ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy",
+                allTargets = false,
+              },
+            },
+          },
+        },
+      })
+  end
 }
 
 -- nvim-cmp setup
