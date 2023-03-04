@@ -41,15 +41,19 @@ return {
 
         -- Only attach to clients that support document formatting
         if not client.server_capabilities.documentFormattingProvider then
-          print('no: ' .. client.name)
           return
         end
-
-        print('yes: ' .. client.name)
 
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
+          return
+        end
+
+        -- enable=false does not work to
+        -- disable lua_ls formatting
+        -- prefer stylua via null-ls
+        if client.name == 'lua_ls' then
           return
         end
 

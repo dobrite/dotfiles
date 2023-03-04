@@ -1,4 +1,4 @@
-vim.o.mouse = ""
+vim.o.mouse = ''
 
 -- whitespace
 vim.o.list = true -- show whitespace
@@ -21,19 +21,19 @@ vim.o.smartcase = true -- unless uppercase letters are used in the regex.
 vim.o.hlsearch = true -- Highlight searches by default.
 vim.o.incsearch = true -- Incrementally search while typing a /regex
 -- hide matches on <leader>,
-vim.api.nvim_set_keymap("n", "<leader>,", ":nohlsearch<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>,', ':nohlsearch<CR>', { noremap = true })
 -- end searching and patterns
 
 local function map(mode, shortcut, command)
-	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function nmap(shortcut, command)
-	map('n', shortcut, command)
+  map('n', shortcut, command)
 end
 
 local function imap(shortcut, command)
-	map('i', shortcut, command)
+  map('i', shortcut, command)
 end
 
 -- navigation ctrl-jklm changes to that split

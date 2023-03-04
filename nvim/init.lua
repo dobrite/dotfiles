@@ -32,7 +32,7 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  "simrat39/rust-tools.nvim",
+  'simrat39/rust-tools.nvim',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -58,7 +58,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -90,12 +90,11 @@ require('lazy').setup({
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
-
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_c = { { 'filename', path = 1 } }
-      }
+        lualine_c = { { 'filename', path = 1 } },
+      },
     },
   },
 
@@ -108,7 +107,7 @@ require('lazy').setup({
     version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
-    }
+    },
   },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -153,7 +152,7 @@ require('lazy').setup({
 vim.wo.number = true
 
 -- Disble mouse mode
-vim.o.mouse = ""
+vim.o.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -213,16 +212,16 @@ require('telescope').setup {
     layout_config = {
       height = 0.95,
       width = 0.95,
-      preview_height = 0.35
+      preview_height = 0.35,
     },
   },
   pickers = {
     live_grep = {
       additional_args = function(opts)
-        return { "--sort-files" }
-      end
-    }
-  }
+        return { '--sort-files' }
+      end,
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
@@ -261,7 +260,7 @@ require('nvim-treesitter.configs').setup {
     'typescript',
     'help',
     'vim',
-    'ruby'
+    'ruby',
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -325,10 +324,10 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -412,33 +411,32 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
-      ["rust_analyzer"] = function()
-    require("rust-tools").setup(
-      {
-        tools = {
-          runnables = {
-            use_telescope = true,
-          },
-          inlay_hints = {
-            auto = true,
-            show_parameter_hints = false,
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
-          },
+  ['rust_analyzer'] = function()
+    require('rust-tools').setup {
+      tools = {
+        runnables = {
+          use_telescope = true,
         },
-        server = {
-          on_attach = on_attach,
-          settings = {
-                ["rust-analyzer"] = {
-              checkOnSave = {
-                command = "clippy",
-                allTargets = false,
-              },
+        inlay_hints = {
+          auto = true,
+          show_parameter_hints = false,
+          parameter_hints_prefix = '',
+          other_hints_prefix = '',
+        },
+      },
+      server = {
+        on_attach = on_attach,
+        settings = {
+          ['rust-analyzer'] = {
+            checkOnSave = {
+              command = 'clippy',
+              allTargets = false,
             },
           },
         },
-      })
-  end
+      },
+    }
+  end,
 }
 
 -- nvim-cmp setup
@@ -454,7 +452,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
@@ -473,8 +471,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
