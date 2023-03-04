@@ -52,6 +52,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 source "$HOME/.cargo/env"
 
+source "$HOME/.asdf/asdf.sh"
+
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
 export RBENV_ROOT=$HOME/.rbenv
