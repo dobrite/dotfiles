@@ -1,1 +1,0 @@
-/Users/dave/dotfiles/.nvimrc
