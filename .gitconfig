@@ -1,12 +1,39 @@
-[user]
-	name = Dave O
-	email = davidobrite@gmail.com
-
-[color]
-	ui = auto
 [push]
-	default = simple
+  default = current
+[color]
+  ui = auto
+  diff = true
+[alias]
+  aa = add --all
+  ap = add --patch
+  ca = commit --amend
+  ci = commit -v
+  co = checkout
+  create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
+  merge-branch = !git checkout master && git merge @{-1}
+  pr = !hub pull-request
+  st = status
+  up = !git fetch origin && git rebase origin/master
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [core]
-	editor = vim
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  editor = nvim
+[include]
+  path = .gitconfig.local # see .gitconfig.local
+[rerere]
+  enabled = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[rebase]
+  autosquash = true
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+[pull]
+  rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main

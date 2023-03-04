@@ -1,0 +1,4 @@
+[user]
+  name = <name>
+  useConfigOnly = true
+  email = <email>
