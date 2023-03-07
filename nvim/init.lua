@@ -441,7 +441,7 @@ mason_lspconfig.setup_handlers {
 require('mason-tool-installer').setup {
   ensure_installed = {
     -- 'codespell',
-    -- 'prettierd',
+    'prettierd',
     -- 'selene',
     -- 'shellcheck', -- used by bash-language-server
     'stylua',
