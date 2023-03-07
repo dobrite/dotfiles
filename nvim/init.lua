@@ -451,6 +451,11 @@ require('mason-tool-installer').setup {
   start_delay = 5000,
 }
 
+-- Ruby stuffs
+require('lspconfig').syntax_tree.setup {
+  cmd = { 'bundle', 'exec', 'stree', 'lsp' },
+}
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
