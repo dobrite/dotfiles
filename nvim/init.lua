@@ -32,8 +32,6 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  'simrat39/rust-tools.nvim',
-
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
@@ -42,13 +40,12 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'folke/neodev.nvim', -- Additional lua configuration, makes nvim stuff amazing!
+      'simrat39/rust-tools.nvim',
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
     },
   },
 
@@ -438,6 +435,20 @@ mason_lspconfig.setup_handlers {
       },
     }
   end,
+}
+
+-- mason auto-update
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    -- 'codespell',
+    -- 'prettierd',
+    -- 'selene',
+    -- 'shellcheck', -- used by bash-language-server
+    'stylua',
+  },
+  auto_update = true,
+  run_on_start = true,
+  start_delay = 5000,
 }
 
 -- nvim-cmp setup
