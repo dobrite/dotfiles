@@ -446,6 +446,7 @@ mason_lspconfig.setup_handlers {
 -- mason auto-update
 require('mason-tool-installer').setup {
   ensure_installed = {
+    'commitlint',
     -- 'codespell',
     'prettierd',
     -- 'selene',
