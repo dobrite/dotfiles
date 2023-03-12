@@ -51,7 +51,21 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      'f3fora/cmp-spell',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-path',
+      'onsails/lspkind.nvim',
+      'petertriho/cmp-git',
+      'ray-x/cmp-treesitter',
+      'rcarriga/cmp-dap',
+      'saadparwaiz1/cmp_luasnip',
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -510,10 +524,25 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'treesitter' },
+    { name = 'buffer' },
+    { name = 'spell', keyword_length = 4 },
   },
 }
+
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources {
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'git_handles', priority = 10 },
+    { name = 'git', priority = 9 },
+    { name = 'spell', keyword_length = 4 },
+  },
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
