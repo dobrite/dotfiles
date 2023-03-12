@@ -70,6 +70,12 @@ require('lazy').setup({
     },
   },
 
+  {
+    'andrewferrier/wrapping.nvim',
+    config = true,
+    ft = { 'markdown', 'gitcommit', 'text' },
+  },
+
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
