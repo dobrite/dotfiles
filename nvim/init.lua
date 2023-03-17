@@ -98,6 +98,20 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'janko-m/vim-test',
+    -- cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
+    config = function()
+      -- vim.g['test#strategy'] = 'neovim'
+      -- let g:test#preserve_screen = 1
+      vim.api.nvim_set_keymap('n', '<leader>N', ':TestNearest<CR>', { silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>F', ':TestFile<CR>', { silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>A', ':TestSuite<CR>', { silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>L', ':TestLast<CR>', { silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>V', ':TestVisit<CR>', { silent = true })
+    end,
+  },
+
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
