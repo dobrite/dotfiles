@@ -252,6 +252,9 @@ require('telescope').setup {
         return { '--sort-files' }
       end,
     },
+    buffers = {
+      sort_lastused = true,
+    },
   },
 }
 
