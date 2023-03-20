@@ -76,7 +76,7 @@ require('lazy').setup({
     -- keys = { '<C-Bslash>' },
     config = function()
       require('toggleterm').setup {
-        open_mapping = '`',
+        open_mapping = '<C-Bslash>',
         direction = 'float',
       }
     end,
