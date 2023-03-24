@@ -28,9 +28,7 @@ return {
       null_ls.builtins.formatting.black, -- python
       null_ls.builtins.formatting.stylua, -- lua
       null_ls.builtins.formatting.prettierd, -- js/react
-      null_ls.builtins.diagnostics.flake8.with {
-        extra_args = { '--import-order-style', 'google' },
-      }, -- python
+      null_ls.builtins.diagnostics.ruff, -- python
       null_ls.builtins.diagnostics.commitlint.with {
         extra_args = { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' },
       },
