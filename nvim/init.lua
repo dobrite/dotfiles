@@ -425,7 +425,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- tsserver = {},
   -- rust_analyzer setup via rust-tools (see mason_lspconfig.setup_handlers)
   lua_ls = {
