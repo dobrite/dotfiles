@@ -25,7 +25,7 @@ return {
   config = function()
     local null_ls = require 'null-ls'
     local sources = {
-      null_ls.builtins.formatting.autopep8, -- python
+      null_ls.builtins.formatting.black, -- python
       null_ls.builtins.formatting.stylua, -- lua
       null_ls.builtins.formatting.prettierd, -- js/react
       null_ls.builtins.diagnostics.flake8.with {
