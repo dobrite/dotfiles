@@ -420,7 +420,16 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pyright = {},
+  pyright = {
+    python = {
+      analysis = {
+        diagnosticSeverityOverrides = {
+          reportGeneralTypeIssues = 'none',
+          reportMissingImports = 'none',
+        },
+      },
+    },
+  },
   -- tsserver = {},
   -- rust_analyzer setup via rust-tools (see mason_lspconfig.setup_handlers)
   lua_ls = {
