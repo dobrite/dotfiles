@@ -49,6 +49,7 @@ export PROMPT='${NEWLINE}$PROMPT_TIME [%F{white}$(ruby_version)%F{grey}] [%F{whi
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
 source "$HOME/.cargo/env"
 
