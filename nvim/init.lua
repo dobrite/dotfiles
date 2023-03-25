@@ -177,6 +177,15 @@ require('lazy').setup({
     },
   },
 
+  {
+    'jvgrootveld/telescope-zoxide',
+    dependencies = {
+      'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+  },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -277,10 +286,48 @@ require('telescope').setup {
       sort_lastused = true,
     },
   },
+  extensions = {
+    zoxide = {
+      prompt_title = '[ Zoxide List ]',
+      list_command = 'zoxide query -ls',
+      mappings = {
+        default = {
+          action = function(selection)
+            vim.cmd.edit(selection.path)
+          end,
+          after_action = function(selection)
+            print('Directory changed to ' .. selection.path)
+          end,
+        },
+        ['<C-s>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'split' },
+        ['<C-v>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'vsplit' },
+        ['<C-e>'] = { action = require('telescope._extensions.zoxide.utils').create_basic_command 'edit' },
+        ['<C-b>'] = {
+          keepinsert = true,
+          action = function(selection)
+            require('telescope.builtin').file_browser { cwd = selection.path }
+          end,
+        },
+        ['<C-f>'] = {
+          keepinsert = true,
+          action = function(selection)
+            require('telescope.builtin').find_files { cwd = selection.path }
+          end,
+        },
+        ['<C-t>'] = {
+          action = function(selection)
+            vim.cmd.tcd(selection.path)
+          end,
+        },
+      },
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+-- Enable zoxide, if installed
+pcall(require('telescope').load_extension 'zoxide')
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -299,6 +346,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>cd', require('telescope').extensions.zoxide.list, { desc = '[C]hange [D]irectory' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
