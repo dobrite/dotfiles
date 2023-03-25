@@ -52,10 +52,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
 source "$HOME/.cargo/env"
-
 source "$HOME/.asdf/asdf.sh"
-
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+source "$HOME/.scm_breeze/scm_breeze.sh"
+source ~/.fzf.zsh
 
 export RBENV_ROOT=$HOME/.rbenv
 eval "$(rbenv init - zsh)"
