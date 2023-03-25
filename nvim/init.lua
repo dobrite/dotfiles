@@ -333,6 +333,14 @@ require('telescope').setup {
     },
     buffers = {
       sort_lastused = true,
+      mappings = {
+        i = {
+          ['<c-d>'] = require('telescope.actions').delete_buffer + require('telescope.actions').move_to_top,
+        },
+        n = {
+          ['<c-d>'] = require('telescope.actions').delete_buffer + require('telescope.actions').move_to_top,
+        },
+      },
     },
   },
   extensions = {
