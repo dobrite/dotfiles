@@ -55,6 +55,7 @@ source "$HOME/.cargo/env"
 source "$HOME/.asdf/asdf.sh"
 source "$HOME/.scm_breeze/scm_breeze.sh"
 source ~/.fzf.zsh
+source ~/.rgz.sh
 
 export RBENV_ROOT=$HOME/.rbenv
 eval "$(rbenv init - zsh)"
