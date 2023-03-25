@@ -6,7 +6,7 @@ local function opts(prefix, desc)
   }
 end
 
-vim.keymap.set('n', '<c-n>', '<cmd>Neotree <cr>', opts('NEO-TREE', 'open neotree'))
+vim.keymap.set('n', '<c-n>', '<cmd>Neotree toggle<cr>', opts('NEO-TREE', 'open neotree'))
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
@@ -18,6 +18,14 @@ return {
   },
   config = function()
     require('neo-tree').setup {
+      event_handlers = {
+        {
+          event = 'file_opened',
+          handler = function()
+            require('neo-tree').close_all()
+          end,
+        },
+      },
       close_if_last_window = true,
       filesystem = {
         filtered_items = {
