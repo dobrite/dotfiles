@@ -65,4 +65,5 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# z binary (better than cd)
+eval "$(zoxide init zsh)"
