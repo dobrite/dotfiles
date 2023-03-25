@@ -32,6 +32,7 @@ return {
       null_ls.builtins.diagnostics.commitlint.with {
         extra_args = { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' },
       },
+      null_ls.builtins.code_actions.gitsigns,
     }
 
     if M.installed_via_bundler 'rubocop' then

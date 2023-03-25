@@ -95,6 +95,55 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- next chunk
+        map('n', ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true })
+        -- prev chunk
+        map('n', '[c', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return '<Ignore>'
+        end, { expr = true })
+
+        map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', { desc = '[g]it [s]tage hunk' })
+        map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', { desc = '[g]it [r]eset hunk' })
+        map('n', '<leader>gS', gs.stage_buffer, { desc = '[g]it [S]tage buffer' })
+        map('n', '<leader>gu', gs.undo_stage_hunk, { desc = '[g]it [u]ndo stage hunk' })
+        map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset buffer' })
+        map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
+        map('n', '<leader>gb', function()
+          gs.blame_line { full = true }
+        end, { desc = '[g]it [b]lame line' })
+        map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = '[g]it [t]oggle current line [b]lame' })
+        map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
+        map('n', '<leader>gD', function()
+          gs.diffthis '~'
+        end, { desc = '[g]it [D]iff this ~' })
+        map('n', '<leader>gtd', gs.toggle_deleted, { desc = '[g]it [t]oggle [d]eleted' })
+
+        -- Text object
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+      end,
     },
   },
 
