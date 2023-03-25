@@ -12,6 +12,7 @@
   "cmp-treesitter": { "branch": "master", "commit": "b40178b780d547bcf131c684bc5fd41af17d05f2" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "fidget.nvim": { "branch": "main", "commit": "688b4fec4517650e29c3e63cfbb6e498b3112ba1" },
+  "fzf": { "branch": "master", "commit": "d7daf5f72411f29eca3ab398c7a8a951ca230cad" },
   "gitsigns.nvim": { "branch": "main", "commit": "b1f9cf7c5c5639c006c937fc1819e09f358210fc" },
   "lazy.nvim": { "branch": "main", "commit": "8456a867f79e3fb3b5390659c5d11a1e35793372" },
   "lspkind.nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
@@ -44,5 +45,6 @@
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
   "vim-test": { "branch": "master", "commit": "c63b94c1e5089807f4532e05f087351ddb5a207c" },
   "which-key.nvim": { "branch": "main", "commit": "fb027738340502b556c3f43051f113bcaa7e8e63" },
-  "wrapping.nvim": { "branch": "master", "commit": "a4013c377e2ffa3be00fb67791d3605ae3115acb" }
+  "wrapping.nvim": { "branch": "master", "commit": "a4013c377e2ffa3be00fb67791d3605ae3115acb" },
+  "zoxide.vim": { "branch": "master", "commit": "e50df0b0160363f5dcae60c4f633ade78e59bdc8" }
 }

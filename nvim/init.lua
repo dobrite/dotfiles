@@ -168,6 +168,15 @@ require('lazy').setup({
     end,
   },
 
+  -- :Z command for cd-ing into folders (see :help zoxide)
+  {
+    'nanotee/zoxide.vim',
+    dependencies = {
+      -- for latest run :call fzf#install()
+      'junegunn/fzf',
+    },
+  },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
