@@ -41,6 +41,7 @@ nmap('<c-j>', '<c-w>j')
 nmap('<c-k>', '<c-w>k')
 nmap('<c-l>', '<c-w>l')
 nmap('<c-h>', '<c-w>h')
+nmap('<C-q>', '<C-^>') -- toggle last buffer
 imap('<C-w>', '<C-O><C-w>') -- not sure what this does
 -- end navigation
 
