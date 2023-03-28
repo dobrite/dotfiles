@@ -167,11 +167,11 @@ require('lazy').setup({
     config = function()
       -- vim.g['test#strategy'] = 'neovim'
       -- let g:test#preserve_screen = 1
-      vim.api.nvim_set_keymap('n', '<leader>tN', ':TestNearest<CR>', { silent = true, desc = '[t]est [N]earest' })
-      vim.api.nvim_set_keymap('n', '<leader>tF', ':TestFile<CR>', { silent = true, desc = '[t]est [F]ile' })
-      vim.api.nvim_set_keymap('n', '<leader>tA', ':TestSuite<CR>', { silent = true, desc = '[t]est [S]uite' })
-      vim.api.nvim_set_keymap('n', '<leader>tL', ':TestLast<CR>', { silent = true, desc = '[t]est [L]ast' })
-      vim.api.nvim_set_keymap('n', '<leader>tV', ':TestVisit<CR>', { silent = true, desc = '[t]est [V]isit' })
+      vim.api.nvim_set_keymap('n', ',N', ':TestNearest<CR>', { silent = true, desc = 'test [N]earest' })
+      vim.api.nvim_set_keymap('n', ',F', ':TestFile<CR>', { silent = true, desc = 'test [F]ile' })
+      vim.api.nvim_set_keymap('n', ',A', ':TestSuite<CR>', { silent = true, desc = 'test [S]uite' })
+      vim.api.nvim_set_keymap('n', ',L', ':TestLast<CR>', { silent = true, desc = 'test [L]ast' })
+      vim.api.nvim_set_keymap('n', ',V', ':TestVisit<CR>', { silent = true, desc = 'test [V]isit' })
     end,
   },
 
