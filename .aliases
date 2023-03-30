@@ -3,10 +3,7 @@ function grbs() {
 }
 
 # Unix
-alias tlf="tail -f"
 alias ln='ln -v'
-alias mkdir='mkdir -p'
-alias ...='../..'
 alias l='ls'
 alias ll='ls -al'
 alias lh='ls -Alh'
@@ -16,12 +13,6 @@ alias lh='ls -Alh'
 #alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
-alias be='bundle exec'
-alias be="bundle exec"
-alias bers="bundle exec rails server"
-alias berc="bundle exec rails console"
-alias bert="bundle exec rails test"
-alias gggunit="guard :rspec, cmd: \"bundle exec rspec\""
 alias p='ps aux | grep $1'
 alias wea='curl http://wttr.in/Carlsbad'
 
@@ -65,27 +56,24 @@ alias dynamo="DYNAMO_ENDPOINT=http://localhost:8000 AWS_ACCESS_KEY_ID='developme
 # Bundler
 alias b="bundle"
 alias be="bundle exec"
-
-# Tests and Specs
-alias t="ruby -I test"
-alias cuc="bundle exec cucumber"
+alias bers="bundle exec rails server"
+alias berc="bundle exec rails console"
+alias bert="bundle exec rails test"
 
 # Rails
 alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
 alias m="migrate"
 alias rk="rake"
-alias s="rspec"
-alias z="zeus"
+
+# logs
+alias ort="tail -f /usr/local/var/log/nginx/*"
 alias tpp="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|XXX'"
 
 # unbox
 alias orr="sudo openresty -s reload"
-alias ort="tail -f /usr/local/var/log/nginx/*"
 
 alias wtf="spring stop && bundle && touch tmp/restart.txt"
 alias things="bundle && touch tmp/restart.txt && yarn && yarn start"
-
-alias mysqlbu="ssh -o ProxyCommand='ssh -W %h:%p ops@mysqlstandby.planningcenter.plumbing' ops@10.23.108.190"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
