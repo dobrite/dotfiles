@@ -24,6 +24,13 @@ vim.o.incsearch = true -- Incrementally search while typing a /regex
 vim.api.nvim_set_keymap('n', '<leader>,', ':nohlsearch<CR>', { noremap = true })
 -- end searching and patterns
 
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  callback = function()
+    vim.bo.filetype = 'sh'
+  end,
+  pattern = '*.aliases',
+})
+
 local function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
