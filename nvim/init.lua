@@ -502,7 +502,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -532,6 +532,13 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  if client.name == 'rust_analyzer' then
+    vim.keymap.set('n', '<leader>rd', '<cmd>RustDebuggables<cr>', { desc = '[R]ust [D]ebug' })
+    vim.keymap.set('n', '<leader>rm', require('rust-tools').expand_macro.expand_macro, { desc = '[R]ust [M]acro expand' })
+    vim.keymap.set('n', '<leader>rha', require('rust-tools').hover_actions.hover_actions, { desc = '[R]ust [H]over [A]ctions', buffer = bufnr })
+    vim.keymap.set('n', '<leader>rca', require('rust-tools').code_action_group.code_action_group, { desc = '[R]ust [C]ode [A]ctions', buffer = bufnr })
+  end
 end
 
 -- Enable the following language servers
@@ -607,7 +614,13 @@ mason_lspconfig.setup_handlers {
           ['rust-analyzer'] = {
             checkOnSave = {
               command = 'clippy',
-              allTargets = false,
+              allTargets = true,
+            },
+            procMacro = {
+              enable = true,
+              attributes = {
+                enable = true,
+              },
             },
           },
         },
