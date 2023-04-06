@@ -650,6 +650,68 @@ require('lspconfig').syntax_tree.setup {
   cmd = { 'bundle', 'exec', 'stree', 'lsp' },
 }
 
+local M = {}
+function M.installed_via_bundler(gemname)
+  local gemfile_lock = vim.fn.getcwd() .. '/Gemfile.lock'
+
+  if vim.fn.filereadable(gemfile_lock) == 0 then
+    return
+  end
+
+  local found = false
+  for line in io.lines(gemfile_lock) do
+    if string.find(line, gemname) then
+      found = true
+      break
+    end
+  end
+
+  return found
+end
+
+if M.installed_via_bundler 'solargraph' then
+  require('lspconfig').solargraph.setup {
+    cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
+    init_options = {
+      formatting = false,
+    },
+    settings = {
+      solargraph = {
+        diagnostics = true,
+        logLevel = 'debug',
+      },
+    },
+    commands = {
+      SolargraphDocumentGems = {
+        function()
+          vim.lsp.buf_notify(0, '$/solargraph/documentGems', {})
+        end,
+        description = 'Build YARD documentation for installed gems',
+      },
+      SolargraphDocumentGemsWithRebuild = {
+        function()
+          vim.lsp.buf_notify(0, '$/solargraph/documentGems', { rebuild = true })
+        end,
+        description = 'Build YARD documentation for installed gems',
+      },
+      SolargraphCheckGemVersion = {
+        function()
+          vim.lsp.buf_notify(0, '$/solargraph/checkGemVersion', { verbose = true })
+        end,
+        description = 'Check if a newer version of the gem is available',
+      },
+      SolargraphRestartServer = {
+        function()
+          vim.lsp.buf_notify(0, '$/solargraph/restartServer', {})
+        end,
+        description = 'A notification sent from the server to the client requesting that the client shut down and restart the server',
+      },
+    },
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
+end
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
