@@ -29,11 +29,13 @@ return {
       null_ls.builtins.formatting.black, -- python
       null_ls.builtins.formatting.stylua, -- lua
       null_ls.builtins.formatting.prettierd, -- js/react
+      null_ls.builtins.diagnostics.eslint_d, -- js
       null_ls.builtins.diagnostics.ruff, -- python
       null_ls.builtins.diagnostics.commitlint.with {
         extra_args = { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' },
       },
       null_ls.builtins.code_actions.gitsigns,
+      null_ls.builtins.code_actions.eslint_d, -- js
     }
 
     if M.installed_via_bundler 'rubocop' then
