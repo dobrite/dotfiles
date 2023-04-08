@@ -70,3 +70,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # z binary (better than cd)
 eval "$(zoxide init zsh)"
+
+# direnv
+eval "$(direnv hook zsh)"
