@@ -1,4 +1,5 @@
 vim.cmd 'map <Leader>ln :NullLsInfo<CR>'
+vim.cmd 'map <Leader>li :LspInfo<CR>'
 vim.cmd 'map <Leader>lf :lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>'
 vim.cmd 'map <Leader>lr :LspRestart<CR>'
 
