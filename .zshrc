@@ -68,6 +68,8 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"
+
 # z binary (better than cd)
 eval "$(zoxide init zsh)"
 
