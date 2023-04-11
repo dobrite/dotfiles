@@ -86,7 +86,7 @@ alias tpp="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|
 alias orr="sudo openresty -s reload"
 
 alias wtf="spring stop && bundle && touch tmp/restart.txt"
-alias things="spring stop && bundle && touch tmp/restart.txt && yarn && bin/webpack-dev-server"
+alias things="spring stop && bundle && touch tmp/restart.txt && yarn && yarn start"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
