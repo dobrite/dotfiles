@@ -761,6 +761,12 @@ cmp.setup {
   },
 }
 
+cmp.setup.filetype('text', {
+  sources = cmp.config.sources {
+    { name = 'spell', keyword_length = 3 },
+  },
+})
+
 cmp.setup.filetype('gitcommit', {
   sources = cmp.config.sources {
     { name = 'luasnip' },
