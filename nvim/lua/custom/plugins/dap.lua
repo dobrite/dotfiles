@@ -42,7 +42,7 @@ return {
 
     -- you can provide additional configuration to the handlers,
     -- see mason-nvim-dap readme for more information
-    require('mason-nvim-dap').setup_handlers()
+    require('mason-nvim-dap').setup()
 
     -- basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<f5>', dap.continue)
