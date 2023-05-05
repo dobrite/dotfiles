@@ -60,6 +60,11 @@ alias clean="pb be tmp:clear && pb be assets:clobber && pb apprestart"
 alias git-delete-merged-branches="git branch --merged | egrep -v \"(^\*|master|dev)\" | xargs git branch -d"
 #alias gcbd="git checkout `git rev-list -n 1 --before='$1' master`"
 
+# Rust
+alias ce="cargo embed"
+alias cc="cargo clippy"
+alias ct="cargo test"
+
 alias b="cd ~/Documents/brain && nvim"
 alias brain="cd ~/Documents/brain && nvim"
 alias brian="cd ~/Documents/brain && nvim"
