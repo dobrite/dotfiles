@@ -67,6 +67,7 @@ alias cc="cargo clippy"
 alias ct="cargo test"
 
 alias b="cd ~/Documents/brain && nvim"
+alias bt="cd ~/Documents/brain && nvim ./daily/$(date +%Y-%m-%d).md"
 alias brain="cd ~/Documents/brain && nvim"
 alias brian="cd ~/Documents/brain && nvim"
 
