@@ -26,9 +26,6 @@ alias v="$VISUAL"
 alias p='ps aux | grep $1'
 alias wea='curl http://wttr.in/SanDiego'
 
-alias cr='cargo run --example sdl2 --features backend'
-alias ct='cargo test --features backend'
-
 # git
 alias master="git checkout master && git pull"
 alias main="git checkout main && git pull"
@@ -64,7 +61,7 @@ alias git-delete-merged-branches="git branch --merged | egrep -v \"(^\*|master|d
 # Rust
 alias ce="cargo embed"
 alias cc="cargo clippy"
-alias ct="cargo test"
+alias ct="cargo test --target x86_64-apple-darwin"
 
 alias b="cd ~/Documents/brain && nvim"
 alias bt="cd ~/Documents/brain && nvim ./daily/$(date +%Y-%m-%d).md"
