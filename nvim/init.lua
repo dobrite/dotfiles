@@ -618,6 +618,11 @@ mason_lspconfig.setup_handlers {
               command = 'clippy',
               allTargets = true,
             },
+            cargo = {
+              buildScripts = {
+                enable = true,
+              },
+            },
             procMacro = {
               enable = true,
               attributes = {
