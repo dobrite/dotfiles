@@ -334,7 +334,9 @@ require('telescope').setup {
       end,
     },
     buffers = {
-      sort_lastused = true,
+      show_all_buffers = false,
+      ignore_current_buffer = true,
+      sort_mru = true,
       mappings = {
         i = {
           ['<c-d>'] = require('telescope.actions').delete_buffer + require('telescope.actions').move_to_top,
