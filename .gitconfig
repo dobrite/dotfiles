@@ -1,7 +1,7 @@
 [push]
   default = current
 [color]
-  ui = auto
+  ui = true
   diff = true
 [alias]
   main = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
@@ -21,6 +21,7 @@
   excludesfile = ~/.gitignore
   autocrlf = input
   editor = nvim
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [include]
   path = ~/.gitconfig.local # see .gitconfig.local
 [rerere]
@@ -40,3 +41,7 @@
   defaultBranch = main
 [blame]
   ignoreRevsFile = .git-blame-ignore-revs
+[interactive]
+  diffFilter = diff-so-fancy --patch
+[diff-so-fancy]
+  markEmptyLines = false
