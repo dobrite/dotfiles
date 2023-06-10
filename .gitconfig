@@ -45,3 +45,5 @@
   diffFilter = diff-so-fancy --patch
 [diff-so-fancy]
   markEmptyLines = false
+[commit]
+  verbose = true
