@@ -1,8 +1,3 @@
-[push]
-  default = current
-[color]
-  ui = true
-  diff = true
 [alias]
   main = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
   stat = status -sb
@@ -17,33 +12,38 @@
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
   merge-branch = !git checkout master && git merge @{-1}
   st = status
+[blame]
+  ignoreRevsFile = .git-blame-ignore-revs
+[color]
+  ui = true
+  diff = true
+[commit]
+  verbose = true
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
   editor = nvim
   pager = diff-so-fancy | less --tabs=4 -RFX
-[include]
-  path = ~/.gitconfig.local # see .gitconfig.local
-[rerere]
-  enabled = true
-[url "git@github.com:"]
-  insteadOf = https://github.com/
-[rebase]
-  autosquash = true
+[diff-so-fancy]
+  markEmptyLines = false
 [filter "lfs"]
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
   clean = git-lfs clean -- %f
-[pull]
-  rebase = false
+[include]
+  path = ~/.gitconfig.local # see .gitconfig.local
 [init]
   defaultBranch = main
-[blame]
-  ignoreRevsFile = .git-blame-ignore-revs
 [interactive]
   diffFilter = diff-so-fancy --patch
-[diff-so-fancy]
-  markEmptyLines = false
-[commit]
-  verbose = true
+[pull]
+  rebase = false
+[push]
+  default = current
+[rebase]
+  autosquash = true
+[rerere]
+  enabled = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
