@@ -86,6 +86,7 @@ alias rk="rake"
 alias ort="tail -f /usr/local/var/log/nginx/*"
 alias tpp="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|XXX'"
 alias tppr="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|Rendered\|XXX'"
+alias tpprc="tail -f log/development.log | grep 'Processing\|Parameters\|Started\|Rendered\|Completed\|XXX'"
 
 # unbox
 alias orr="sudo openresty -s reload"
