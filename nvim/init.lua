@@ -723,11 +723,15 @@ end
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
+local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
 
 cmp.setup {
+  formatting = {
+    format = lspkind.cmp_format { mode = 'symbol_text' },
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
