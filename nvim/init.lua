@@ -335,7 +335,6 @@ require('telescope').setup {
     },
     buffers = {
       show_all_buffers = false,
-      ignore_current_buffer = true,
       sort_mru = true,
       mappings = {
         i = {
