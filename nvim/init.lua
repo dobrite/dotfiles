@@ -34,6 +34,9 @@ require('lazy').setup({
 
   'tpope/vim-rails',
 
+  -- MixedCase (crm) camelCase (crc) UPPER_CASE (cru) dash-case (cr-) dot.case (cr.)
+  'tpope/vim-abolish',
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   { -- LSP Configuration & Plugins
