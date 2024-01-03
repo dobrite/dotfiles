@@ -12,6 +12,20 @@ function go() {
   fi
 }
 
+function frg {
+    result=$(rg --ignore-case --color=always --line-number --no-heading "$@" |
+      fzf --ansi \
+          --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+          --delimiter ':' \
+          --preview "bat --color=always {1} --theme='Solarized (light)' --highlight-line {2}" \
+          --preview-window 'up,60%,border-bottom,+{2}+3/3,~3')
+    file=${result%%:*}
+    linenumber=$(echo "${result}" | cut -d: -f2)
+    if [[ -n "$file" ]]; then
+            $EDITOR +"${linenumber}" "$file"
+    fi
+  }
+
 # Unix
 alias ln='ln -v'
 alias l='ls'
@@ -56,6 +70,7 @@ alias gca="git commit --amend --no-edit"
 alias gcae="git commit --amend"
 alias clean="pb be tmp:clear && pb be assets:clobber && pb apprestart"
 alias git-delete-merged-branches="git branch --merged | egrep -v \"(^\*|master|dev)\" | xargs git branch -d"
+alias lom="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/main..HEAD"
 #alias gcbd="git checkout `git rev-list -n 1 --before='$1' master`"
 
 # Rust
@@ -64,7 +79,8 @@ alias cc="cargo clippy"
 alias ct="cargo test --target x86_64-apple-darwin"
 
 alias b="cd ~/Documents/brain && nvim"
-alias bt="cd ~/Documents/brain && nvim ./daily/$(date +%Y-%m-%d).md"
+# alias bt="cd ~/Documents/brain && nvim ./daily/$(date +%Y-%m-%d).md"
+# alias bt="cp \"\$(ls -1 | tail -n 1)\" \"\$(date +%Y-%m-%d).md\" && cd ~/Documents/brain && nvim ./daily/$(date +%Y-%m-%d).md"
 alias brain="cd ~/Documents/brain && nvim"
 alias brian="cd ~/Documents/brain && nvim"
 
@@ -92,7 +108,7 @@ alias tpprc="tail -f log/development.log | grep 'Processing\|Parameters\|Started
 alias orr="sudo openresty -s reload"
 
 alias wtf="spring stop && bundle && touch tmp/restart.txt"
-alias things="spring stop && bundle && touch tmp/restart.txt && yarn && yarn start"
+alias things="spring stop && bundle && touch tmp/restart.txt && yarn && bin/webpacker"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
