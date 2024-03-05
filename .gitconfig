@@ -12,6 +12,7 @@
   merge-branch = !git checkout master && git merge @{-1}
   st = status
   stat = status -sb
+  fpush = push
 [blame]
   ignoreRevsFile = .git-blame-ignore-revs
 [color]
@@ -47,5 +48,10 @@
   updateRefs = true
 [rerere]
   enabled = true
+  autoUpdate = true
 [url "git@github.com:"]
   insteadOf = https://github.com/
+[branch]
+  sort = -committerdate
+[merge]
+  conflictStyle = zdiff3
