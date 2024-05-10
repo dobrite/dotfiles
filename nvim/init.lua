@@ -250,6 +250,23 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'kdheepak/lazygit.nvim',
+    cmd = {
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    keys = {
+      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
+  },
+
   { 'lunarmodules/luafilesystem' },
 
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
@@ -795,6 +812,11 @@ cmp.setup.filetype('gitcommit', {
     { name = 'spell', keyword_length = 4 },
   },
 })
+
+vim.g.lazygit_floating_window_winblend = 0
+vim.g.lazygit_floating_window_scaling_factor = 1.0
+vim.g.lazygit_floating_window_use_plenary = 1
+vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
