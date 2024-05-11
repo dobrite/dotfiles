@@ -513,6 +513,9 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+-- note, add gem to Gemfile, bundle, then remove
+require('lspconfig').ruby_lsp.setup {}
+
 -- folding via treesitter
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
