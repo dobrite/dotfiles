@@ -55,4 +55,11 @@ imap('<C-w>', '<C-O><C-w>') -- not sure what this does
 -- close buffer and don't close split
 nmap('<leader>w', ':b#<bar>bd#<CR>')
 
+local open_todays_note = function()
+  local date = os.date '%Y-%m-%d'
+  vim.cmd('edit ~/Documents/brain/daily/' .. date .. '.md')
+end
+vim.api.nvim_create_user_command('OpenTodaysNote', open_todays_note, {})
+vim.api.nvim_set_keymap('n', '<leader>bt', '<cmd>OpenTodaysNote<CR>', { noremap = true, silent = true, desc = "Open Today's Note" })
+
 return {}
