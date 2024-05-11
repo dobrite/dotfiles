@@ -68,7 +68,6 @@ require('lazy').setup({
       'onsails/lspkind.nvim',
       'petertriho/cmp-git',
       'ray-x/cmp-treesitter',
-      'rcarriga/cmp-dap',
       'saadparwaiz1/cmp_luasnip',
     },
   },
