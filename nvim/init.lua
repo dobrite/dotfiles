@@ -678,11 +678,6 @@ require('mason-tool-installer').setup {
   start_delay = 5000,
 }
 
--- Ruby stuffs
-require('lspconfig').syntax_tree.setup {
-  cmd = { 'bundle', 'exec', 'stree', 'lsp' },
-}
-
 local M = {}
 function M.installed_via_bundler(gemname)
   local gemfile_lock = vim.fn.getcwd() .. '/Gemfile.lock'
