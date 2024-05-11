@@ -68,7 +68,8 @@ return {
             end
 
             vim.lsp.buf.format {
-              async = true,
+              async = false, -- needs to be false to format prior to save
+              timeout_ms = 10000,
               filter = function(c)
                 return c.id == client.id
               end,
