@@ -810,9 +810,8 @@ cmp.setup.filetype('gitcommit', {
   },
 })
 
-vim.g.lazygit_floating_window_winblend = 0
 vim.g.lazygit_floating_window_scaling_factor = 1.0
-vim.g.lazygit_floating_window_use_plenary = 1
+vim.g.lazygit_floating_window_use_plenary = 0 -- otherwise key shortcut footer is missing
 vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
 
 -- The line beneath this is called `modeline`. See `:help modeline`
