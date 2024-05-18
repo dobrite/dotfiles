@@ -452,6 +452,8 @@ require('nvim-treesitter.configs').setup {
   },
 
   auto_install = false,
+  sync_install = false,
+  ignore_install = {},
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
