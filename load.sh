@@ -6,4 +6,5 @@ ln -s ~/dotfiles/.commitlintrc.js ~
 ln -s ~/dotfiles/.fzf.zsh ~
 ln -s ~/dotfiles/.rgz.sh ~
 ln -s ~/dotfiles/.envrc ~/projects
+ln -s ~/dotfiles/bin/open /usr/local/bin
 cp ~/dotfiles/.gitconfig.local ~ # then fill out file
