@@ -264,6 +264,7 @@ require('lazy').setup({
   },
 
   { 'lunarmodules/luafilesystem' },
+  { 'slim-template/vim-slim' },
 
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   --
