@@ -567,6 +567,25 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rha', require('rust-tools').hover_actions.hover_actions, { desc = '[R]ust [H]over [A]ctions', buffer = bufnr })
     vim.keymap.set('n', '<leader>rca', require('rust-tools').code_action_group.code_action_group, { desc = '[R]ust [C]ode [A]ctions', buffer = bufnr })
   end
+
+  local wamLspAutocmdsGrp = vim.api.nvim_create_augroup('WamLspAutocmds', {})
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      callback = function()
+        vim.lsp.buf.document_highlight()
+      end,
+      buffer = bufnr,
+      group = wamLspAutocmdsGrp,
+    })
+
+    vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+      buffer = bufnr,
+      group = wamLspAutocmdsGrp,
+    })
+  end
 end
 
 -- Enable the following language servers
