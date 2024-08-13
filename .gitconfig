@@ -55,3 +55,5 @@
   sort = -committerdate
 [merge]
   conflictStyle = zdiff3
+[alias]
+  branch = branch --sort=-committerdate
