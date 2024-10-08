@@ -347,9 +347,12 @@ require('telescope').setup {
     },
   },
   pickers = {
+    find_files = {
+      find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+    },
     live_grep = {
       additional_args = function()
-        return { '--sort-files' }
+        return { '--sort-files', '--hidden', '--glob', '!**/.git/*', '--glob', '!**/node_modules/*' }
       end,
     },
     buffers = {
