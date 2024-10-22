@@ -608,7 +608,7 @@ local servers = {
       },
     },
   },
-  tsserver = {},
+  ts_ls = {},
   -- rust_analyzer setup via rust-tools (see mason_lspconfig.setup_handlers)
   lua_ls = {
     Lua = {
