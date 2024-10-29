@@ -273,6 +273,7 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 
   { 'echasnovski/mini.icons', version = false },
+  { 'github/copilot.vim' },
 }, {})
 
 -- [[ Setting options ]]
