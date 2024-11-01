@@ -840,5 +840,16 @@ vim.g.lazygit_floating_window_scaling_factor = 1.0
 vim.g.lazygit_floating_window_use_plenary = 0 -- otherwise key shortcut footer is missing
 vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
 
+vim.g.copilot_no_tab_map = true
+vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.keymap.set('i', '<C-c>a', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.g.copilot_workspace_folders = { vim.fn.fnamemodify(vim.fn.system 'git rev-parse --show-toplevel', ':p:h') }
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
