@@ -447,7 +447,6 @@ require('nvim-treesitter.configs').setup {
     'cpp',
     'diff',
     'go',
-    'help',
     'javascript',
     'lua',
     'markdown',
