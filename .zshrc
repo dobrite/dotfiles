@@ -55,7 +55,6 @@ export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
 source "$HOME/.cargo/env"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
-source "$HOME/.scm_breeze/scm_breeze.sh"
 source ~/.fzf.zsh
 source ~/.rgz.sh
 
@@ -69,6 +68,9 @@ export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"
 
 # z binary (better than cd)
 eval "$(zoxide init zsh)"
+
+# like scm_breeze but devbox compatible
+eval "$(scmpuff init -s)"
 
 # direnv
 eval "$(direnv hook zsh)"
