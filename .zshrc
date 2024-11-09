@@ -53,6 +53,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
 source "$HOME/.cargo/env"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 source ~/.fzf.zsh
