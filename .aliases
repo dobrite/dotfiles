@@ -107,9 +107,9 @@ alias tpprc="tail -f log/development.log | grep 'Processing\|Parameters\|Started
 # unbox
 alias orr="sudo openresty -s reload"
 
-alias wtf="spring stop && bundle && touch tmp/restart.txt"
-alias things="spring stop && bundle && touch tmp/restart.txt && yarn && bin/webpacker"
-alias nuke="spring stop && bundle && touch tmp/restart.txt && rm -rf tmp/cache && rm -rf ./node_modules && rm -rf public/packs/ && yarn && bin/webpacker"
+alias wtf="spring stop; bundle && touch tmp/restart.txt"
+alias things="spring stop; bundle && touch tmp/restart.txt && yarn && bin/webpacker"
+alias nuke="spring stop; bundle && touch tmp/restart.txt && rm -rf tmp/cache && rm -rf ./node_modules && rm -rf public/packs/ && yarn && bin/webpacker"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
