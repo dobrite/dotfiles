@@ -54,13 +54,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
 source "$HOME/.cargo/env"
-source "$HOME/.asdf/asdf.sh"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 source "$HOME/.scm_breeze/scm_breeze.sh"
 source ~/.fzf.zsh
 source ~/.rgz.sh
-
-export RBENV_ROOT=$HOME/.rbenv
-eval "$(rbenv init - zsh)"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
