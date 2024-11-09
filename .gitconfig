@@ -25,6 +25,7 @@
   editor = nvim
   excludesfile = ~/.gitignore
   pager = diff-so-fancy | less --tabs=4 -RFX
+  attributesfile = ~/.gitattributes
 [diff-so-fancy]
   markEmptyLines = false
 [filter "lfs"]
@@ -57,3 +58,6 @@
   conflictStyle = zdiff3
 [alias]
   branch = branch --sort=-committerdate
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
