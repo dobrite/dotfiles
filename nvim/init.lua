@@ -724,6 +724,12 @@ function M.installed_via_bundler(gemname)
   return found
 end
 
+if M.installed_via_bundler 'syntax_tree' then
+  require('lspconfig').syntax_tree.setup {
+    cmd = { 'bundle', 'exec', 'stree', 'lsp' },
+  }
+end
+
 if M.installed_via_bundler 'solargraph' then
   require('lspconfig').solargraph.setup {
     cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },

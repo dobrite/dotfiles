@@ -24,12 +24,6 @@ end
 
 -- vim.lsp.set_log_level 'debug'
 
-if M.installed_via_bundler 'syntax_tree' then
-  require('lspconfig').syntax_tree.setup {
-    cmd = { 'bundle', 'exec', 'stree', 'lsp' },
-  }
-end
-
 return {
   'jose-elias-alvarez/null-ls.nvim',
   config = function()
