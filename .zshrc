@@ -55,7 +55,15 @@ export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 source "$HOME/.cargo/env"
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+# try one of two locations
+if [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
+  . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
+fi
+if [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
+  . "/usr/local/opt/asdf/libexec/asdf.sh"
+fi
+
 source ~/.rgz.sh
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
