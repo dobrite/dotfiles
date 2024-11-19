@@ -3,25 +3,7 @@ vim.cmd 'map <Leader>li :LspInfo<CR>'
 vim.cmd 'map <Leader>lf :lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>'
 vim.cmd 'map <Leader>lr :LspRestart<CR>'
 
-local M = {}
-function M.installed_via_bundler(gemname)
-  local gemfile_lock = vim.fn.getcwd() .. '/Gemfile.lock'
-
-  if vim.fn.filereadable(gemfile_lock) == 0 then
-    return
-  end
-
-  local found = false
-  for line in io.lines(gemfile_lock) do
-    if string.find(line, gemname) then
-      found = true
-      break
-    end
-  end
-
-  return found
-end
-
+local utils = require 'utils'
 -- vim.lsp.set_log_level 'debug'
 
 return {
@@ -41,7 +23,7 @@ return {
       null_ls.builtins.code_actions.eslint_d, -- js
     }
 
-    if M.installed_via_bundler 'rubocop' then
+    if utils.installed_via_bundler 'rubocop' then
       local rubocop_source = null_ls.builtins.diagnostics.rubocop.with {
         command = 'bundle',
         args = vim.list_extend({ 'exec', 'rubocop' }, null_ls.builtins.diagnostics.rubocop._opts.args),

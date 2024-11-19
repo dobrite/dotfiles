@@ -17,6 +17,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local utils = require 'utils'
+
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -705,32 +707,13 @@ require('mason-tool-installer').setup {
   start_delay = 5000,
 }
 
-local M = {}
-function M.installed_via_bundler(gemname)
-  local gemfile_lock = vim.fn.getcwd() .. '/Gemfile.lock'
-
-  if vim.fn.filereadable(gemfile_lock) == 0 then
-    return
-  end
-
-  local found = false
-  for line in io.lines(gemfile_lock) do
-    if string.find(line, gemname) then
-      found = true
-      break
-    end
-  end
-
-  return found
-end
-
-if M.installed_via_bundler 'syntax_tree' then
+if utils.installed_via_bundler 'syntax_tree' then
   require('lspconfig').syntax_tree.setup {
     cmd = { 'bundle', 'exec', 'stree', 'lsp' },
   }
 end
 
-if M.installed_via_bundler 'solargraph' then
+if utils.installed_via_bundler 'solargraph' then
   require('lspconfig').solargraph.setup {
     cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
     init_options = {
