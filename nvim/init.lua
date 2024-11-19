@@ -276,6 +276,11 @@ require('lazy').setup({
 
   { 'echasnovski/mini.icons', version = false },
   { 'github/copilot.vim' },
+
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -840,6 +845,24 @@ vim.keymap.set('i', '<C-c>a', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false,
 })
 vim.g.copilot_workspace_folders = { vim.fn.fnamemodify(vim.fn.system 'git rev-parse --show-toplevel', ':p:h') }
+
+require('conform').setup {
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    -- python = { 'isort', 'black' },
+    ruby = { 'rubocop' },
+    rust = { 'rustfmt', lsp_format = 'fallback' },
+    javascript = { 'prettierd' },
+    javascriptreact = { 'prettierd' },
+    typescript = { 'prettierd' },
+    typescriptreact = { 'prettierd' },
+  },
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 10000,
+    lsp_format = 'fallback',
+  },
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
