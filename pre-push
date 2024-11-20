@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check if pushing to main is allowed in this repository
+allow_push_main=$(git config --get hooks.allowpushmain)
+
+if [ "$allow_push_main" != "true" ]; then
+  while read local_ref local_sha remote_ref remote_sha
+  do
+    # Only examine branch refs
+    if [[ "$local_ref" =~ ^refs/heads/ ]]; then
+      branch_name=${local_ref#refs/heads/}
+      if [ "$branch_name" == "main" ]; then
+        echo "Error: Pushing to the 'main' branch is prohibited in this repository."
+        exit 1
+      fi
+    fi
+  done
+fi
+
+exit 0
