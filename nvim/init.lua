@@ -609,6 +609,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
+  harper_ls = {},
   clangd = {},
   pyright = {
     python = {
@@ -710,6 +711,31 @@ require('mason-tool-installer').setup {
   auto_update = true,
   run_on_start = true,
   start_delay = 5000,
+}
+
+require('lspconfig').harper_ls.setup {
+  -- added javascriptreact
+  filetypes = {
+    'c',
+    'cpp',
+    'cs',
+    'gitcommit',
+    'go',
+    'html',
+    'java',
+    'javascript',
+    'javascriptreact',
+    'lua',
+    'markdown',
+    'nix',
+    'python',
+    'ruby',
+    'rust',
+    'swift',
+    'toml',
+    'typescript',
+    'typescriptreact',
+  },
 }
 
 if utils.installed_via_bundler 'syntax_tree' then
