@@ -51,8 +51,6 @@
 [rerere]
   enabled = true
   autoUpdate = true
-[url "git@github.com:"]
-  insteadOf = https://github.com/
 [branch]
   sort = -committerdate
 [merge]
