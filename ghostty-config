@@ -1,0 +1,7 @@
+theme = ITerm2 Solarized Dark
+font-family = "Fira Code"
+font-size = 18
+macos-titlebar-style = tabs
+quick-terminal-animation-duration = 0
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+window-inherit-working-directory = false

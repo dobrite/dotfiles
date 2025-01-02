@@ -10,4 +10,5 @@ git config --local hooks.allowpushmain true
 ln -s /Users/<username>/dotfiles/.zprofile ~/.zprofile
 ln -s /Users/<username>/dotfiles/.gitattributes ~/.gitattributes
 ln -s /Users/<username>/dotfiles/direnv.toml ~/.config/direnv/direnv.toml
+ln -s /Users/<username>/dotfiles/ghostty-config ~/.config/ghostty/config
 ```
