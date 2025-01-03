@@ -5,7 +5,7 @@ macos-titlebar-style = tabs
 quick-terminal-animation-duration = 0
 window-inherit-working-directory = false
 confirm-close-surface = false
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = cmd+shift+l=next_tab
 keybind = cmd+shift+h=previous_tab
 keybind = cmd+shift+ctrl+l=move_tab:1
