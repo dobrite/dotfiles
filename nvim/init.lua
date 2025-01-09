@@ -360,11 +360,39 @@ require('telescope').setup {
   },
   pickers = {
     find_files = {
-      find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+      find_command = {
+        'rg',
+        '--files',
+        '--hidden',
+        '--no-ignore-vcs',
+        '--glob',
+        '!**/.git/*',
+        '--glob',
+        '!**/node_modules/*',
+        '--glob',
+        '!**/.devbox/virtenv/*',
+        '--glob',
+        '!**/tmp/*',
+        '--glob',
+        '!**public/uploads/*',
+      },
     },
     live_grep = {
       additional_args = function()
-        return { '--sort-files', '--hidden', '--glob', '!**/.git/*', '--glob', '!**/node_modules/*' }
+        return {
+          '--sort-files',
+          '--hidden',
+          '--glob',
+          '!**/.git/*',
+          '--glob',
+          '!**/node_modules/*',
+          '--glob',
+          '!**/.devbox/virtenv/*',
+          '--glob',
+          '!**/tmp/*',
+          '--glob',
+          '!**public/uploads/*',
+        }
       end,
     },
     buffers = {
