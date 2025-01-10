@@ -4,12 +4,12 @@ My dotfiles for various things.
 
 ```
 mkdir -p ~/.githooks
-ln -s /Users/<username>/dotfiles/.gitconfig ~/.gitconfig
-ln -s /Users/<username>/dotfiles/pre-push ~/.githooks/pre-push
+ln -s $HOME/dotfiles/.gitconfig ~/.gitconfig
+ln -s $HOME/dotfiles/pre-push ~/.githooks/pre-push
 git config --local hooks.allowpushmain true
-ln -s /Users/<username>/dotfiles/.zprofile ~/.zprofile
-ln -s /Users/<username>/dotfiles/.gitattributes ~/.gitattributes
-ln -s /Users/<username>/dotfiles/direnv.toml ~/.config/direnv/direnv.toml
-ln -s /Users/<username>/dotfiles/ghostty-config ~/.config/ghostty/config
-ln -s /Users/<username>/dotfiles/.irbrc ~/.irbrc
+ln -s $HOME/dotfiles/.zprofile ~/.zprofile
+ln -s $HOME/dotfiles/.gitattributes ~/.gitattributes
+ln -s $HOME/dotfiles/direnv.toml ~/.config/direnv/direnv.toml
+ln -s $HOME/dotfiles/ghostty-config ~/.config/ghostty/config
+ln -s $HOME/dotfiles/.irbrc ~/.irbrc
 ```
