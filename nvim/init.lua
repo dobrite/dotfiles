@@ -566,9 +566,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- note, add gem to Gemfile, bundle, then remove
-require('lspconfig').ruby_lsp.setup { mason = false }
-
 -- folding via treesitter
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -752,6 +749,18 @@ require('mason-tool-installer').setup {
   auto_update = true,
   run_on_start = true,
   start_delay = 5000,
+}
+
+require('lspconfig').ruby_lsp.setup {
+  mason = false,
+  capabilities = capabilities,
+  on_attach = on_attach,
+  --  init_options = {
+  --    formatter = 'standard',
+  --    linters = { 'standard' },
+  --  },
+  settings = {},
+  filetypes = { 'ruby', 'eruby' },
 }
 
 require('lspconfig').harper_ls.setup {
