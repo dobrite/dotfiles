@@ -275,11 +275,29 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 
   { 'echasnovski/mini.icons', version = false },
-  { 'github/copilot.vim' },
 
   {
     'stevearc/conform.nvim',
     opts = {},
+  },
+
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    opts = { file_types = { 'markdown', 'copilot-chat' } },
+  },
+
+  { 'github/copilot.vim' },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    dependencies = {
+      { 'github/copilot.vim' },
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
+    },
+    build = 'make tiktoken',
+    opts = {
+      model = 'claude-3.5-sonnet',
+    },
   },
 }, {})
 
@@ -544,15 +562,7 @@ require('nvim-treesitter.configs').setup {
         ['[]'] = '@class.outer',
       },
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
+    swap = { enable = false },
   },
 }
 
@@ -564,6 +574,9 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevelstart = 99
 -- end folding
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -860,6 +873,7 @@ cmp.setup {
   },
   sources = {
     { name = 'luasnip' },
+    { name = 'render-markdown' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'treesitter' },
@@ -889,6 +903,7 @@ vim.g.lazygit_floating_window_scaling_factor = 1.0
 vim.g.lazygit_floating_window_use_plenary = 0 -- otherwise key shortcut footer is missing
 vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
 
+-- AI stuffs
 vim.g.copilot_no_tab_map = true
 vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
   expr = true,
@@ -899,6 +914,44 @@ vim.keymap.set('i', '<C-c>a', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false,
 })
 vim.g.copilot_workspace_folders = { vim.fn.fnamemodify(vim.fn.system 'git rev-parse --show-toplevel', ':p:h') }
+local chat = require 'CopilotChat'
+local actions = require 'CopilotChat.actions'
+-- local integration = require 'CopilotChat.integrations.fzflua'
+local group = vim.api.nvim_create_augroup('NeoVimRc', { clear = true })
+
+require('which-key').add { '<leader>a', group = 'AI' }
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = group,
+  pattern = 'copilot-*',
+  callback = function()
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+  end,
+})
+
+vim.keymap.set({ 'n' }, '<leader>aa', chat.toggle, { desc = 'AI Toggle' })
+vim.keymap.set({ 'v' }, '<leader>aa', chat.open, { desc = 'AI Open' })
+vim.keymap.set({ 'n' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
+vim.keymap.set({ 'n' }, '<leader>as', chat.stop, { desc = 'AI Stop' })
+vim.keymap.set({ 'n' }, '<leader>am', chat.select_model, { desc = 'AI Model' })
+--vim.keymap.set({ 'n', 'v' }, '<leader>ap', function()
+--  integration.pick(actions.prompt_actions(), {
+--    fzf_tmux_opts = {
+--      ['-d'] = '45%',
+--    },
+--  })
+--end, { desc = 'AI Prompts' })
+vim.keymap.set({ 'n', 'v' }, '<leader>aq', function()
+  vim.ui.input({
+    prompt = 'AI Question> ',
+  }, function(input)
+    if input and input ~= '' then
+      chat.ask(input)
+    end
+  end)
+end, { desc = 'AI Question' })
+-- End AI stuffs
 
 require('conform').setup {
   formatters_by_ft = {
