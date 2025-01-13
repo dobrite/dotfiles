@@ -2,16 +2,6 @@ function grbs() {
   git reflog | egrep -io "moving from ([^[:space:]]+)" | awk '{ print $3 }' | awk ' !x[$0]++' | egrep -v '^[a-f0-9]{40}$' | egrep -v -x '^(master|staging)$' | head -12
 }
 
-function go() {
-  if [ -z $1 ]
-  then
-    endpath=$(basename "$(pwd)")
-    open "https://github.com/planningcenter/${endpath}"
-  else
-    open "https://github.com/planningcenter/$1"
-  fi
-}
-
 function frg {
     result=$(rg --ignore-case --color=always --line-number --no-heading "$@" |
       fzf --ansi \
