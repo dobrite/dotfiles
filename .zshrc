@@ -46,7 +46,7 @@ node_version() {
 
 has_devbox() {
   if [ -f devbox.json ]; then
-    echo ''
+    echo "%F{cyan}%F{white}"
   fi
 }
 
