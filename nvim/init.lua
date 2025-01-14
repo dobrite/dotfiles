@@ -793,6 +793,8 @@ require('lspconfig').ruby_lsp.setup {
 }
 
 require('lspconfig').harper_ls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
   -- added javascriptreact
   filetypes = {
     'c',
@@ -814,6 +816,16 @@ require('lspconfig').harper_ls.setup {
     'toml',
     'typescript',
     'typescriptreact',
+  },
+  settings = {
+    ['harper-ls'] = {
+      linters = {
+        sentence_capitalization = false,
+      },
+      codeActions = {
+        forceStable = true,
+      },
+    },
   },
 }
 
