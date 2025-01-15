@@ -67,14 +67,6 @@ export PATH="$HOME/Library/Python/3.11/bin:$PATH"
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 source "$HOME/.cargo/env"
 
-# try one of two locations
-if [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
-  . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
-fi
-if [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
-  . "/usr/local/opt/asdf/libexec/asdf.sh"
-fi
-
 source ~/.rgz.sh
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -83,8 +75,18 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-if [ -d "/opt/homebrew/lib" ]; then
-    export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"
+if [[ -e "/opt/homebrew/bin/brew" ]]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+  export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# asdf: try one of two locations
+if [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
+  . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
+fi
+if [ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]; then
+  . "/usr/local/opt/asdf/libexec/asdf.sh"
 fi
 
 # z binary (better than cd)
@@ -94,4 +96,6 @@ eval "$(zoxide init zsh)"
 eval "$(scmpuff init -s)"
 
 # direnv
-eval "$(direnv hook zsh)"
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
