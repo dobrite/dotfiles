@@ -10,7 +10,7 @@ vim.keymap.set('n', '<c-n>', '<cmd>Neotree toggle<cr>', opts('NEO-TREE', 'open n
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  version = 'v2.x',
+  version = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
