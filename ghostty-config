@@ -10,3 +10,10 @@ keybind = cmd+shift+l=next_tab
 keybind = cmd+shift+h=previous_tab
 keybind = cmd+shift+ctrl+l=move_tab:1
 keybind = cmd+shift+ctrl+h=move_tab:-1
+# So we have more scrollback history (the size of the scrollback buffer in bytes)
+scrollback-limit = 100000000
+
+# The default keybindings use `write_scrollback_file` but that only includes what is
+# offscreen. `write_screen_file` includes what's on screen and offscreen.
+keybind = ctrl+shift+j=write_screen_file:paste
+keybind = ctrl+shift+alt+j=write_screen_file:open
