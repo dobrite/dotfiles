@@ -46,17 +46,21 @@
   autoSetupRemote = true
   default = current
 [rebase]
-  autosquash = true
+  autoSquash = true
   updateRefs = true
+  autoStash = true
 [rerere]
   enabled = true
-  autoUpdate = true
+  autoupdate = true
 [branch]
   sort = -committerdate
 [merge]
   conflictStyle = zdiff3
+  autoStash = true
 [alias]
   branch = branch --sort=-committerdate
 [merge "mergiraf"]
     name = mergiraf
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
+[help]
+  autocorrect = prompt
