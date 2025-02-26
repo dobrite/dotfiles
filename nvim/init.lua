@@ -296,7 +296,7 @@ require('lazy').setup({
     },
     build = 'make tiktoken',
     opts = {
-      model = 'claude-3.5-sonnet',
+      model = 'claude-3.7-sonnet',
       mappings = {
         submit_prompt = {
           normal = '<C-s>',
