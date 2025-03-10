@@ -27,6 +27,15 @@
   pager = diff-so-fancy | less --tabs=4 -RFX
   attributesfile = ~/.gitattributes
   hooksPath = /Users/dave/.githooks
+[grep]
+  patternType = perl
+[feature]
+  experimental = true
+[diff]
+  colorMoved = true
+  algorithm = histogram
+  mnemonicPrefix = true
+  renames = true
 [diff-so-fancy]
   markEmptyLines = false
 [filter "lfs"]
@@ -64,3 +73,9 @@
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
 [help]
   autocorrect = prompt
+[tag]
+  sort = version:refname
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
