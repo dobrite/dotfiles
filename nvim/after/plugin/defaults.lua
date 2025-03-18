@@ -24,6 +24,9 @@ vim.o.incsearch = true -- Incrementally search while typing a /regex
 vim.api.nvim_set_keymap('n', '<leader>,', ':nohlsearch<CR>', { noremap = true })
 -- end searching and patterns
 
+-- map escape to exit insert mode in terminal mode
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   callback = function()
     vim.bo.filetype = 'sh'
