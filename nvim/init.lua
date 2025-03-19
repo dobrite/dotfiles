@@ -1032,7 +1032,16 @@ require('conform').setup {
   formatters_by_ft = {
     lua = { 'stylua' },
     -- python = { 'isort', 'black' },
-    ruby = { 'syntax_tree', 'rubocop' },
+    ruby = (function()
+      local formatters = {}
+      if utils.installed_via_bundler 'syntax_tree' then
+        table.insert(formatters, 'syntax_tree')
+      end
+      if utils.rubocop_version_doesnt_hose_everything() then
+        table.insert(formatters, 'rubocop')
+      end
+      return formatters
+    end)(),
     rust = { 'rustfmt', lsp_format = 'fallback' },
     javascript = { 'prettierd' },
     javascriptreact = { 'prettierd' },
