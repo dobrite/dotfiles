@@ -54,6 +54,21 @@ function M.rubocop_supports_lsp()
   return version and vim.version.ge(version, { 1, 53, 0 })
 end
 
+function M.rubocop_version_doesnt_hose_everything()
+  local version = M.installed_gem_version 'rubocop'
+
+  -- https://github.com/rubocop/rubocop/issues/13561
+  return version and vim.version.ge(version, { 1, 69, 0 })
+end
+
+function M.is_product(name)
+  -- method to grab the last folder off the cwd
+  local cwd = vim.fn.getcwd()
+  local product = cwd:match '([^/]+)/?$'
+
+  return product == name
+end
+
 function M.ruby_lsp_setup()
   local directory = vim.fn.getcwd() .. '/.ruby-lsp'
 
