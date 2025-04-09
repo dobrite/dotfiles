@@ -12,4 +12,6 @@ ln -s $HOME/dotfiles/.gitattributes ~/.gitattributes
 ln -s $HOME/dotfiles/direnv.toml ~/.config/direnv/direnv.toml
 ln -s $HOME/dotfiles/ghostty-config ~/.config/ghostty/config
 ln -s $HOME/dotfiles/.irbrc ~/.irbrc
+ln -s $HOME/dotfiles/bin/git-delete-local-merged /usr/local/bin
+ln -s $HOME/dotfiles/bin/git-super-prune /usr/local/bin
 ```
