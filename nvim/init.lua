@@ -980,6 +980,7 @@ vim.g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not ins
 
 -- AI stuffs
 vim.g.copilot_no_tab_map = true
+vim.g.copilot_node_command = '~/.asdf/installs/nodejs/23.1.0/bin/node'
 vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
