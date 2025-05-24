@@ -28,6 +28,16 @@ compinit
 export VISUAL=nvim
 export EDITOR=$VISUAL
 
+function repo() {
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    origin_url=$(git remote get-url origin | 
+      sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git$//')
+    open "$origin_url"
+  else
+    echo "Not in a git repository. Please provide a repository name."
+  fi
+}
+
 git_branch() {
   git symbolic-ref --short HEAD 2> /dev/null
 }
