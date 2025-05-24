@@ -305,6 +305,54 @@ require('lazy').setup({
           insert = '<C-r>',
         },
       },
+      prompts = {
+        RSpec = {
+          prompt = [[
+            Please generate rspec tests for my code using the following guidelines:
+
+            Add `require "rails_helper"` to the top of the file.
+            Single space
+            Use a top-level `describe ClassName` block to wrap the tests rather than `RSpec.describe`
+
+            Prefer using named subjects, if possible: `subject(:my_subject) { ... }`
+            Prefer using `super()` in child contexts, if possible. Do not use named subjects in child contexts as they're not supported.
+            Prefer using shorthand `it { is_expected.to ... }` syntax.
+            Strongly prefer one expect per test.
+            Do not test private methods or explicitly call out private methods in the tests.
+            Only use comments when absolutely necessary.
+
+            ## Currents
+
+            `Organization` and `Person` both have a `.current` method that returns the current instance of the class.
+            `Organization.current` is aleady set in global RSpec setup. There is no need to set it.
+            If needed for the test, add `let(:organization) { Organization.current }`
+            Use `organization` rather than `Organization.current` in the tests.
+
+            ## Redis
+
+            * Redis is set up and available to use.
+            * Prefer using directly in unit tests for code that directly interact with Redis.
+              * If Redis is used, be sure to clean up after the test in an after block.
+            * Prefer stubbing collaborator methods in unit tests for code that indirectly interacts with Redis.
+
+            ## Time handling
+
+            Prefer using `ActiveSupport::Testing::TimeHelpers` over `Timecop`.
+            If used, ensure to clean up after the test in an after block.
+
+            ## Formatting
+
+            Prefer using `{ }` for short blocks and `do ... end` for blocks that span multiple lines.
+
+            Make the order:
+
+            1) any `let`s
+            2) `subject`
+            3) `before` block
+            4) `after` block (if needed)
+          ]],
+        },
+      },
       contexts = {
         file = {
           input = function(callback)
