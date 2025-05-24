@@ -169,40 +169,13 @@ require('lazy').setup({
 
   {
     'janko-m/vim-test',
-    -- cmd = { 'TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit' },
     config = function()
-      vim.g['test#strategy'] = 'neovim'
-      -- let g:test#preserve_screen = 1
+      vim.g['test#strategy'] = 'basic'
       vim.api.nvim_set_keymap('n', ',N', ':TestNearest<CR>', { silent = true, desc = 'test [N]earest' })
       vim.api.nvim_set_keymap('n', ',F', ':TestFile<CR>', { silent = true, desc = 'test [F]ile' })
       vim.api.nvim_set_keymap('n', ',A', ':TestSuite<CR>', { silent = true, desc = 'test [S]uite' })
       vim.api.nvim_set_keymap('n', ',L', ':TestLast<CR>', { silent = true, desc = 'test [L]ast' })
       vim.api.nvim_set_keymap('n', ',V', ':TestVisit<CR>', { silent = true, desc = 'test [V]isit' })
-
-      -- iTerm2 strategy for vim-test
-      -- vim.g['test#custom_strategies'] = {
-      --   iterm2_tab = function(cmd)
-      --     local current_dir = vim.fn.getcwd()
-      --     local script = string.format(
-      --       [[
-      --       tell application "iTerm2"
-      --         tell current window
-      --           create tab with default profile
-      --           tell current session
-      --             write text "cd %s && %s"
-      --           end tell
-      --         end tell
-      --       end tell
-      --     ]],
-      --       current_dir:gsub("'", "'\\''"), -- Escape single quotes for AppleScript
-      --       cmd:gsub("'", "'\\''") -- Escape single quotes for AppleScript
-      --     )
-      --     vim.fn.system("osascript -e '" .. script .. "'")
-      --   end,
-      -- }
-
-      -- Set the strategy to iterm2_tab
-      -- vim.g['test#strategy'] = 'iterm2_tab'
     end,
   },
 
