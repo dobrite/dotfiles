@@ -306,6 +306,15 @@ require('lazy').setup({
         },
       },
       prompts = {
+        SecondOpinion = {
+          context = 'git:staged',
+          prompt = [[
+            How does this as a solution?
+
+            Can you think of anything simpler, or more idiomatic?
+            Can you think of any edge cases that this solution does not handle?
+          ]],
+        },
         RSpec = {
           prompt = [[
             Please generate rspec tests for my code using the following guidelines:
