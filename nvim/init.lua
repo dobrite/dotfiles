@@ -191,7 +191,8 @@ require('lazy').setup({
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_c = { { 'filename', path = 1 } },
+        lualine_b = { 'diff', 'diagnostics' },
+        lualine_c = { { 'filename', path = 2 } },
       },
     },
   },
