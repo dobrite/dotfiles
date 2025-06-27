@@ -281,6 +281,66 @@ require('lazy').setup({
   },
 
   {
+    'mfussenegger/nvim-lint',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      local lint = require 'lint'
+      local utils = require 'utils'
+
+      -- Configure linters
+      lint.linters_by_ft = {
+        javascript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
+        python = { 'ruff' },
+        gitcommit = { 'commitlint' },
+      }
+
+      -- Add Ruby linting if rubocop is available via bundler
+      if utils.installed_via_bundler 'rubocop' then
+        -- Create custom rubocop linter that uses bundle exec
+        lint.linters.rubocop_bundler = vim.tbl_deep_extend('force', lint.linters.rubocop, {
+          cmd = 'bundle',
+          args = vim.list_extend({ 'exec', 'rubocop' }, lint.linters.rubocop.args),
+        })
+        lint.linters_by_ft.ruby = { 'rubocop_bundler' }
+      end
+
+      -- Configure commitlint to use custom config
+      lint.linters.commitlint.args = vim.list_extend(
+        lint.linters.commitlint.args or {},
+        { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' }
+      )
+
+      -- Auto-lint on save and text changes
+      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+
+      -- Key mappings for linting and formatting
+      vim.keymap.set('n', '<leader>ln', function()
+        local linters = lint.get_running()
+        if #linters == 0 then
+          print 'No linters running'
+        else
+          print('Linters running: ' .. table.concat(linters, ', '))
+        end
+      end, { desc = 'Show running linters' })
+
+      vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<CR>', { desc = 'LSP Info' })
+      vim.keymap.set('n', '<leader>lf', function()
+        vim.lsp.buf.format { timeout_ms = 2000 }
+      end, { desc = 'Format buffer' })
+      vim.keymap.set('n', '<leader>lr', '<cmd>LspRestart<CR>', { desc = 'Restart LSP' })
+    end,
+  },
+
+  {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     opts = { file_types = { 'markdown', 'copilot-chat' } },
