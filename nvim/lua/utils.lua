@@ -90,7 +90,7 @@ function M.is_file(filename)
 end
 
 function M.exists(filename)
-  local stat = vim.loop.fs_stat(filename)
+  local stat = (vim.uv or vim.loop).fs_stat(filename)
   return stat and stat.type or false
 end
 
