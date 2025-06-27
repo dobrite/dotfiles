@@ -773,53 +773,54 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
+-- Setup LSP servers using vim.lsp.config (new in 0.11)
+for server_name, server_config in pairs(servers) do
+  if server_name ~= 'rust_analyzer' then
+    vim.lsp.config(server_name, {
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-  ['rust_analyzer'] = function()
-    require('rust-tools').setup {
-      tools = {
-        runnables = {
-          use_telescope = true,
+      settings = server_config,
+      filetypes = (server_config or {}).filetypes,
+    })
+  end
+end
+
+-- Special handling for rust_analyzer via rust-tools
+require('rust-tools').setup {
+  tools = {
+    runnables = {
+      use_telescope = true,
+    },
+    inlay_hints = {
+      auto = true,
+      show_parameter_hints = true,
+      parameter_hints_prefix = '',
+      other_hints_prefix = '',
+    },
+  },
+  server = {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+      ['rust-analyzer'] = {
+        checkOnSave = {
+          command = 'clippy',
+          allTargets = true,
         },
-        inlay_hints = {
-          auto = true,
-          show_parameter_hints = true,
-          parameter_hints_prefix = '',
-          other_hints_prefix = '',
+        cargo = {
+          buildScripts = {
+            enable = true,
+          },
         },
-      },
-      server = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          ['rust-analyzer'] = {
-            checkOnSave = {
-              command = 'clippy',
-              allTargets = true,
-            },
-            cargo = {
-              buildScripts = {
-                enable = true,
-              },
-            },
-            procMacro = {
-              enable = true,
-              attributes = {
-                enable = true,
-              },
-            },
+        procMacro = {
+          enable = true,
+          attributes = {
+            enable = true,
           },
         },
       },
-    }
-  end,
+    },
+  },
 }
 
 -- mason auto-update
@@ -838,7 +839,7 @@ require('mason-tool-installer').setup {
   start_delay = 5000,
 }
 
-require('lspconfig').ruby_lsp.setup {
+vim.lsp.config('ruby_lsp', {
   mason = false,
   capabilities = capabilities,
   on_attach = on_attach,
@@ -848,9 +849,9 @@ require('lspconfig').ruby_lsp.setup {
   --  },
   settings = {},
   filetypes = { 'ruby', 'eruby' },
-}
+})
 
-require('lspconfig').harper_ls.setup {
+vim.lsp.config('harper_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
   -- added javascriptreact
@@ -885,16 +886,16 @@ require('lspconfig').harper_ls.setup {
       },
     },
   },
-}
+})
 
 if utils.installed_via_bundler 'syntax_tree' then
-  require('lspconfig').syntax_tree.setup {
+  vim.lsp.config('syntax_tree', {
     cmd = { 'bundle', 'exec', 'stree', 'lsp' },
-  }
+  })
 end
 
 if utils.installed_via_bundler 'solargraph' then
-  require('lspconfig').solargraph.setup {
+  vim.lsp.config('solargraph', {
     cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
     init_options = {
       formatting = false,
@@ -933,7 +934,7 @@ if utils.installed_via_bundler 'solargraph' then
     },
     capabilities = capabilities,
     on_attach = on_attach,
-  }
+  })
 end
 
 -- nvim-cmp setup
