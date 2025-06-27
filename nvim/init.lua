@@ -722,6 +722,30 @@ vim.opt.foldlevelstart = 99
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Configure diagnostics
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = '●', -- Could be '●', '▎', 'x', '■', , 
+    spacing = 4,
+    source = 'if_many', -- show source if multiple sources
+    format = function(diagnostic)
+      return diagnostic.message
+    end,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
+}
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
