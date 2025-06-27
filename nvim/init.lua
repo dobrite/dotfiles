@@ -308,10 +308,7 @@ require('lazy').setup({
       end
 
       -- Configure commitlint to use custom config
-      lint.linters.commitlint.args = vim.list_extend(
-        lint.linters.commitlint.args or {},
-        { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' }
-      )
+      lint.linters.commitlint.args = vim.list_extend(lint.linters.commitlint.args or {}, { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' })
 
       -- Auto-lint on save and text changes
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
@@ -725,7 +722,7 @@ vim.opt.splitbelow = true
 -- Configure diagnostics
 vim.diagnostic.config {
   virtual_text = {
-    prefix = '●', -- Could be '●', '▎', 'x', '■', , 
+    prefix = '●', -- Could be '●', '▎', 'x', '■', ,
     spacing = 4,
     source = 'if_many', -- show source if multiple sources
     format = function(diagnostic)
@@ -933,6 +930,46 @@ vim.lsp.config('ruby_lsp', {
   --  },
   settings = {},
   filetypes = { 'ruby', 'eruby' },
+})
+
+-- RuboCop autofix after save
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*.rb',
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local file_path = vim.api.nvim_buf_get_name(buf)
+
+    -- Find project root directory
+    local root_dir = vim.fs.find({ 'Gemfile', 'Gemfile.lock', '.git' }, {
+      upward = true,
+      path = vim.fs.dirname(file_path),
+    })[1]
+
+    if root_dir then
+      root_dir = vim.fs.dirname(root_dir)
+
+      -- Use vim.system to run rubocop with proper working directory
+      local result = vim
+        .system({
+          'bundle',
+          'exec',
+          'rubocop',
+          '--autocorrect',
+          '--format',
+          'quiet',
+          file_path,
+        }, {
+          cwd = root_dir,
+          timeout = 5000,
+        })
+        :wait()
+
+      if result.code == 0 then
+        -- Reload the buffer to show changes
+        vim.cmd 'edit!'
+      end
+    end
+  end,
 })
 
 vim.lsp.config('harper_ls', {
@@ -1156,9 +1193,7 @@ require('conform').setup {
       if utils.installed_via_bundler 'syntax_tree' then
         table.insert(formatters, 'syntax_tree')
       end
-      if utils.rubocop_version_doesnt_hose_everything() then
-        table.insert(formatters, 'rubocop')
-      end
+      -- RuboCop formatting now handled by LSP server
       return formatters
     end)(),
     rust = { 'rustfmt', lsp_format = 'fallback' },
@@ -1167,6 +1202,7 @@ require('conform').setup {
     typescript = { 'prettierd' },
     typescriptreact = { 'prettierd' },
   },
+  -- formatters = {}, -- No custom formatters needed now
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 10000,
