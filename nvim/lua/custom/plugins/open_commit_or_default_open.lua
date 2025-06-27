@@ -22,16 +22,17 @@ function M.open_commit_url()
 
   local function get_github_repo_url()
     local handle = io.popen('git -C ' .. cwd .. ' remote get-url origin')
-    if handle == nil then
+    if not handle then
       return nil
     end
 
     local result = handle:read '*a'
-    if handle:close() == nil then
+    local success = handle:close()
+    if not success then
       return nil
     end
 
-    if result then
+    if result and result ~= '' then
       result = result:gsub('%s+$', '')
       local repo_path = result:match 'github.com[:/](.+)%.git'
       return repo_path
