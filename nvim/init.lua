@@ -73,20 +73,6 @@ require('lazy').setup({
     },
   },
 
-  -- toggle term
-  {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    -- cmd = { 'ToggleTerm', 'TermExec' },
-    -- keys = { '<C-Bslash>' },
-    config = function()
-      require('toggleterm').setup {
-        open_mapping = '<C-Bslash>',
-        direction = 'float',
-      }
-    end,
-  },
-
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes

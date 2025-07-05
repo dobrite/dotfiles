@@ -1,3 +1,10 @@
+function all_claude_perms() {
+  # also add them to `~/.claude/settings.json` (untested)
+  # jq --argjson new_perms "$(find ~/Code -name "settings.local.json" -exec jq -r '.permissions.allow[]?' {} \; 2>/dev/null | jq -R -s 'split("\n") | map(select(length > 0))')" '.permissions.allow = (.permissions.allow + $new_perms | unique | sort)' ~/.claude/settings.json > ~/.claude/settings.json.tmp && mv ~/.claude/settings.json.tmp ~/.claude/settings.json
+
+  find ~/Code -name "settings.local.json" -exec jq -r '.permissions.allow[]?' {} \; 2>/dev/null | sort -u
+}
+
 function grbs() {
   git reflog | egrep -io "moving from ([^[:space:]]+)" | awk '{ print $3 }' | awk ' !x[$0]++' | egrep -v '^[a-f0-9]{40}$' | egrep -v -x '^(master|staging)$' | head -12
 }
