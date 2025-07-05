@@ -1,4 +1,5 @@
 local M = {}
+M.initial_cwd = vim.fn.getcwd()
 
 function M.installed_via_bundler(gemname)
   local gemfile = M.gemfile()
@@ -125,6 +126,55 @@ function M.toggle_loclist()
     return
   end
   vim.cmd 'lopen'
+end
+
+function M.open_init_lua()
+  local config_path = vim.fn.stdpath 'config'
+  local init_lua = config_path .. '/init.lua'
+
+  vim.cmd('edit ' .. init_lua)
+  vim.cmd('cd ' .. config_path)
+  vim.notify('Opened init.lua and set cwd to ' .. config_path, vim.log.levels.INFO)
+end
+
+function M.restore_previous_cwd()
+  local current_dir = vim.fn.getcwd()
+
+  if current_dir ~= M.initial_cwd then
+    vim.cmd('cd ' .. M.initial_cwd)
+    vim.notify('Restored to initial working directory: ' .. M.initial_cwd, vim.log.levels.INFO)
+  else
+    vim.notify('Already in the initial working directory', vim.log.levels.INFO)
+  end
+end
+
+function M.reload_config()
+  -- Clear module cache to ensure fresh modules are loaded
+  local function clear_cache()
+    for module_name, _ in pairs(package.loaded) do
+      if module_name:match '^user' or module_name:match '^plugins' or module_name:match '^lua' or module_name == 'utils' then
+        package.loaded[module_name] = nil
+      end
+    end
+  end
+
+  -- Save cursor position
+  local cursor_pos = vim.fn.getcurpos()
+
+  -- Reload init.lua and clear cache
+  clear_cache()
+  vim.cmd('source ' .. vim.fn.stdpath 'config' .. '/init.lua')
+
+  -- Reload Lazy plugins if available
+  local lazy_ok, lazy = pcall(require, 'lazy')
+  if lazy_ok then
+    -- Sync plugins to load any changes
+    lazy.sync { show = false }
+  end
+
+  -- Restore cursor position
+  vim.fn.setpos('.', cursor_pos)
+  vim.notify('Neovim configuration reloaded!', vim.log.levels.INFO)
 end
 
 return M
