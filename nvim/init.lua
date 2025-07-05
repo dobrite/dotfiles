@@ -351,7 +351,7 @@ require('lazy').setup({
     },
     build = 'make tiktoken',
     opts = {
-      model = 'gemini-2.5-pro-preview-06-05',
+      model = 'gemini-2.5-pro',
       mappings = {
         submit_prompt = {
           normal = '<C-s>',
@@ -363,16 +363,17 @@ require('lazy').setup({
         },
       },
       prompts = {
-        SecondOpinion = {
-          context = 'git:staged',
+        CodeReview = {
+          model = 'gemini-2.5-pro',
           prompt = [[
-            How does this as a solution?
+            How does this look as a solution?
 
             Can you think of anything simpler, or more idiomatic?
             Can you think of any edge cases that this solution does not handle?
           ]],
         },
         RSpec = {
+          model = 'claude-sonnet-4',
           prompt = [[
             Please generate rspec tests for my code using the following guidelines:
 
