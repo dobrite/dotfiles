@@ -19,6 +19,16 @@ function M.installed_via_bundler(gemname)
 end
 
 function M.gemfile()
+  local gemfile = vim.fn.getcwd() .. '/Gemfile'
+
+  if vim.fn.filereadable(gemfile) == 0 then
+    return nil
+  end
+
+  return gemfile
+end
+
+function M.gemfile_lock()
   local gemfile = vim.fn.getcwd() .. '/Gemfile.lock'
 
   if vim.fn.filereadable(gemfile) == 0 then
@@ -31,7 +41,7 @@ end
 function M.installed_gem_version(gemname)
   -- TODO: support version number for non-bundler gems, default bundler = true param
 
-  local gemfile = M.gemfile()
+  local gemfile = M.gemfile_lock()
   if not gemfile then
     return nil
   end
