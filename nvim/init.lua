@@ -918,7 +918,6 @@ vim.lsp.config('ruby_lsp', {
   filetypes = { 'ruby', 'eruby' },
 })
 
-
 vim.lsp.config('harper_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
