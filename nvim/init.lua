@@ -918,45 +918,6 @@ vim.lsp.config('ruby_lsp', {
   filetypes = { 'ruby', 'eruby' },
 })
 
--- RuboCop autofix after save
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = '*.rb',
-  callback = function()
-    local buf = vim.api.nvim_get_current_buf()
-    local file_path = vim.api.nvim_buf_get_name(buf)
-
-    -- Find project root directory
-    local root_dir = vim.fs.find({ 'Gemfile', 'Gemfile.lock', '.git' }, {
-      upward = true,
-      path = vim.fs.dirname(file_path),
-    })[1]
-
-    if root_dir then
-      root_dir = vim.fs.dirname(root_dir)
-
-      -- Use vim.system to run rubocop with proper working directory
-      local result = vim
-        .system({
-          'bundle',
-          'exec',
-          'rubocop',
-          '--autocorrect',
-          '--format',
-          'quiet',
-          file_path,
-        }, {
-          cwd = root_dir,
-          timeout = 5000,
-        })
-        :wait()
-
-      if result.code == 0 then
-        -- Reload the buffer to show changes
-        vim.cmd 'edit!'
-      end
-    end
-  end,
-})
 
 vim.lsp.config('harper_ls', {
   capabilities = capabilities,
@@ -1179,7 +1140,9 @@ require('conform').setup {
       if utils.installed_via_bundler 'syntax_tree' then
         table.insert(formatters, 'syntax_tree')
       end
-      -- RuboCop formatting now handled by LSP server
+      if utils.rubocop_version_doesnt_hose_everything() then
+        table.insert(formatters, 'rubocop')
+      end
       return formatters
     end)(),
     rust = { 'rustfmt', lsp_format = 'fallback' },
@@ -1188,9 +1151,12 @@ require('conform').setup {
     typescript = { 'prettierd' },
     typescriptreact = { 'prettierd' },
   },
-  -- formatters = {}, -- No custom formatters needed now
+  formatters = {
+    rubocop = {
+      args = { '--server', '--auto-correct-all', '--stderr', '--force-exclusion', '--stdin', '$FILENAME' },
+    },
+  },
   format_on_save = {
-    -- These options will be passed to conform.format()
     timeout_ms = 10000,
     lsp_format = 'fallback',
   },
