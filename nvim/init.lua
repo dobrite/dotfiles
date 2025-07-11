@@ -705,6 +705,10 @@ vim.opt.foldlevelstart = 99
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Enable spell checking
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us'
+
 -- Configure diagnostics
 vim.diagnostic.config {
   virtual_text = {
