@@ -908,12 +908,25 @@ require('mason-tool-installer').setup {
 
 vim.lsp.config('ruby_lsp', {
   mason = false,
+  cmd = { 'bundle', 'exec', 'ruby-lsp' },
+  cmd_env = vim.env.RUBY_CONFDIR and {
+    GEM_HOME = vim.env.RUBY_CONFDIR,
+  } or nil,
   capabilities = capabilities,
   on_attach = on_attach,
-  --  init_options = {
-  --    formatter = 'standard',
-  --    linters = { 'standard' },
-  --  },
+  init_options = (function()
+    local options = {}
+
+    if utils.installed_via_bundler 'rubocop' then
+      options.linters = { 'rubocop' }
+    end
+
+    if utils.installed_via_bundler 'syntax_tree' then
+      options.formatter = 'syntax_tree'
+    end
+
+    return options
+  end)(),
   settings = {},
   filetypes = { 'ruby', 'eruby' },
 })
