@@ -47,7 +47,7 @@ alias launch_staging="git add . && git stash && git checkout staging && git fetc
 alias gci="git pull --rebase && rake && git push"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gd="clear; git diff"
-alias gdd="git diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'"
+alias gdno="git diff --name-only"
 alias gs="git status"
 alias gdc="git diff --cached"
 alias gtfo="git reset --hard HEAD"
