@@ -35,7 +35,7 @@ alias lh='ls -Alh'
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias p='ps aux | grep $1'
-alias wea='curl http://wttr.in/SanDiego'
+alias wea='curl http://wttr.in/san+diego'
 
 # git
 alias master="git checkout master && git pull"
