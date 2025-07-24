@@ -158,7 +158,6 @@ require('lazy').setup({
       vim.g['test#strategy'] = 'basic'
       vim.api.nvim_set_keymap('n', ',N', ':TestNearest<CR>', { silent = true, desc = 'test [N]earest' })
       vim.api.nvim_set_keymap('n', ',F', ':TestFile<CR>', { silent = true, desc = 'test [F]ile' })
-      vim.api.nvim_set_keymap('n', ',A', ':TestSuite<CR>', { silent = true, desc = 'test [S]uite' })
       vim.api.nvim_set_keymap('n', ',L', ':TestLast<CR>', { silent = true, desc = 'test [L]ast' })
       vim.api.nvim_set_keymap('n', ',V', ':TestVisit<CR>', { silent = true, desc = 'test [V]isit' })
     end,
@@ -615,6 +614,9 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 -- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', ',a', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', ',A', function()
+  require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') }
+end, { desc = '[S]earch current [W]ord with grep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>cd', require('telescope').extensions.zoxide.list, { desc = '[C]hange [D]irectory' })
