@@ -876,7 +876,8 @@ require('rust-tools').setup {
     on_attach = on_attach,
     settings = {
       ['rust-analyzer'] = {
-        checkOnSave = {
+        checkOnSave = true,
+        check = {
           command = 'clippy',
           allTargets = true,
         },
