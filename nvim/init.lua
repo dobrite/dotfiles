@@ -49,7 +49,6 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'folke/neodev.nvim', -- Additional lua configuration, makes nvim stuff amazing!
-      'simrat39/rust-tools.nvim',
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
@@ -776,9 +775,6 @@ local on_attach = function(client, bufnr)
 
   if client.name == 'rust_analyzer' then
     vim.keymap.set('n', '<leader>rd', '<cmd>RustDebuggables<cr>', { desc = '[R]ust [D]ebug' })
-    vim.keymap.set('n', '<leader>rm', require('rust-tools').expand_macro.expand_macro, { desc = '[R]ust [M]acro expand' })
-    vim.keymap.set('n', '<leader>rha', require('rust-tools').hover_actions.hover_actions, { desc = '[R]ust [H]over [A]ctions', buffer = bufnr })
-    vim.keymap.set('n', '<leader>rca', require('rust-tools').code_action_group.code_action_group, { desc = '[R]ust [C]ode [A]ctions', buffer = bufnr })
   end
 
   local wamLspAutocmdsGrp = vim.api.nvim_create_augroup('WamLspAutocmds', {})
@@ -820,7 +816,6 @@ local servers = {
     },
   },
   ts_ls = {},
-  -- rust_analyzer setup via rust-tools (see mason_lspconfig.setup_handlers)
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -844,57 +839,6 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
-}
-
--- Setup LSP servers using vim.lsp.config (new in 0.11)
-for server_name, server_config in pairs(servers) do
-  if server_name ~= 'rust_analyzer' then
-    vim.lsp.config(server_name, {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = server_config,
-      filetypes = (server_config or {}).filetypes,
-    })
-  end
-end
-
--- Special handling for rust_analyzer via rust-tools
-require('rust-tools').setup {
-  tools = {
-    runnables = {
-      use_telescope = true,
-    },
-    inlay_hints = {
-      auto = true,
-      show_parameter_hints = true,
-      parameter_hints_prefix = '',
-      other_hints_prefix = '',
-    },
-  },
-  server = {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      ['rust-analyzer'] = {
-        checkOnSave = true,
-        check = {
-          command = 'clippy',
-          allTargets = true,
-        },
-        cargo = {
-          buildScripts = {
-            enable = true,
-          },
-        },
-        procMacro = {
-          enable = true,
-          attributes = {
-            enable = true,
-          },
-        },
-      },
-    },
-  },
 }
 
 -- mason auto-update
@@ -970,6 +914,29 @@ vim.lsp.config('harper_ls', {
       },
       codeActions = {
         forceStable = true,
+      },
+    },
+  },
+})
+
+vim.lsp.config('rust_analyzer', {
+  settings = {
+    ['rust-analyzer'] = {
+      checkOnSave = true,
+      check = {
+        command = 'clippy',
+        allTargets = true,
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+        attributes = {
+          enable = true,
+        },
       },
     },
   },
