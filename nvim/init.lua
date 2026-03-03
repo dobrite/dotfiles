@@ -519,6 +519,8 @@ require('telescope').setup {
         '!**/tmp/*',
         '--glob',
         '!**public/uploads/*',
+        '--glob',
+        '!**/target/*',
       },
     },
     live_grep = {
@@ -536,6 +538,8 @@ require('telescope').setup {
           '!**/tmp/*',
           '--glob',
           '!**public/uploads/*',
+          '--glob',
+          '!**/target/*',
         }
       end,
     },
