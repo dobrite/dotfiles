@@ -106,7 +106,7 @@ eval "$(zoxide init zsh)"
 # like scm_breeze but devbox compatible
 eval "$(scmpuff init -s)"
 
-# direnv
+# direnv (also in .zprofile, too)
 if command -v direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
 fi
