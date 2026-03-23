@@ -5,7 +5,7 @@
 #
 #   https://plus.google.com/115587336092124934674/posts/dXsagsvLakJ
 
-for branch in $(git branch --merged | grep -v "master")
+for branch in $(git branch --merged | grep -v "main")
 do
   git branch -d "$branch";
 done
