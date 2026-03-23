@@ -425,6 +425,12 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'coder/claudecode.nvim',
+    opts = {
+      auto_start = true,
+    },
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -618,7 +624,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 -- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', ',a', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', ',A', function()
-  require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') }
+  require('telescope.builtin').live_grep { default_text = vim.fn.expand '<cword>' }
 end, { desc = '[S]earch current [W]ord with grep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
