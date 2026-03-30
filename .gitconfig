@@ -23,7 +23,7 @@
 [core]
   autocrlf = input
   editor = nvim
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFX
   attributesfile = ~/.gitattributes
   hooksPath = /Users/dave/.githooks
