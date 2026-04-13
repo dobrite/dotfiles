@@ -47,11 +47,19 @@ current_path() {
 }
 
 ruby_version() {
-  (devbox info ruby 2>/dev/null || asdf current ruby) | head -n1 | awk '{print $2}'
+  if [ -f devbox.json ]; then
+    devbox info ruby 2>/dev/null | head -n1 | awk '{print $2}'
+  else
+    asdf current ruby 2>/dev/null | tail -n1 | awk '{print $2}'
+  fi
 }
 
 node_version() {
-  (devbox info nodejs 2>/dev/null || asdf current nodejs) | head -n1 | awk '{print $2}'
+  if [ -f devbox.json ]; then
+    devbox info nodejs 2>/dev/null | head -n1 | awk '{print $2}'
+  else
+    asdf current nodejs 2>/dev/null | tail -n1 | awk '{print $2}'
+  fi
 }
 
 has_devbox() {
