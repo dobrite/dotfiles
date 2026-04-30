@@ -38,12 +38,14 @@ alias p='ps aux | grep $1'
 alias wea='curl http://wttr.in/san+diego'
 
 # git
-alias master="git checkout master && git pull"
-alias main="git checkout main && git pull"
-alias next="git checkout next && git pull"
-alias release="git checkout release && git pull"
-alias staging="git checkout staging && git pull"
+alias master="git checkout master"
+alias masterp="git checkout master && git pull"
+alias main="git checkout main"
+alias mainp="git checkout main && git pull"
+alias staging="git checkout staging"
+alias stagingp="git checkout staging && git pull"
 alias launch_staging="git add . && git stash && git checkout staging && git fetch origin staging && git reset --hard origin/staging && git merge - && git push && pco deploy && git checkout -"
+alias gp="git pull"
 alias gci="git pull --rebase && rake && git push"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gd="clear; git diff"
