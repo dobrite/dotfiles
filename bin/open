@@ -34,5 +34,5 @@ if [[ $1 =~ ^[0-9a-f]{4,40}$ ]]; then
 
   gh browse "$(git rev-parse "$1")"
 else
-  /usr/bin/open "$1"
+  /usr/bin/open "$@"
 fi
