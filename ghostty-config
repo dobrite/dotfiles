@@ -3,7 +3,10 @@ font-family = "Fira Code"
 font-size = 18
 macos-titlebar-style = tabs
 quick-terminal-animation-duration = 0
+working-directory = home
+tab-inherit-working-directory = false
 window-inherit-working-directory = false
+window-new-tab-position = end
 confirm-close-surface = false
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = cmd+shift+l=next_tab
