@@ -757,7 +757,6 @@ require('mason-tool-installer').setup {
 }
 
 vim.lsp.config('ruby_lsp', {
-  mason = false,
   cmd = { 'bundle', 'exec', 'ruby-lsp' },
   cmd_env = vim.env.RUBY_CONFDIR and {
     GEM_HOME = vim.env.RUBY_CONFDIR,
