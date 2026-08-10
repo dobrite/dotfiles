@@ -714,7 +714,6 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  harper_ls = {},
   clangd = {},
   pyright = {
     python = {
@@ -791,43 +790,6 @@ vim.lsp.config('ruby_lsp', {
   end)(),
   settings = {},
   filetypes = { 'ruby', 'eruby' },
-})
-
-vim.lsp.config('harper_ls', {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  -- added javascriptreact
-  filetypes = {
-    'c',
-    'cpp',
-    'cs',
-    'gitcommit',
-    'go',
-    'html',
-    'java',
-    'javascript',
-    'javascriptreact',
-    'lua',
-    'markdown',
-    'nix',
-    'python',
-    'ruby',
-    'rust',
-    'swift',
-    'toml',
-    'typescript',
-    'typescriptreact',
-  },
-  settings = {
-    ['harper-ls'] = {
-      linters = {
-        sentence_capitalization = false,
-      },
-      codeActions = {
-        forceStable = true,
-      },
-    },
-  },
 })
 
 vim.lsp.config('rust_analyzer', {
