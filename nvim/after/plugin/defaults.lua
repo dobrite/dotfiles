@@ -58,6 +58,20 @@ imap('<C-w>', '<C-O><C-w>') -- not sure what this does
 -- close buffer and don't close split
 nmap('<leader>w', ':b#<bar>bd#<CR>')
 
+local function yank_location(path)
+  local location = path .. ':' .. vim.fn.line '.'
+  vim.fn.setreg('+', location)
+  vim.notify(location)
+end
+
+vim.keymap.set('n', '<leader>yp', function()
+  yank_location(vim.fn.expand '%')
+end, { desc = '[Y]ank relative [P]ath:line' })
+
+vim.keymap.set('n', '<leader>yP', function()
+  yank_location(vim.fn.expand '%:p')
+end, { desc = '[Y]ank absolute [P]ath:line' })
+
 local open_todays_note = function()
   local date = os.date '%Y-%m-%d'
   vim.cmd('edit ~/Documents/brain/daily/' .. date .. '.md')
