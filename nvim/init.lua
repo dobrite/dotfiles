@@ -268,7 +268,6 @@ require('lazy').setup({
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
-      local utils = require 'utils'
 
       -- Configure linters
       lint.linters_by_ft = {
@@ -280,22 +279,12 @@ require('lazy').setup({
         gitcommit = { 'commitlint' },
       }
 
-      -- Add Ruby linting if rubocop is available via bundler
-      if utils.installed_via_bundler 'rubocop' then
-        -- Create custom rubocop linter that uses bundle exec
-        lint.linters.rubocop_bundler = vim.tbl_deep_extend('force', lint.linters.rubocop, {
-          cmd = 'bundle',
-          args = vim.list_extend({ 'exec', 'rubocop' }, lint.linters.rubocop.args),
-        })
-        lint.linters_by_ft.ruby = { 'rubocop_bundler' }
-      end
-
       -- Configure commitlint to use custom config
       lint.linters.commitlint.args = vim.list_extend(lint.linters.commitlint.args or {}, { '--config', os.getenv 'HOME' .. '/.commitlintrc.js' })
 
-      -- Auto-lint on save and text changes
+      -- Auto-lint on save
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         group = lint_augroup,
         callback = function()
           lint.try_lint()
