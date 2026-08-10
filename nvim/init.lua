@@ -780,6 +780,8 @@ vim.lsp.config('ruby_lsp', {
   filetypes = { 'ruby', 'eruby' },
 })
 
+vim.lsp.enable 'ruby_lsp'
+
 vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
