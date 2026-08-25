@@ -321,6 +321,8 @@ require('lazy').setup({
       auto_start = true,
     },
   },
+
+  { 'Zamua/openloc.nvim', lazy = false, opts = {} },
 }, {})
 
 -- [[ Setting options ]]
