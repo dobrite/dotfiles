@@ -1,3 +1,13 @@
+# The following lines were added by compinstall
+# Must run before anything that calls compdef (e.g. `pco init`, sourced via ~/.work.sh)
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
 if [ -f ~/.aliases ]; then
   . ~/.aliases
 fi
@@ -15,15 +25,6 @@ fi
 if [ -f ~/.work.sh ]; then
   . ~/.work.sh
 fi
-
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _complete _ignored
-zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 
 export VISUAL=nvim
 export EDITOR=$VISUAL
@@ -77,6 +78,7 @@ export PROMPT='${NEWLINE}$PROMPT_TIME %F{grey}$RUBY $NODE $(has_devbox) ${NEWLIN
 
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.11/bin:$PATH"
