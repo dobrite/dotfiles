@@ -26,7 +26,6 @@
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFX
   attributesfile = ~/.gitattributes
-  hooksPath = /Users/dave/.githooks
 [grep]
   patternType = perl
 [feature]
@@ -47,6 +46,7 @@
   path = ~/.gitconfig.local # see .gitconfig.local
 [init]
   defaultBranch = main
+  templateDir = ~/.git-template
 [interactive]
   diffFilter = diff-so-fancy --patch
 [pull]
@@ -68,9 +68,10 @@
   autoStash = true
 [alias]
   branch = branch --sort=-committerdate
+  merge-staging = !git fetch origin +staging:staging && git checkout staging && git merge - --no-edit && git push && git checkout -
 [merge "mergiraf"]
-    name = mergiraf
-    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
+  name = mergiraf
+  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
 [tag]
   sort = version:refname
 [fetch]
