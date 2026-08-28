@@ -748,7 +748,7 @@ require('mason-tool-installer').setup {
     'commitlint',
     -- 'codespell',
     'prettierd',
-    'eslint_d',
+    { 'eslint_d', version = '15.0.2' },
     -- 'selene',
     -- 'shellcheck', -- used by bash-language-server
     'stylua',
