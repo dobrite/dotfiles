@@ -10,7 +10,9 @@ if [ "$allow_push_main" != "true" ]; then
     if [[ "$local_ref" =~ ^refs/heads/ ]]; then
       branch_name=${local_ref#refs/heads/}
       if [ "$branch_name" == "main" ]; then
-        echo "Error: Pushing to the 'main' branch is prohibited in this repository."
+        echo "error: refusing to push local 'main' directly (global pre-push hook, ~/dotfiles/pre-push)" >&2
+        echo "  Push a feature branch and open a PR instead, or to allow direct pushes to main in just this repo:" >&2
+        echo "    git config hooks.allowpushmain true" >&2
         exit 1
       fi
     fi
