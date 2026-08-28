@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo 'usage: ws -- <workspace name>'
+}
+
+name=""
+if [[ "${1-}" == "--" ]]; then
+  shift
+  name="$*"
+elif [[ "${1-}" == "-h" || "${1-}" == "--help" ]]; then
+  usage
+  exit 0
+else
+  name="$*"
+fi
+
+if [[ -z "$name" ]]; then
+  usage >&2
+  exit 1
+fi
+
+for cmd in herdr jq; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "ws: $cmd not found in PATH" >&2
+    exit 1
+  fi
+done
+
+cwd="$PWD"
+
+created="$(herdr workspace create --cwd "$cwd" --label "$name" --no-focus)"
+workspace_id="$(jq -r '.result.workspace.workspace_id' <<<"$created")"
+nvim_tab="$(jq -r '.result.tab.tab_id' <<<"$created")"
+nvim_pane="$(jq -r '.result.root_pane.pane_id' <<<"$created")"
+
+herdr tab rename "$nvim_tab" nvim >/dev/null
+herdr pane run "$nvim_pane" nvim
+
+slug="$(printf '%s' "$name" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9]\{1,\}/-/g' -e 's/^-//' -e 's/-$//')"
+
+shell_tab="$(herdr tab create --workspace "$workspace_id" --cwd "$cwd" --label shell --no-focus)"
+shell_pane="$(jq -r '.result.root_pane.pane_id' <<<"$shell_tab")"
+herdr pane run "$shell_pane" "wt switch --create $slug --execute 'box update-app'"
+
+claude_tab="$(herdr tab create --workspace "$workspace_id" --cwd "$cwd" --label claude --no-focus)"
+claude_tab_id="$(jq -r '.result.tab.tab_id' <<<"$claude_tab")"
+claude_pane="$(jq -r '.result.root_pane.pane_id' <<<"$claude_tab")"
+herdr pane run "$claude_pane" claude
+
+herdr tab focus "$claude_tab_id" >/dev/null
+herdr workspace focus "$workspace_id" >/dev/null
