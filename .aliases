@@ -75,6 +75,7 @@ alias gcane="git commit --amend --no-edit"
 alias clean="pb be tmp:clear && pb be assets:clobber && pb apprestart"
 alias git-delete-merged-branches="git branch --merged | egrep -v \"(^\*|master|dev)\" | xargs git branch -d"
 alias lom="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/main..HEAD"
+alias loms="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --shortstat origin/main..HEAD"
 #alias gcbd="git checkout `git rev-list -n 1 --before='$1' master`"
 
 # Rust
@@ -90,6 +91,9 @@ alias brian="cd ~/Documents/brain && nvim"
 
 # DynamoDB
 alias dynamo="DYNAMO_ENDPOINT=http://localhost:8000 AWS_ACCESS_KEY_ID='developmentId' dynamodb-admin"
+
+# nvim
+alias nvim-config="nvim ~/.config/nvim/init.lua"
 
 # Bundler
 alias be="bundle exec"
@@ -115,7 +119,10 @@ alias orr="sudo openresty -s reload"
 
 alias wtf="spring stop; bundle && box restart-app"
 alias things="spring stop; bundle && yarn && box restart-app && yarn start"
-alias nuke="spring stop; bundle && rm -rf tmp/cache && rm -rf ./node_modules; rm -rf .yalc; rm yalc.lock; rm -rf public/packs/ && rm -rf public/assets/ && yarn && box restart-app; yarn build:css; yarn start"
+alias nuke="spring stop; bundle && rm -rf tmp/cache && rm -rf ./node_modules; rm -rf .yalc; rm yalc.lock; rm -rf public/packs/ && rm -rf public/assets/ && yarn && box restart-app; yarn start"
+
+# claude
+alias claude='claude --model claude-opus-5'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
