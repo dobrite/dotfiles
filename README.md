@@ -17,4 +17,6 @@ ln -s $HOME/dotfiles/bin/git-delete-local-merged /usr/local/bin
 ln -s $HOME/dotfiles/bin/git-super-prune /usr/local/bin
 ln -s $HOME/dotfiles/bin/timey.rb /usr/local/bin
 ln -s $HOME/dotfiles/home_claude.md ~/.claude/CLAUDE.md
+mkdir ~/.config/herdr
+ln -s $HOME/dotfiles/herdr-config.toml ~/.config/herdr/config.toml
 ```
