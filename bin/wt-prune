@@ -1,0 +1,91 @@
+#!/usr/bin/env zsh
+
+local dry_run=false yes=false
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dry-run) dry_run=true; shift ;;
+    -y|--yes) yes=true; shift ;;
+    -h|--help)
+      echo "usage: wt-prune [--dry-run] [-y|--yes]"
+      exit 0 ;;
+    *) echo "unknown arg: $1" >&2; exit 1 ;;
+  esac
+done
+
+local bold='' dim='' red='' green='' yellow='' white='' reset=''
+if [[ -t 1 && -z "${NO_COLOR-}" ]]; then
+  bold=$'\e[1m'; dim=$'\e[2m'; red=$'\e[31m'; green=$'\e[32m'; yellow=$'\e[33m'; white=$'\e[97m'; reset=$'\e[0m'
+fi
+
+local list_json
+list_json="$(wt list --format json)" || exit $?
+
+local -a to_remove remove_closed keep_no_pr keep_dirty keep_open keep_unpushed warn_fork
+local rows
+rows="$(jq -c '.[] | select(.is_main == false and .is_current == false)' <<<"$list_json")"
+
+local row branch wt_path dirty ahead merge_ref pr_state
+while IFS= read -r row; do
+  [[ -z "$row" ]] && continue
+  branch="$(jq -r '.branch' <<<"$row")"
+  wt_path="$(jq -r '.path' <<<"$row")"
+  dirty="$(jq -r '.working_tree | (.staged or .modified or .untracked or .renamed or .deleted)' <<<"$row")"
+  ahead="$(jq -r '.remote.ahead // 0' <<<"$row")"
+
+  if [[ "$dirty" == "true" ]]; then
+    keep_dirty+=("$branch")
+    continue
+  fi
+
+  if (( ahead > 0 )); then
+    keep_unpushed+=("$branch")
+    continue
+  fi
+
+  merge_ref="$(git -C "$wt_path" config --get "branch.$branch.merge" 2>/dev/null)"
+  if [[ "$merge_ref" == refs/pull/* ]]; then
+    warn_fork+=("$branch")
+    continue
+  fi
+
+  pr_state="$(gh pr list --head "$branch" --state all --json state --jq '.[0].state' 2>/dev/null)"
+  case "$pr_state" in
+    MERGED) to_remove+=("$branch") ;;
+    OPEN)   keep_open+=("$branch") ;;
+    CLOSED) remove_closed+=("$branch") ;;
+    *) keep_no_pr+=("$branch") ;;
+  esac
+done <<<"$rows"
+
+printf '%sPlan:%s\n' "$bold" "$reset"
+(( ${#to_remove[@]} ))     && { printf '  %s🗑  remove (merged)%s\n'             "$bold$red"  "$reset"; printf "    %s\n" "${to_remove[@]}"; }
+(( ${#remove_closed[@]} )) && { printf '  %s🗑  remove (closed, not merged)%s\n' "$bold$red"  "$reset"; printf "    %s\n" "${remove_closed[@]}"; }
+(( ${#keep_open[@]} ))     && { printf '  %s🟢 keep (open PR)%s\n'               "$green"     "$reset"; printf "    %s\n" "${keep_open[@]}"; }
+(( ${#keep_no_pr[@]} ))    && { printf '  %s⚪ keep (no PR)%s\n'                "$dim"       "$reset"; printf "    %s\n" "${keep_no_pr[@]}"; }
+(( ${#keep_dirty[@]} ))    && { printf '  %s⚠️  keep (dirty)%s\n'               "$yellow"    "$reset"; printf "    %s\n" "${keep_dirty[@]}"; }
+(( ${#keep_unpushed[@]} )) && { printf '  %s📤 keep (unpushed commits)%s\n'    "$yellow"    "$reset"; printf "    %s\n" "${keep_unpushed[@]}"; }
+(( ${#warn_fork[@]} ))     && { printf '  %s🍴 skip (fork PR — manual)%s\n'    "$yellow"    "$reset"; printf "    %s\n" "${warn_fork[@]}"; }
+
+to_remove+=("${remove_closed[@]}")
+
+if (( ${#to_remove[@]} == 0 )); then
+  printf '\n%sNothing to remove.%s\n' "$white" "$reset"
+  exit 0
+fi
+
+$dry_run && exit 0
+
+if ! $yes; then
+  printf '%sRemove %d worktree(s)?%s [y/N] ' "$bold" "${#to_remove[@]}" "$reset"
+  local reply
+  read -r reply
+  [[ "$reply" =~ ^[Yy]$ ]] || { printf '%sAborted.%s\n' "$yellow" "$reset"; exit 1; }
+fi
+
+for branch in "${to_remove[@]}"; do
+  if wt remove -y "$branch"; then
+    printf '%s✓%s removed %s\n' "$green" "$reset" "$branch"
+  else
+    printf '%s✗%s failed to remove %s\n' "$red" "$reset" "$branch"
+  fi
+done
