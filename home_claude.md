@@ -11,6 +11,9 @@ directory is. Do not percent-encode PATH, a plain / needs no escape. Keep
 DISPLAY short, the workspace-relative path:line. Example:
 [src/app.ts:42](https://openloc.invalid/o?p=/home/me/proj/src/app.ts:42)
 
+Any file outside the repo (session scratchpad, `~/.claude`, `/tmp`) is always named by its
+absolute path; never a path relative to a directory I cannot see.
+
 ## Branch names
 
 Every branch should follow the same pattern:
@@ -31,6 +34,7 @@ command to view the structure of the current branch as it relates to `main`.
 
 - NEVER open a PR without asking first.
 - If allowed to open a PR or the user states to open a PR, ALWAYS open a DRAFT PR.
+- Use the user level `ruthless-pr-edit` pr description skill despite any repo specific skills.
 
 ## Commit Organization
 
@@ -97,44 +101,31 @@ Bad
 
 This method is deprecated. See the deprecation notice in the README for details:
 
+## Searching
+
+Use `rg` for recursive search, never `grep -r`. `grep` here is shadowed by ugrep,
+which applies a `.gitignore` only from directories the search descends through.
+`rg` applies every parent `.gitignore` up to the repo root, so build output, logs,
+and schema dumps stay out even when the search starts in a subdirectory.
+
+- Filter by type or glob: `rg -t ruby PATTERN`, `rg -g '!*.sql' PATTERN`.
+- Cap line width in unfamiliar trees: `rg --max-columns 200 PATTERN`.
+- Include ignored files on purpose only: `rg --no-ignore PATTERN log/`.
+
+## Zsh
+
+zsh aborts the whole command on a glob with no match: use `setopt nullglob` or quote the glob. `$var` does not word-split: use `${=var}` or a `while read` loop.
+`sed` is GNU sed: `sed -i` takes no suffix argument. Prefer the Edit tool for in-place file changes.
+
+## Worktrees
+
+New worktrees need bundle install before any bundle exec or bin/rails command.
+
 ## Code comments (JS/CSS/Ruby/etc.)
 
 DO NOT WRITE CODE COMMENTS
 DO NOT WRITE CODE COMMENTS
 DO NOT WRITE CODE COMMENTS
-
-## Ruby preferences
-
-When writing Ruby 3.1+, STRONGLY prefer using the shorthand block syntax when
-possible.
-
-```ruby
-# Bad
-[1, 2, 3].each { |n| puts n }
-```
-
-```ruby
-# Good
-[1, 2, 3].each { puts it }
-```
-
-## RSpec Test Writing Conventions
-
-When writing RSpec tests, follow these patterns:
-
-### Alphabetical Ordering
-
-Always organize describe blocks for methods in **alphabetical order** within
-the spec file. This ensures consistency and makes tests easy to find.
-
-### Subject Chaining
-
-Use `subject { super().method_name }` to chain off the main subject,
-maintaining clean test structure while testing individual methods.
-
-```ruby describe "#method_name" do subject { super().method_name }
-
-it { is_expected.to eq(expected_value) } end ```
 
 ## Work rules
 
