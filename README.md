@@ -20,3 +20,6 @@ ln -s $HOME/dotfiles/home_claude.md ~/.claude/CLAUDE.md
 mkdir ~/.config/herdr
 ln -s $HOME/dotfiles/herdr-config.toml ~/.config/herdr/config.toml
 ```
+
+Raycast: Settings → Extensions → Script Commands → Add Directories → `$HOME/dotfiles/raycast`.
+Then set the alias `pr-review` on the "PR review" command so `/pr-review` works.
