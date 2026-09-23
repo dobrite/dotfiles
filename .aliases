@@ -120,7 +120,7 @@ alias orr="sudo openresty -s reload"
 
 alias wtf="spring stop; bundle && box restart-app"
 alias things="spring stop; bundle && yarn && box restart-app && yarn start"
-alias nuke="spring stop; bundle && rm -rf tmp/cache && rm -rf ./node_modules; rm -rf .yalc; rm yalc.lock; rm -rf public/packs/ && rm -rf public/assets/ && yarn && box restart-app; yarn start"
+alias nuke="spring stop; bundle install && rm -rf tmp/cache && rm -rf ./node_modules; rm -rf .yalc; rm yalc.lock; rm -rf public/packs/ && rm -rf public/assets/ && yarn && box restart-app; yarn start"
 
 # claude
 alias claude='claude --model claude-opus-5'
