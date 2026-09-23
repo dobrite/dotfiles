@@ -22,15 +22,15 @@ list_json="$(wt list --format json)" || exit $?
 
 local -a to_remove remove_closed keep_no_pr keep_dirty keep_open keep_unpushed warn_fork
 local rows
-rows="$(jq -c '.[] | select(.is_main == false and .is_current == false)' <<<"$list_json")"
+rows="$(jq -c '.items[] | select(.worktree.main == false and .worktree.current == false)' <<<"$list_json")"
 
 local row branch wt_path dirty ahead merge_ref pr_state
 while IFS= read -r row; do
   [[ -z "$row" ]] && continue
   branch="$(jq -r '.branch' <<<"$row")"
-  wt_path="$(jq -r '.path' <<<"$row")"
-  dirty="$(jq -r '.working_tree | (.staged or .modified or .untracked or .renamed or .deleted)' <<<"$row")"
-  ahead="$(jq -r '.remote.ahead // 0' <<<"$row")"
+  wt_path="$(jq -r '.worktree.path' <<<"$row")"
+  dirty="$(jq -r '.worktree.changes | (.staged or .modified or .untracked or .renamed or .deleted or .conflicted)' <<<"$row")"
+  ahead="$(jq -r '.upstream.ahead // 0' <<<"$row")"
 
   if [[ "$dirty" == "true" ]]; then
     keep_dirty+=("$branch")
