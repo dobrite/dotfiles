@@ -27,8 +27,9 @@ e.g.
 ## Stacked branches
 
 I typically use stacked branches to break up large features into smaller,
-tightly focused PRs. When starting a discussion, use the custom `lom` alias git
-command to view the structure of the current branch as it relates to `main`.
+tightly focused PRs. Run the custom `lom` git alias before any `git rebase`, `reset`,
+`cherry-pick`, or `push`, and when a discussion starts. It shows the current branch
+against `main`, so stale commit ids and a rebased remote are visible before you act.
 
 ## Pull requests
 
@@ -116,10 +117,6 @@ and schema dumps stay out even when the search starts in a subdirectory.
 
 zsh aborts the whole command on a glob with no match: use `setopt nullglob` or quote the glob. `$var` does not word-split: use `${=var}` or a `while read` loop.
 `sed` is GNU sed: `sed -i` takes no suffix argument. Prefer the Edit tool for in-place file changes.
-
-## Worktrees
-
-New worktrees need bundle install before any bundle exec or bin/rails command.
 
 ## Code comments (JS/CSS/Ruby/etc.)
 
