@@ -125,7 +125,7 @@ alias things="spring stop; bundle && yarn && box restart-app && yarn start"
 alias nuke="spring stop; bundle install && rm -rf tmp/cache && rm -rf ./node_modules; rm -rf .yalc; rm yalc.lock; rm -rf public/packs/ && rm -rf public/assets/ && yarn && box restart-app; yarn start"
 
 # claude
-alias claude='claude --model claude-opus-5'
+alias claude='claude --model claude-opus-5-5'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
