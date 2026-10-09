@@ -745,7 +745,7 @@ mason_lspconfig.setup {
 -- mason auto-update
 require('mason-tool-installer').setup {
   ensure_installed = {
-    'commitlint',
+    { 'commitlint', version = '21.2.2' },
     -- 'codespell',
     'prettierd',
     { 'eslint_d', version = '15.0.2' },
