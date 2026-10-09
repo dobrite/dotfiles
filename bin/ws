@@ -55,7 +55,11 @@ done
 cwd="$PWD"
 
 if [[ -n "$branch" ]]; then
-  switched="$(wt switch --create "$branch" --no-cd --format json -y -C "$cwd")"
+  switch_args=(--no-cd --format json -y -C "$cwd")
+  if ! git -C "$cwd" show-ref --verify --quiet "refs/heads/$branch"; then
+    switch_args+=(--create -b @)
+  fi
+  switched="$(wt switch "${switch_args[@]}" "$branch")"
   cwd="$(jq -r '.path // empty' <<<"$switched")"
   if [[ -z "$cwd" || ! -d "$cwd" ]]; then
     echo "ws: wt switch did not report a worktree path" >&2
