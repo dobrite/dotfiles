@@ -100,6 +100,10 @@ if [[ -e "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if command -v go >/dev/null 2>&1; then
+  export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
 # asdf: try one of two locations
 if [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]; then
   . "/opt/homebrew/opt/asdf/libexec/asdf.sh"
