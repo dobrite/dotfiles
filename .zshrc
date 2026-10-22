@@ -29,6 +29,9 @@ fi
 export VISUAL=nvim
 export EDITOR=$VISUAL
 
+# herdr supports OSC 8 links, but Claude Code doesn't detect it
+[[ $TERM_PROGRAM == herdr ]] && export FORCE_HYPERLINK=1
+
 function repo() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
     origin_url=$(git remote get-url origin | 
