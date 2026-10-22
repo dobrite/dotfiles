@@ -41,6 +41,9 @@ against `main`, so stale commit ids and a rebased remote are visible before you 
 
 - Each commit should be accompanied by tests, if applicable, rather than having a test only commit later in the commit series
 - Each commit should build upon the previous commits. Tell a story and build up the branch logically.
+- Commits that contain refactoring and a change should be split:
+  1. First commit containing the (non-behavior changing) refactors.
+  2. Second commit with the actual change.
 
 ## Commiting
 
