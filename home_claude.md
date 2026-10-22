@@ -120,6 +120,7 @@ and schema dumps stay out even when the search starts in a subdirectory.
 
 zsh aborts the whole command on a glob with no match: use `setopt nullglob` or quote the glob. `$var` does not word-split: use `${=var}` or a `while read` loop.
 `sed` is GNU sed: `sed -i` takes no suffix argument. Prefer the Edit tool for in-place file changes.
+A word that starts with = expands to a command path: quote separators like '====='.
 
 ## Code comments (JS/CSS/Ruby/etc.)
 
