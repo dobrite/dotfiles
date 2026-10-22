@@ -25,7 +25,6 @@
   editor = nvim
   excludesfile = ~/.gitignore_global
   pager = diff-so-fancy | less --tabs=4 -RFX
-  attributesfile = ~/.gitattributes
 [grep]
   patternType = perl
 [feature]
@@ -69,9 +68,6 @@
 [alias]
   branch = branch --sort=-committerdate
   merge-staging = !git fetch origin +staging:staging && git checkout staging && git merge - --no-edit && git push && git checkout -
-[merge "mergiraf"]
-  name = mergiraf
-  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
 [tag]
   sort = version:refname
 [fetch]
