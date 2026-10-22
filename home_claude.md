@@ -35,7 +35,7 @@ against `main`, so stale commit ids and a rebased remote are visible before you 
 
 - NEVER open a PR without asking first.
 - If allowed to open a PR or the user states to open a PR, ALWAYS open a DRAFT PR.
-- Use the user level `ruthless-pr-edit` pr description skill despite any repo specific skills.
+- Use the user level `ruthsome-pr-edit` pr description skill despite any repo specific skills.
 
 ## Commit Organization
 
