@@ -68,6 +68,8 @@
 [alias]
   branch = branch --sort=-committerdate
   merge-staging = !git fetch origin +staging:staging && git checkout staging && git merge - --no-edit && git push && git checkout -
+	pushf = "!f() { b=$(git branch --show-current); case \"$b\" in do/*|cloud-agent/*) git push --force-with-lease --force-if-includes origin \"refs/heads/$b:refs/heads/$b\" ;; *) echo \"pushf: refuse to push $b\" >&2; return 1 ;; esac; }; f"
+	fold = "!f() { [ -n \"$1\" ] || { echo 'usage: git fold <commit>' >&2; return 1; }; t=$(git rev-parse --verify --quiet \"$1^{commit}\") || { echo \"fold: unknown commit $1\" >&2; return 1; }; m=$(git main) && git rev-parse --verify --quiet \"origin/$m\" >/dev/null || { echo 'fold: cannot resolve origin main branch' >&2; return 1; }; git merge-base --is-ancestor \"$t\" HEAD || { echo \"fold: $1 is not on this branch\" >&2; return 1; }; if git merge-base --is-ancestor \"$t\" \"origin/$m\"; then echo \"fold: $1 is already on origin/$m\" >&2; return 1; fi; pr=$(gh pr view --json headRefOid -q .headRefOid) || return 1; [ \"$(git rev-parse HEAD)\" = \"$pr\" ] || { echo \"fold: HEAD $(git rev-parse --short HEAD) differs from the PR head $pr\" >&2; return 1; }; git commit --fixup=\"$t\" || return 1; git rebase --autosquash \"$t^\" || return 1; if git log --format=%s \"$t^..HEAD\" | grep -q '^fixup! '; then echo 'fold: a fixup commit remains' >&2; return 1; fi; git lom; echo; }; f"
 [tag]
   sort = version:refname
 [fetch]
