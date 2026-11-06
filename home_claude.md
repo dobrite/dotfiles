@@ -1,18 +1,12 @@
-## Interactions
-
-NEVER OFFER AND NEVER POST COMMENTS TO SLACK, LINEAR, NOTION, OR GITHUB.
-
 ## Source location References
 
-When you reference a source location, render it as a markdown link
-[DISPLAY](https://openloc.invalid/o?p=PATH:LINE). PATH is the ABSOLUTE file
-path and LINE is the line number, so the link resolves whatever the working
-directory is. Do not percent-encode PATH, a plain / needs no escape. Keep
-DISPLAY short, the workspace-relative path:line. Example:
-[src/app.ts:42](https://openloc.invalid/o?p=/home/me/proj/src/app.ts:42)
+Name every file and source location by its ABSOLUTE path, in backticks, as
+`PATH:LINE` (or `PATH` alone when no line applies). Never use a relative path,
+`~`, or a markdown link. I copy the path and prepend `nvim` to open it. Example:
+`/home/me/proj/src/app.ts:42`
 
-Any file outside the repo (session scratchpad, `~/.claude`, `/tmp`) is always named by its
-absolute path; never a path relative to a directory I cannot see.
+This applies everywhere: files in the repo, the session scratchpad, `~/.claude`,
+and `/tmp`.
 
 ## Branch names
 
@@ -30,6 +24,14 @@ I typically use stacked branches to break up large features into smaller,
 tightly focused PRs. Run the custom `lom` git alias before any `git rebase`, `reset`,
 `cherry-pick`, or `push`, and when a discussion starts. It shows the current branch
 against `main`, so stale commit ids and a rebased remote are visible before you act.
+
+To force-push, run `git lom`, then `git pushf` with no arguments. It force-pushes the
+current `do/` or `cloud-agent/` branch with `--force-with-lease --force-if-includes`. Never run
+`git push --force`, `-f`, `--force-with-lease`, or a `+` refspec directly.
+
+To fold staged changes into an earlier commit on this branch, run `git fold <commit>`.
+Then amend the message, or fixup/rebase the changes through, if needed, run `git lom`, and run `git pushf`.
+If commit messages and/or the PR description need to change, ask first with the proposal.
 
 ## Pull requests
 
